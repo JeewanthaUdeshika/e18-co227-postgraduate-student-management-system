@@ -9,7 +9,7 @@ title:
 
 [comment]: # "This is the standard layout for the project, but you can clean this and use your own template"
 
-# Project Title
+# Postgraduate Student Management System
 
 ---
 
@@ -19,9 +19,9 @@ This is a sample image, to show how to add images to your page. To learn more op
 
 
 ## Team
--  eNumber, Name, [email](mailto:name@email.com)
--  eNumber, Name, [email](mailto:name@email.com)
--  eNumber, Name, [email](mailto:name@email.com)
+-  E/18/028, Ariyawansha P.H.J.U., [e18028@eng.pdn.ac.lk](mailto:name@email.com)
+-  E/18/173, Kasthuripitiya K.A.I.M., [e18173@eng.pdn.ac.lk](mailto:name@email.com)
+-  E/18/285, Ranasinghe S.M.T.S.C., [e18285@eng.pdn.ac.lk](mailto:name@email.com)
 
 ## Table of Contents
 1. [Introduction](#introduction)
