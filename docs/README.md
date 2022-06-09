@@ -15,7 +15,8 @@ title:
 
 This is a sample image, to show how to add images to your page. To learn more options, please refer [this](https://projects.ce.pdn.ac.lk/docs/faq/how-to-add-an-image/)
 
-![Sample Image](./images/sample.png)
+![ezgif-1-0eb041aa59](https://user-images.githubusercontent.com/73387606/172770744-94a5a3c6-e8e8-4e3b-b253-542755c577fd.png)
+
 
 
 ## Team
