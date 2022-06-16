@@ -2,6 +2,11 @@
 The aim of this project is to design and deployment of a student management system for PG
 students in the Department of Computer Engineering.
 
+## Group 11
+E/18/028 - Ariyawansha P.H.J.U
+E/18/173 - Kasthuripitiya K.A.I.M.
+E/18/285 - Ransinghe S.M.T.S.C.
+
 ## Features:
 1. Student Registration System
 2. User Management facility for Administrators (PG Coordinator, HoD, Internal Staff, and
