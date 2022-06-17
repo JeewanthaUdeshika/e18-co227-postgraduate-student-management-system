@@ -23,10 +23,10 @@ const transporter = nodemailer.createTransport({
 
 const mailConfigurations = {
   // It should be a string of sender email
-  from: "ishankasthuripitiya@gmail.com",
+  from: secure_configuration.EMAIL_USERNAME,
 
   // Comma Separated list of mails
-  to: "ishanmaduranga271@gmail.com",
+  to: secure_configuration.EMAIL_LIST,
 
   // Subject of Email
   subject: "Sending Email using Node.js",
