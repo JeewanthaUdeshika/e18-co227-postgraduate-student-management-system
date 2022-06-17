@@ -10,17 +10,13 @@ const secure_configuration = require("./secure");
 
 //All the security_configs are in a seperate file for security purposes
 const transporter = nodemailer.createTransport({
-  // host: "smtp.gmail.com",
-  // port: 465,
-  // secure: true,
+  host: secure_configuration.HOST,
+  port: secure_configuration.PORT,
+  secure: true,
   service: "gmail",
   auth: {
-    type: "OAuth2",
     user: secure_configuration.EMAIL_USERNAME,
     pass: secure_configuration.PASSWORD,
-    clientId: secure_configuration.CLIENT_ID,
-    clientSecret: secure_configuration.CLIENT_SECRET,
-    refreshToken: secure_configuration.REFRESH_TOKEN,
   },
 });
 
@@ -43,10 +39,6 @@ const mailConfigurations = {
     "Hi! There, You know I am using the" +
     " NodeJS Code along with NodeMailer " +
     "to send this email.",
-
-  headers: {
-    priority: "high",
-  },
 
   attachments: [
     {
