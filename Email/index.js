@@ -12,8 +12,8 @@ const secure_configuration = require("./secure");
 const transporter = nodemailer.createTransport({
   host: secure_configuration.HOST,
   port: secure_configuration.PORT,
-  secure: true,
-  service: "gmail",
+  secure: false,
+  service: secure_configuration.SERVICE,
   auth: {
     user: secure_configuration.EMAIL_USERNAME,
     pass: secure_configuration.PASSWORD,
