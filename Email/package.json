@@ -9,7 +9,7 @@
   "author": "Ishan Maduranga",
   "license": "ISC",
   "dependencies": {
-    "crypto": "^1.0.1",
+    "dotenv": "^16.0.1",
     "nodemailer": "^6.7.5"
   },
   "description": ""

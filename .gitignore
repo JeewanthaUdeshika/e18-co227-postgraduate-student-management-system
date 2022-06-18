@@ -2,4 +2,5 @@ Email/node_modules
 Email/secure.js
 Email/indexold.js
 Email/secureold.js
-Email/decrypt.js
+Email/.env
+Email/.env.test
