@@ -1,7 +1,8 @@
-const MailSender = require("./mailsender");
+import moment from "moment";
+import { TaskScheduler } from "./taskScheduler.js";
+const time = moment().format();
+console.log(moment(time).format("HH:mm:ss"));
+const mytask = new TaskScheduler(time);
 
-// Give the mail addresses as strings seperated by commas
-let emailList = [];
-const mailsender = new MailSender(emailList);
-
-mailsender.sendEmail();
+// Start all the tasks
+mytask.start();
