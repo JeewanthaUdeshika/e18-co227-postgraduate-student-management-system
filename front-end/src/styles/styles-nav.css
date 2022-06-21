@@ -1,0 +1,42 @@
+* {
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+}
+
+/*
+Styling For Navbar content and NavBar
+*/
+
+
+.nav{
+    background-color: darkcyan;
+    color: white;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 1rem;
+   
+
+}
+
+.nav-title{
+    font-size:25px;
+    font-style: oblique;
+}
+
+.nav-sub-title{
+    font-size: 20px;
+    font-style: oblique; 
+}
+
+
+.navbar-logo{
+    justify-content: left;
+    height: 100px;
+    width: 100px;
+}
+
