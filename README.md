@@ -13,3 +13,10 @@ students, and jobs assigned for various stakeholders including
 reviewers/examiners/superviors/etc
 6. Repository for Mphil/Ph.D. theses and publications
 7. API to other web applications (e.g. Departments LMS, Web site, AR Office etc)
+
+## Tecknology Stack
+ MERN
+ *Mongo DB
+ *Express JS
+ *React JS
+ *Node Js
