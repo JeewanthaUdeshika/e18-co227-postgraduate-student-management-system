@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.css';
 import Navbar from './components/navbar';
 import Login from './components/login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<Login/>);
+root.render(<Navbar/>);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
