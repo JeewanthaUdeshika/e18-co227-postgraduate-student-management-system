@@ -5,9 +5,12 @@ import moment from "moment";
 let emailList = ["ishanmaduranga271@gmail.com", "e18173@eng.pdn.ac.lk"];
 
 // Task 01
-const regDate = moment().add(1, "m").format();
+const regDate = moment().add(10, "s").format();
 new MailSender(emailList, regDate).sendEmail();
 
 // Task 02
-const newRegDate = moment(regDate).add(1, "m").format();
+new MailSender([], regDate).sendEmail();
+
+// Task 03
+const newRegDate = moment(regDate).add(10, "s").format();
 new MailSender(["ishanmaduranga271@gmail.com"], newRegDate).sendEmail();

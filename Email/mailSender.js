@@ -62,6 +62,7 @@ class MailSender {
     };
 
     await scheduleJob(new Date(this.regDate), () => {
+      // verify connection configuration
       transporter.verify(function (error, success) {
         if (error) {
           console.log(error);
@@ -80,11 +81,11 @@ class MailSender {
             });
           } else {
             console.log("Email list empty");
+            return;
           }
         }
       });
     });
-    // verify connection configuration
   }
 }
 
