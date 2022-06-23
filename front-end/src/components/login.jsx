@@ -9,36 +9,31 @@ class Login extends Component {
     render() { 
         return ( 
             
-            <body class="text-center" style={{alignItems: 'center'}} >
-                <main class="form-signin w-100 m-auto">
+            <body class="text-center">
+                <main class='form-signin w-100 m-auto'>
                     <form>
                         <h1 class="h3 mb-3 fw-normal" style={{ fontSize: '40px'}}>
                             WELCOME !
                         </h1>
-
-
                         <div class="form-floating" 
-                            style={{marginTop: '20px' , width: '300px', justifyContent: 'center'}}>
+                            style={{marginTop: '20px' , width: '200px', justifyContent: 'center', allignContent: 'center'}}>
                             
                             <input type="text" class="form-control" id="RegNo" placeholder='Registraton Number'/>
                             <label for="RegNo">REGISTRATION NUMBER</label>
                         </div>
-
                         <div class="form-floating" 
-                            style={{ width: '300px', justifyContent: 'center'}}>
+                            style={{ width: '200px', justifyContent: 'center', allignContent: 'center'}}>
                             
                             <input type="password" class="form-control" id="password" placeholder='Password'/>
                             <label for='password'>PASSWORD</label>
                         </div>
-
-
-                        <button class='w-50 btn btn-lg btn-primary' type='submit' style={{marginTop: '50px'}} >
+                        <button class='w-30 btn btn-lg btn-primary' type='submit' style={{marginTop: '50px'}} >
                             Sign In
                         </button>
                     </form>
                 </main>
             </body>
-
+          
         );
     }
 }
@@ -89,20 +84,20 @@ export default Login;
       </div>
       <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
         <form>
-          <!-- Email input -->
+         
           <div class="form-outline mb-4">
             <input type="email" id="form1Example13" class="form-control form-control-lg" />
             <label class="form-label" for="form1Example13">Email address</label>
           </div>
 
-          <!-- Password input -->
+         
           <div class="form-outline mb-4">
             <input type="password" id="form1Example23" class="form-control form-control-lg" />
             <label class="form-label" for="form1Example23">Password</label>
           </div>
 
           <div class="d-flex justify-content-around align-items-center mb-4">
-            <!-- Checkbox -->
+           
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
               <label class="form-check-label" for="form1Example3"> Remember me </label>
@@ -110,7 +105,7 @@ export default Login;
             <a href="#!">Forgot password?</a>
           </div>
 
-          <!-- Submit button -->
+        
           <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
 
           <div class="divider d-flex align-items-center my-4">
