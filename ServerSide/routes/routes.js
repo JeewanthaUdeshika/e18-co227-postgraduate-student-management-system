@@ -7,6 +7,7 @@
 
 import express from "express";
 import {gotologin, gotosignup} from '../services/services.js';
+import { signUp } from "../controller/controller.js";
 
 // Get Router from express
 const route = express.Router();
@@ -16,5 +17,8 @@ route.get('/', gotologin);
 
 // Route to go signup page
 route.get('/sign_up', gotosignup);
+
+// route to sign up api
+route.post('/api/user', signUp);
 
 export default route;
