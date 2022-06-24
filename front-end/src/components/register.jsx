@@ -10,7 +10,7 @@ class Registration extends Component {
     }
 
     /*
-    Get some message fom props
+    Get some message from props
     */
     render() { 
         return (  
