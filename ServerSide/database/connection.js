@@ -10,7 +10,7 @@ import mongoose from "mongoose";
 export const connectDB = async () => {
     try{
         // MongoDB conenction string
-        const con = await mongoose.connect(process.env.MONGODB_URI, {useUnifiedTopology: true})
+        const con = await mongoose.connect(process.env.MONGODB_URI, {useUnifiedTopology: true});
 
         console.log(`MongoDB Connected: ${con.connection.host}`);
     }
