@@ -9,7 +9,9 @@ class Registration extends Component {
         super(props);
     }
 
-
+    /*
+    Get some message fom props
+    */
     render() { 
         return (  
 
