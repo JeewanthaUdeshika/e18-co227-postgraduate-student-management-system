@@ -15,11 +15,12 @@ class Registration extends Component {
       console.log(selectedState);
 
       if(selectedState === "registered"){
-        this.render(<div>
-          <h1>Registerd</h1>
-        </div>);
-        
+        console.log("Registered is Selected")
         }
+
+      else{
+        console.log("Provisional is selected")
+      }
       
     }
 
@@ -42,7 +43,7 @@ class Registration extends Component {
 
                   <img class="mb-4" src={registration} alt="" width="72" height="72"/>
 
-                  <h1 class="h3 mb-3 fw-normal" style={{ fontFamily: 'sans-serif'}}>Registration</h1>
+                  <h1 class="h3 mb-3 fw-normal" style={{ fontFamily: 'sans-serif', fontSize: '40px', fontWeight: 'bold'}}>Registration</h1>
 
                 </body>
 
@@ -81,7 +82,7 @@ class Registration extends Component {
 
 
 
-                <div style={{marginTop: '20px', marginBottom:'15px'}}>
+                <div style={{marginTop: '20px', marginBottom:'5px'}}>
                 
                   <h1 style={{marginBottom: '10px', fontWeight: '100px', fontSize: '20px'}}>Registration Status</h1>
 
@@ -107,7 +108,7 @@ class Registration extends Component {
                   
                     
                 <body class='text-center'>
-                  <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+                  <button class="w-100 btn btn-lg btn-primary" type="submit">Next</button>
 
                   <p class="mt-5 mb-3 text-muted">&copy; University Of Peradeniya</p>
                 </body>
@@ -132,7 +133,7 @@ js code for Regsistered Students
 
 /*
 
-<div class="form-floating">
+                <div class="form-floating">
                   <input type="text" class="form-control" id="regNo" placeholder="Registration Number" required/>
                   <label for="regNo">Registration Number</label>
                 </div>

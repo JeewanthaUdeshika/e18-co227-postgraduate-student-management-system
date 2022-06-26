@@ -10,21 +10,23 @@ class Navbar extends Component {
     
     render() { 
         return (  
-            <nav class = "navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                <div class = "container-fluid">
+            <nav class = "navbar navbar-expand-md navbar-dark fixed-top bg-dark" style={{height: '110px'}}>
+                <div class = "container-fluid" style={{marginTop: '15px'}}>
                     <a class="navbar-brand" href="#" style={{fontSize: '30px'}}>
                         <img 
                             src={logo}
-                            width='45px'
-                            height='45px'
+                            width='70px'
+                            height='70px'
                             class="d-inline-block align-top"
                             alt='UoP'
                         />
                         &nbsp;&nbsp;
-                        University of Peradeniya
-                        <span class="navbar-text" style={{marginLeft: '50px', fontSize:'20px'}}>    
-                            Post-Graduate Students Program
-                        </span>
+                    
+                        <ul style={{listStyle: 'none', marginLeft: '60px', marginTop:'-75px' , lineHeight: '25px'}}>
+                            <li><span style={{fontSize: '25px'}}>Department of Computer Engineering</span></li>
+                            <li><span style={{fontSize: '20px'}}>Faculty of Engineering</span></li>
+                            <li><span style={{fontSize: '17px'}}>University of Peradeniya</span></li>
+                        </ul>
                     </a>
                     
                 </div>
