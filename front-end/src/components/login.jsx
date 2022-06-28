@@ -1,5 +1,4 @@
 import React, { Component } from 'react';   // Import React
-import '../styles/login.css';              // Import styles of login
 import login from '../images/login.png';    // Import Login image
 
 
@@ -10,9 +9,15 @@ class Login extends Component {
     render() { 
         return ( 
             
-          <body class="text-center" >
+          <body class="text-center" style={{
+            display: 'block',
+            alignItems: 'center',
+            paddingTop: '40px',
+            paddingBottom: '40px'
+            
+          }}>
     
-            <main class="form-signin w-100 m-auto">
+            <main class="form-signin w-100 m-auto" style={{maxWidth: '330px', padding: '5px'}}>
               <form >
 
           
@@ -20,7 +25,7 @@ class Login extends Component {
 
                 <h1 class="h3 mb-3 fw-normal" style={{ fontFamily: 'sans-serif'}}>Welcome</h1>
             
-                <div class="form-floating">
+                <div class="form-floating" style={{zIndex: '2'}}>
                   <input type="text" class="form-control" id="floatingInput" placeholder="Registration Number"/>
                   <label for="floatingInput">Registration Number</label>
                 </div>
@@ -31,7 +36,7 @@ class Login extends Component {
                   <label for="floatingPassword">Password</label>
                 </div>
             
-                <div class="checkbox mb-3" style={{alignItems: 'center'}}>
+                <div class="checkbox mb-3" style={{alignItems: 'center', marginTop:'10px'}}>
                   <label>
                     <input type="checkbox" value="remember-me"/>
                     &nbsp; Remember me

@@ -8,20 +8,61 @@ class Registration extends Component {
         super(props);
     }
 
+
+    state = {
+      password: null,
+      confirmedPassword: null,
+      registrationStatus: null
+    }
+
     
     // Handling form with changes of registered state
     handelRegChange = (regState) => {
-      let selectedState = regState.target.value;      // Variable for get selected state
+      let selectedState = regState.target.value;                    // Variable for get selected state
+      this.setState({registrationStatus: regState.target.value});   // Set registered Student Attribute of state
       console.log(selectedState);
 
       if(selectedState === "registered"){
-        console.log("Registered is Selected")
+        console.log("Registered is Selected");
+        this.passwordCheck();
         }
 
       else{
-        console.log("Provisional is selected")
+        console.log("Provisional is selected");
+        this.passwordCheck();
       }
       
+    }
+
+
+    // Function to get input password
+    getPassword =(event) => {
+      let password = event.target.value;                // Get the entered Passowrd
+      this.setState({password: event.target.value});    // Set password attribute of state
+    }
+
+
+    // Function to get input confirmed password
+    getConfirmed =(event) => {
+      let confirmedPassword = event.target.value;             // Get the entered Confirmed Passowrd
+      this.setState({confirmedPassword: event.target.value}); // Set confirmed password value of state
+    }
+
+
+    // Check whether both password inputs are same or not
+    passwordCheck = (event) =>{
+      let password = this.state.password;                     // Get entered paswword
+      let confirmedPassword = this.state.confirmedPassword;   // Get Confirmed password
+
+      if(password === confirmedPassword){
+        // ToDo: implement task when both password inputs are same
+        console.log('Access granted');
+      }
+
+      else{
+        // ToDo: implement task for incorrected password verification
+        console.log("Incorrect Password");
+      }
     }
 
 
@@ -82,13 +123,13 @@ class Registration extends Component {
 
                 <div class="col-md-6"  style={{fontSize: '20px', fontWeight: 'bold'}}>
                   <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Password" required/>
+                  <input type="password" class="form-control" id="password" placeholder="Password" onChange={this.getPassword} required/>
                 </div>
 
 
                 <div class="col-md-6"  style={{fontSize: '20px', fontWeight: 'bold'}}>
                   <label for="confirmedPassword" class="form-label">Confirm Password</label>
-                  <input type="password" class="form-control" id="confirmedPassword" placeholder="Confirm Password" required/>
+                  <input type="password" class="form-control" id="confirmedPassword" placeholder="Confirm Password" onChange={this.getConfirmed} required/>
                 </div>
 
 
@@ -124,6 +165,7 @@ class Registration extends Component {
                 </body>
 
               </form>
+
             </main> 
           //</body>
 
@@ -144,109 +186,3 @@ export default Registration;
 
                 */
 
-
-/*
-js code for Regsistered Students
-*/
-
-
-/*
-
-                <div class="form-floating">
-                  <input type="text" class="form-control" id="regNo" placeholder="Registration Number" required/>
-                  <label for="regNo">Registration Number</label>
-                </div>
-
-
-                <div class="form-floating">
-                  <input type="text" class="form-control" id="regNo" placeholder="Date of Registration" required/>
-                  <label for="regNo">Registration Number</label>
-                </div>
-
-
-                <div class="form-floating">
-                  <input type="text" class="form-control" id="regDate" placeholder="Date of Registration" required/>
-                  <label for="regDate">Date of Registration</label>
-                </div>
-                
-
-
-                <div class="btn-group" role="group" aria-label="Basic radio toggle button group" style={{marginBottom: '12px', marginTop: '15px', width:' 470px'}}>
-
-                 <p style={{marginRight: '10px', marginTop: '10px'}}>Degree</p>
-                  <input type="radio" class="btn-check" name="btnradio" id="phd" autocomplete="off"/>
-                  <label class="btn btn-outline-primary" for="phd">phD</label>
-
-                  <input type="radio" class="btn-check" name="btnradio" id="mphill" autocomplete="off"/>
-                  <label class="btn btn-outline-primary" for="mphill">MPhill</label>
-
-                  <input type="radio" class="btn-check" name="btnradio" id="msc" autocomplete="off"/>
-                  <label class="btn btn-outline-primary" for="msc">MSc</label>
-
-                  <input type="radio" class="btn-check" name="btnradio" id="meng" autocomplete="off"/>
-                  <label class="btn btn-outline-primary" for="meng">MEng</label>
-
-                  <input type="radio" class="btn-check" name="btnradio" id="provisional" autocomplete="off"/>
-                  <label class="btn btn-outline-primary" for="provisional">*Provisional</label>
-                </div>
-
-
-
-                <div class="btn-group" role="group" aria-label="Basic radio toggle button group" style={{marginBottom: '12px', marginTop: '15px', width: '470px'}}>
-
-                 <p style={{marginRight: '10px', marginTop: '10px'}}>Mode of Study</p>
-                  <input type="radio" class="btn-check" name="btnradio" id="partTime" autocomplete="off"/>
-                  <label class="btn btn-outline-primary" for="partTime">Part Time</label>
-
-                  <input type="radio" class="btn-check" name="btnradio" id="fullTime" autocomplete="off"/>
-                  <label class="btn btn-outline-primary" for="fullTime">Full Time</label>
-                </div>
-
-
-
-
-                <div class="form-floating">
-                  <input type="text" class="form-control" id="supervisors" placeholder="Supervisors" required/>
-                  <label for="supervisors">Supervisors</label>
-                </div>
-
-                
-
-                <div class="form-floating">
-                  <input type="text" class="form-control" id="researchTopic" placeholder="Research Topic" required/>
-                  <label for="regsearchTopic">Research Topic</label>
-                </div>
-
-
-                
-                <div class="col-md-5" style={{marginBottom: '20px', marginTop: '20px', width: '470px'}}>
-                  <label for="progressLevel" class="form-label">Progress Level</label>
-                  
-                  <select class="form-select" id="progressLevel" required>
-
-                    <option selected disabled value="">Select</option>
-                    <option value="1">Half Year Progress Report Submitted</option>
-                    <option value="2">Annual Progress Report Submitted</option>
-                    <option value="3">Annual Oral Presentation Completed</option>
-                    <option value="4">Viva Completed</option>
-                    <option value="5">Thesis Submitted for Review</option>
-                    <option value="6">Other</option>
-                  </select>
-                </div>
-
-
-
-                <div class="form-floating">
-                  <input type="text" class="form-control" id="lastDate" placeholder="Last Date of Submission" required/>
-                  <label for="lastDate">Last Date of Submission</label>
-                </div>
-
-
-                <form>
-                  <div class="custom-file" style={{marginBottom: '20px'}}>
-                    <label class="custom-file-label" for="customFile">Profile Picture</label>
-                    <input type="file" class="custom-file-input" id="customFile"/>
-                  </div>
-                </form>
-
-*/
