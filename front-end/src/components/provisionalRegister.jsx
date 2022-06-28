@@ -18,7 +18,7 @@ class ProvisionalRegister extends Component {
 
                 <form class="row g-3">
 
-                    <h1 style={{fontSize: '35px', fontWeight: 'bolder'}}>Registration for Provisional Student</h1>
+                    <h1 style={{fontSize: '35px', fontWeight: 'bolder', fontFamily: 'monospace'}}>Registration for Provisional Students</h1>
 
 
                     <div class="col-12" style={{fontSize: '20px', fontWeight: 'bold'}}>

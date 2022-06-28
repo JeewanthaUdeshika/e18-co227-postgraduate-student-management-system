@@ -15,7 +15,7 @@ class RegRegister extends Component {
         <main class="form-signin w-100 m-auto">
         <form class="row g-3">
 
-            <h1 style={{fontSize: '35px', fontWeight: 'bolder'}}>Registration for Registered Student</h1>
+            <h1 style={{fontSize: '35px', fontWeight: 'bolder', fontFamily: 'monospace'}}>Registration for Registered Students</h1>
 
             <div class="col-md-6">
                 <label for="regNo" class="form-label" style={{fontWeight: 'bold', fontSize: '20px'}}>Registration Number</label>

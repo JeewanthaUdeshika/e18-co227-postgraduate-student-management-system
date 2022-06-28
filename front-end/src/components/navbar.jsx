@@ -10,22 +10,22 @@ class Navbar extends Component {
     
     render() { 
         return (  
-            <nav class = "navbar navbar-expand-md navbar-dark fixed-top bg-dark" style={{height: '110px'}}>
+            <nav class = "navbar navbar-expand-md navbar-dark fixed-top bg-dark" style={{height: '90px'}}>
                 <div class = "container-fluid" style={{marginTop: '15px'}}>
                     <a class="navbar-brand" href="#" style={{fontSize: '30px'}}>
                         <img 
                             src={logo}
-                            width='70px'
-                            height='70px'
+                            width='60px'
+                            height='60px'
                             class="d-inline-block align-top"
                             alt='UoP'
                         />
                         &nbsp;&nbsp;
                     
-                        <ul style={{listStyle: 'none', marginLeft: '60px', marginTop:'-75px' , lineHeight: '25px'}}>
-                            <li><span style={{fontSize: '25px'}}>Department of Computer Engineering</span></li>
-                            <li><span style={{fontSize: '20px'}}>Faculty of Engineering</span></li>
-                            <li><span style={{fontSize: '17px'}}>University of Peradeniya</span></li>
+                        <ul style={{listStyle: 'none', marginLeft: '60px', marginTop:'-70px' , lineHeight: '20px'}}>
+                            <li><span style={{fontSize: '20px'}}>Department of Computer Engineering</span></li>
+                            <li><span style={{fontSize: '17px'}}>Faculty of Engineering</span></li>
+                            <li><span style={{fontSize: '15px'}}>University of Peradeniya</span></li>
                         </ul>
                     </a>
                     

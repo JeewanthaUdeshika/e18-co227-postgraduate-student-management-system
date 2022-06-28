@@ -36,47 +36,59 @@ class Registration extends Component {
 
     
             <main class="form-signin w-100 m-auto">
-              <form >
+              <form class="row g-3">
 
 
                 <body class="text-center">
 
-                  <img class="mb-4" src={registration} alt="" width="72" height="72"/>
+                  <img class="mb-4" src={registration} alt="" width="70" height="70"/>
 
-                  <h1 class="h3 mb-3 fw-normal" style={{ fontFamily: 'sans-serif', fontSize: '40px', fontWeight: 'bold'}}>Registration</h1>
+                  <h1 class="h3 mb-3 fw-normal" style={{ fontFamily: 'monospace', fontSize: '40px', fontWeight: 'bolder'}}>Registration</h1>
 
                 </body>
 
 
 
 
-                <div class="form-floating">
+                <div class="col-12"  style={{fontSize: '20px', fontWeight: 'bold'}}>
+                  <label for="nameWithInitials" class="form-label">Name With Initials</label>
                   <input type="text" class="form-control" id="nameWithInitials" placeholder="Name with Initials" required/>
-                  <label for="nameWithInitials">Name With Initials</label>
                 </div>
 
 
-                <div class="form-floating">
+                <div class="col-12"  style={{fontSize: '20px', fontWeight: 'bold'}}>
+                  <label for="initials" class="form-label">Name Denoted by Initials</label>
                   <input type="text" class="form-control" id="initials" placeholder="Name Denoted by Initials" required/>
-                  <label for="initials">Name Denoted by Initials</label>
                 </div>
                     
 
-                <div class="form-floating">
+                <div class="col-12"  style={{fontSize: '20px', fontWeight: 'bold'}}>
+                  <label for="address" class="form-label">Postal Address</label>
                   <input type="text" class="form-control" id="address" placeholder="Postal Address" required/>
-                  <label for="address">Postal Address</label>
                 </div>
 
 
-                <div class="form-floating">
+                <div class="col-md-6"  style={{fontSize: '20px', fontWeight: 'bold'}}>
+                  <label for="email" class="form-label">E-Mail Address</label>
                   <input type="email" class="form-control" id="email" placeholder="E-Mail Address" required/>
-                  <label for="email">E-Mail Address</label>
                 </div>
 
 
-                <div class="form-floating">
+                <div class="col-md-6"  style={{fontSize: '20px', fontWeight: 'bold'}}>
+                  <label for="contactNumber" class="form-label">Contact Number</label>
                   <input type="text" class="form-control" id="contactNumber" placeholder="Contact Number" required/>
-                  <label for="contactNumber">Contact Number</label>
+                </div>
+
+
+                <div class="col-md-6"  style={{fontSize: '20px', fontWeight: 'bold'}}>
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="Password" required/>
+                </div>
+
+
+                <div class="col-md-6"  style={{fontSize: '20px', fontWeight: 'bold'}}>
+                  <label for="confirmedPassword" class="form-label">Confirm Password</label>
+                  <input type="password" class="form-control" id="confirmedPassword" placeholder="Confirm Password" required/>
                 </div>
 
 
@@ -84,7 +96,7 @@ class Registration extends Component {
 
                 <div style={{marginTop: '20px', marginBottom:'5px'}}>
                 
-                  <h1 style={{marginBottom: '10px', fontWeight: '100px', fontSize: '20px'}}>Registration Status</h1>
+                  <h1 style={{marginBottom: '10px', fontWeight: '100px', fontSize: '20px', fontWeight:'bold'}}>Registration Status</h1>
 
                   <div class="form-check" 
                     onChange={this.handelRegChange}  
@@ -100,7 +112,7 @@ class Registration extends Component {
 
 
                     <input type="radio" class="form-check-input" id="prospective" name="regState" value="prospective"/>
-                    <label class="form-check-label" for="prospective">Propective Student</label>
+                    <label class="form-check-label" for="prospective">Prospective Student</label>
                   </div>
 
                 </div>
@@ -109,8 +121,6 @@ class Registration extends Component {
                     
                 <body class='text-center'>
                   <button class="w-100 btn btn-lg btn-primary" type="submit">Next</button>
-
-                  <p class="mt-5 mb-3 text-muted">&copy; University Of Peradeniya</p>
                 </body>
 
               </form>
@@ -124,6 +134,15 @@ class Registration extends Component {
 export default Registration;
 
 
+// Form Floating Example
+/*
+
+ <div class="form-floating">
+                  <input type="text" class="form-control" id="contactNumber" placeholder="Contact Number" required/>
+                  <label for="contactNumber">Contact Number</label>
+                </div>
+
+                */
 
 
 /*

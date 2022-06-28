@@ -4,15 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
-import Navbar from './components/navbar';
-import Login from './components/login';
-import Registration from './components/register';
-import RegRegister from './components/regRegister';
-import ProvisionalRegister from './components/provisionalRegister';
+import LoginPage from './pages/loginPage';
+import RegisteredRegPage from './pages/reg-reg-page';
+import ProRegPage from './pages/pro-reg-page';
+import RegisterBasic from './pages/register-basic';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Registration/>
+    <LoginPage/>
     );
 
 // If you want to start measuring performance in your app, pass a function
