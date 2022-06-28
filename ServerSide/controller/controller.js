@@ -24,7 +24,8 @@ export const signUp = (req, res) => {
         postalAddress: req.body.postalAddress,
         email: req.body.email,
         telNo: req.body.telNo,
-        password: req.body.password
+        password: req.body.password,
+        supervisors: req.body.supervisors
     });
 
     // save the data in the database
@@ -45,10 +46,24 @@ function validateUser (userData){
     const schema = Joi.object({
         nameWithInitials : Joi.string().min(3).required(),
         fullName: Joi.string().required(),
-        postalAddress: Joi.string(),
-        email: Joi.string().email({minDomainSegments: 2}),
-        telNo: Joi.number(),
-        password: Joi.string()
+        postalAddress: Joi.string().required(),
+        email: Joi.string().email({minDomainSegments: 2}).required(),
+        telNo: Joi.number().min(10).required(),
+        password: Joi.string().required(),
+        regState: Joi.string().valid('Registered', 'Prospective'),
+        regNo: Joi.string(),
+        DOR: Joi.date().raw(),
+        degree: Joi.string().valid('PhD', 'MPhil', 'Msc', 'MEng', 'Provisional'),
+        studyMode: Joi.string().valid('Full', 'Part'),
+        /* supervisors: Joi.array().items(Joi.string()) */  /**@Todo Get array of supervisors from frontend */ 
+        supervisors: Joi.string(),
+        researchTopic: Joi.string(),
+        completionYear: Joi.number().min(4),
+        progressLevel: Joi.string().valid('Half Year Progress Report Submitted', 'Annual Progress Report Submitted', 'Annual Oral Presentation Completed', 'Viva Completed', 'Thesis Submitted for Review', 'Final Thesis Submitted'),
+        dateofLastSubmission: Joi.date(),
+        urlToWebsite: Joi.string(),
+        researchArea: Joi.string(),
+        reseachProgram: Joi.string().valid('PhD', 'MPhil'),
     });
 
     return schema.validate(userData);

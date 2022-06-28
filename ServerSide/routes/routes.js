@@ -12,13 +12,22 @@ import { signUp } from "../controller/controller.js";
 // Get Router from express
 const route = express.Router();
 
-// Route to go login page
+/**
+ * @description Root Route
+ * @method GET
+ */
 route.get('/', gotologin);
 
-// Route to go signup page
+/**
+ * @description Route to the signup page
+ * @method GET
+ */
 route.get('/sign_up', gotosignup);
 
-// route to sign up api
+/**
+ * @description Route to register a user
+ * @method GET
+ */
 route.post('/api/user', signUp);
 
 export default route;
