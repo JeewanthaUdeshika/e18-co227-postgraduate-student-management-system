@@ -61,7 +61,12 @@ title:
 * MongoDB
    * Mongo DB is one of the most useful database layers
    * The database allows modern apps to be easily developed, tested, and hosted on the cloud
-   * 
+   
+## High Level System Organization
+
+![High level system organization](https://user-images.githubusercontent.com/73387606/176453629-4b1eec86-ef3d-4722-9095-bbf61464a7fb.png)
+
+   
 ## Data Flow through the system
 
 ![cpu](https://user-images.githubusercontent.com/73387606/176451868-4e8175ca-6f47-42fb-9f2c-0c5a65f517a2.jpg)
