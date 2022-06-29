@@ -42,7 +42,26 @@ title:
          * It- Easier for coordinators to get a reminder as well as students
          * Automated Email and Notification System is developed in this part
          * This prevents submission and processing delays
-    
+         
+## Technology Stack
+
+![Screenshot 2022-06-29 185918](https://user-images.githubusercontent.com/73387606/176448500-d963a59a-89cf-4df7-a3c4-7a316e9b20cb.png)
+
+* ReactJS
+   * Improves the quality of user interface
+   * Open source and easy to use
+   * Less coding and gives more functionality
+   * Performance Enhancement by using virtual DOM
+
+* Express JS
+   * Can handle a higher level of requests efficiently
+   * Can integrate several third-party applications and services with ExpressJS.
+   * fast application development in a limited time
+ 
+* MongoDB
+   * Mongo DB is one of the most useful database layers
+   * The database allows modern apps to be easily developed, tested, and hosted on the cloud
+
 ## Team
 -  E/18/028, Ariyawansha P.H.J.U., [e18028@eng.pdn.ac.lk](mailto:name@email.com)
 -  E/18/173, Kasthuripitiya K.A.I.M., [e18173@eng.pdn.ac.lk](mailto:name@email.com)
