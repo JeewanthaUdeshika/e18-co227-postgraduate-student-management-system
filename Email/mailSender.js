@@ -2,24 +2,27 @@
  * E / 18 / 173
  * Kasthuripitiya K.A.I.M.
  * Automated Mail Sender
- * 21/06/2022
+ * 28/06/2022
  */
 
-// import { workerData } from "worker_threads";
 import moment from "moment";
+import details from "./structure.js";
 import { scheduleJob } from "node-schedule";
 import nodemailer from "nodemailer";
-import "dotenv/config"; //Read the .env file
+import * as dotenv from "dotenv"; //Read the .env file
+dotenv.config({ path: ".env.auth" }); //Read the .env file
 
 class MailSender {
   // Constructor to set the email list
-  constructor(emailList, regDate) {
+  constructor(emailList, regDate, property) {
     this.emailList = emailList;
     this.regDate = regDate;
+    this.property = property;
   }
 
+  // Mail sending Function
   async sendEmail() {
-    console.log(moment().format("HH:mm:ss"));
+    // console.log(moment().format("HH:mm:ss"));
 
     //All the security_configs are in a seperate file for security purposes
     const transporter = nodemailer.createTransport({
@@ -40,6 +43,9 @@ class MailSender {
       // Comma Separated list of mails
       bcc: this.emailList,
 
+      // reply-to field
+      replyTo: `do not reply to this email ${process.env.EMAIL_USERNAME}`,
+
       // send the list as bcc or cc
       // bcc: secure_configuration.EMAIL_LIST_BCC,
       // cc: secure_configuration.EMAIL_LIST_CC,
@@ -49,9 +55,7 @@ class MailSender {
 
       // This would be the text of email body
       text:
-        "Hi! There, You know I am using the" +
-        " NodeJS Code along with NodeMailer " +
-        "to send this email.",
+        this.property != undefined ? details[this.property] : "Unknown Content",
 
       attachments: [
         {
