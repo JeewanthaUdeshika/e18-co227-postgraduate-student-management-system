@@ -98,6 +98,7 @@ export const signUp = async (req, res) => {
                     maxAge: maxAge*1000,     // 3hrs in ms
                 });
                 res.status(208).send({message: 'data inserted successfully', user});
+                /**@Todo Send Mail to admin to approve */
             })
             .catch(err => {
                 res.status(500).send({
@@ -201,6 +202,7 @@ export const approveStudent = async (req, res) => {
         });
         res.status(200).send({message: "User  approved by admin"});
         /**@ToDo Send Email to user that he is approved */
+
     }
     else{
         res.status(400).send({message: "There is no user with that ID"});
