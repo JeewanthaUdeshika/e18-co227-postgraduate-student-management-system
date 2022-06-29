@@ -9,7 +9,7 @@ import mongoose from "mongoose";
 
 const options = {discriminatorKey: 'kind'};
 
-// state for the register state
+/* // state for the register state
 const registerStatus = new mongoose.Schema({
     supervisors: {
         type: Array,
@@ -18,7 +18,7 @@ const registerStatus = new mongoose.Schema({
 },
 options
 );
-
+ */
 // Shape of the user document
 const userSchema = new mongoose.Schema({
     nameWithInitials: {
@@ -48,10 +48,16 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    
-    regState: registerStatus,
+    supervisors: {
+        type: Array,
+        default: []
+    },
+},
+options);
 
-});
+// Make the document model
+export const UserDB = mongoose.model('userData', userSchema);
+
 
 
 // Schema for the registered students
@@ -100,10 +106,13 @@ const prospectiveSchema = new mongoose.Schema({
     },
 });
 
-// Discrimination of the registerStatus
+// Model  for registered students
+export const registeredUser = UserDB.discriminator('Registered', registeredSchema, options);
+// Model for prospective students
+export const prospectiveUser = UserDB.discriminator('Prospective', prospectiveSchema, options);
+
+
+/* // Discrimination of the registerStatus
 userSchema.path('regState').discriminator('Registered' ,registeredSchema);
 userSchema.path('regState').discriminator('Prospective' ,prospectiveSchema);
-
-// Make the document model
-export const UserDB = mongoose.model('userData', userSchema);
-
+ */

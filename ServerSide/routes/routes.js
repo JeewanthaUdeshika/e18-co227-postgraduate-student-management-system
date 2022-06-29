@@ -7,7 +7,7 @@
 
 import express from "express";
 import {gotologin, gotosignup} from '../services/services.js';
-import { signUp } from "../controller/controller.js";
+import { login, signUp } from "../controller/controller.js";
 
 // Get Router from express
 const route = express.Router();
@@ -25,9 +25,15 @@ route.get('/', gotologin);
 route.get('/sign_up', gotosignup);
 
 /**
- * @description Route to register a user
- * @method GET
+ * @description Route to register an user
+ * @method POST
  */
-route.post('/api/user', signUp);
+route.post('/user/signup', signUp);
+
+/**
+ * @description Route to login  an user
+ * @method POST
+ */
+ route.post('/user/login', login);
 
 export default route;
