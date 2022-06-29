@@ -11,14 +11,20 @@ title:
 
 # Postgraduate Student Management System
 
----
+## Problem
 
-This is a sample image, to show how to add images to your page. To learn more options, please refer [this](https://projects.ce.pdn.ac.lk/docs/faq/how-to-add-an-image/)
+* Currently the system we use for managing the postgraduate students is not suitable , because the system is not user friendly.
 
-![ezgif-1-0eb041aa59](https://user-images.githubusercontent.com/73387606/172770744-94a5a3c6-e8e8-4e3b-b253-542755c577fd.png)
+![Screenshot_2022-06-29_151736-removebg-preview](https://user-images.githubusercontent.com/73387606/176407296-fbc7a165-0cdf-4a07-961f-e01787952b34.png)
 
+## Solution
 
-
+* So we decided to implement interactive <code><i>Web Application</i></code>.This system consists of ,
+    * Student Registration System
+    * User Management Facility System
+    * Progress and Performance Monitorin System
+    * Automated Event Management System
+    
 ## Team
 -  E/18/028, Ariyawansha P.H.J.U., [e18028@eng.pdn.ac.lk](mailto:name@email.com)
 -  E/18/173, Kasthuripitiya K.A.I.M., [e18173@eng.pdn.ac.lk](mailto:name@email.com)
