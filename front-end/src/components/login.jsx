@@ -26,8 +26,8 @@ class Login extends Component {
                 <h1 class="h3 mb-3 fw-normal" style={{ fontFamily: 'sans-serif'}}>Welcome</h1>
             
                 <div class="form-floating" style={{zIndex: '2'}}>
-                  <input type="text" class="form-control" id="floatingInput" placeholder="Registration Number"/>
-                  <label for="floatingInput">Registration Number</label>
+                  <input type="email" class="form-control" id="floatingInput" placeholder="E-Mail Address"/>
+                  <label for="floatingInput">E-Mail Address</label>
                 </div>
 
 
@@ -49,7 +49,7 @@ class Login extends Component {
 
 
                 <div class="text-center" style={{marginTop: '30px'}}>
-                  <p> Not Registered ? <a href='src\pages\register-basic.js'>Register</a></p>
+                  <p> Not Registered ? <a href='#'>Register</a></p>
                 </div>
 
               </form>
