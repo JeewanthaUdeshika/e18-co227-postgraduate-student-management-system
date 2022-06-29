@@ -61,7 +61,14 @@ title:
 * MongoDB
    * Mongo DB is one of the most useful database layers
    * The database allows modern apps to be easily developed, tested, and hosted on the cloud
+   * 
+## Data Flow through the system
 
+![cpu](https://user-images.githubusercontent.com/73387606/176451868-4e8175ca-6f47-42fb-9f2c-0c5a65f517a2.jpg)
+
+## Project Repo
+   * [Project Repo](https://github.com/cepdnaclk/e18-co227-Postgraduate-Student-Management-System)
+   * [Kanban Board](https://github.com/cepdnaclk/e18-co227-Postgraduate-Student-Management-System/projects/1?fullscreen=true)
 ## Team
 -  E/18/028, Ariyawansha P.H.J.U., [e18028@eng.pdn.ac.lk](mailto:name@email.com)
 -  E/18/173, Kasthuripitiya K.A.I.M., [e18173@eng.pdn.ac.lk](mailto:name@email.com)
