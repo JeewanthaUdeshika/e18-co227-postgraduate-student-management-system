@@ -12,6 +12,15 @@ title:
 # Postgraduate Student Management System
 ![s](https://user-images.githubusercontent.com/73387606/176441317-5bc0ae9e-75ff-4313-b2f0-fdfe32851b7b.png)
 
+## Table of Contents
+1. [Problem](#problem)
+2. [Solution](#solution)
+3. [Technology Stack](#technology-stack)
+4. [High Level System Organization](#high-level-system-organization)
+5. [Data Flow through the system](#data-flow-through-the-system)
+6. [Project Repository](#project-repo)
+7. [Team](#team)
+8. [Links](#links)
 
 ## Problem
 
@@ -78,21 +87,6 @@ title:
 -  E/18/028, Ariyawansha P.H.J.U., [e18028@eng.pdn.ac.lk](mailto:name@email.com)
 -  E/18/173, Kasthuripitiya K.A.I.M., [e18173@eng.pdn.ac.lk](mailto:name@email.com)
 -  E/18/285, Ranasinghe S.M.T.S.C., [e18285@eng.pdn.ac.lk](mailto:name@email.com)
-
-## Table of Contents
-1. [Introduction](#introduction)
-2. [Other Sub Topics](#other-sub-topics)
-3. [Links](#links)
-
----
-
-## Introduction
-
- description of the real world problem and solution, impact
-
-## Other Sub Topics
-
-.....
 
 ## Links
 
