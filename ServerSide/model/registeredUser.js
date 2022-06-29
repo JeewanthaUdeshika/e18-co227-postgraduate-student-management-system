@@ -6,9 +6,6 @@
  */
 
  import mongoose from "mongoose";
-
- //const options = {discriminatorKey: 'kind'};
- 
  
  // Shape of the user document
  const userSchema = new mongoose.Schema({
