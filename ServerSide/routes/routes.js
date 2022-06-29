@@ -7,7 +7,8 @@
 
 import express from "express";
 import {gotologin, gotosignup} from '../services/services.js';
-import { login, signUp } from "../controller/controller.js";
+import { approveStudent, login, signUp } from "../controller/controller.js";
+import { adminAuth } from "../Middleware/auth.js";
 
 // Get Router from express
 const route = express.Router();
@@ -35,5 +36,17 @@ route.post('/user/signup', signUp);
  * @method POST
  */
  route.post('/user/login', login);
+
+ /**
+ * @description Route to approve a given userID for admin
+ * @method GET
+ */
+  route.get('/admin/approve/:id', adminAuth, approveStudent);
+
+
+  // Check admin
+  route.get('/admin',adminAuth, (req, res)=>{
+    res.send("You are an admin");
+  })
 
 export default route;

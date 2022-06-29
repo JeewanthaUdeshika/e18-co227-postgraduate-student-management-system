@@ -9,16 +9,7 @@ import mongoose from "mongoose";
 
 const options = {discriminatorKey: 'kind'};
 
-/* // state for the register state
-const registerStatus = new mongoose.Schema({
-    supervisors: {
-        type: Array,
-        default: []
-    },
-},
-options
-);
- */
+
 // Shape of the user document
 const userSchema = new mongoose.Schema({
     nameWithInitials: {
@@ -52,6 +43,10 @@ const userSchema = new mongoose.Schema({
         type: Array,
         default: []
     },
+    role: {
+        type: String,
+        enum: ['admin', 'student', 'supervisor'],       /**@Todo This should be updated as you want */
+    }
 },
 options);
 

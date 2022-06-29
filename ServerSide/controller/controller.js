@@ -10,6 +10,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { prospectiveUser, registeredUser, UserDB } from "../model/user.js";
+import mongoose from "mongoose";
+import { RegisteredDB } from "../model/registeredUser.js";
 
 dotenv.config({path: 'config.env'});
 
@@ -173,6 +175,38 @@ export const login = async (req, res) => {
     }
 }
 
+// Function to approve student. This passes the data to regstered database
+export const approveStudent = async (req, res) => {
+    const userID = req.params.id;
+    
+    if (!userID){
+        return res.status(400).send({message: "User not found"});
+    }
+
+    // Get user details from the userDB
+    const user = await UserDB.findById(userID);
+    const RegDate = new Date();
+    if (user){
+        await RegisteredDB.create({
+            nameWithInitials: user.nameWithInitials,
+            fullName: user.fullName,
+            postalAddress: user.postalAddress,
+            email: user.email,
+            telNo: user.telNo,
+            password: user.password,
+            supervisors: user.supervisors,
+            researchArea: user.researchArea,
+            reseachProgram: user.reseachProgram,
+            RegisteredDate: RegDate
+        });
+        res.status(200).send({message: "User  approved by admin"});
+        /**@ToDo Send Email to user that he is approved */
+    }
+    else{
+        res.status(400).send({message: "There is no user with that ID"});
+    }
+}
+
 function validateUser (userData){
     // Joi Schema for checking sign up data
     const schema = Joi.object({
@@ -200,3 +234,6 @@ function validateUser (userData){
 
     return schema.validate(userData);
 }
+
+
+// This function is to add specific user to main database
