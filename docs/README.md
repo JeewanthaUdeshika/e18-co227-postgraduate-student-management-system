@@ -15,11 +15,11 @@ title:
 
 * Currently the system we use for managing the postgraduate students is not suitable , because the system is not user friendly.
 
-![Screenshot_2022-06-29_151736-removebg-preview](https://user-images.githubusercontent.com/73387606/176407296-fbc7a165-0cdf-4a07-961f-e01787952b34.png)
+   ![Screenshot_2022-06-29_151736-removebg-preview](https://user-images.githubusercontent.com/73387606/176407296-fbc7a165-0cdf-4a07-961f-e01787952b34.png)
 
 ## Solution
 
-* So we decided to implement interactive <code><i>Web Application</i></code>.This system consists of ,
+* So we decided to implement interactive <code><i>Web Application</i></code>. This system consists of ,
     * Student Registration System
     * User Management Facility System
     * Progress and Performance Monitorin System
