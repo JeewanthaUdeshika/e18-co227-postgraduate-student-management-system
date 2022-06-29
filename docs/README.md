@@ -10,6 +10,8 @@ title:
 [comment]: # "This is the standard layout for the project, but you can clean this and use your own template"
 
 # Postgraduate Student Management System
+![s](https://user-images.githubusercontent.com/73387606/176441317-5bc0ae9e-75ff-4313-b2f0-fdfe32851b7b.png)
+
 
 ## Problem
 
