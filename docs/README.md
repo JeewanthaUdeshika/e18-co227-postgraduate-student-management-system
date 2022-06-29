@@ -19,7 +19,7 @@ title:
 
 ## Solution
 
-* So we decided to implement interactive <code><i>Web Application</i></code>.This system consists of ,
+* So we decided to implement interactive <code><i>Web Application</i></code>. This system consists of ,
     * Student Registration System
     * User Management Facility System
     * Progress and Performance Monitorin System
