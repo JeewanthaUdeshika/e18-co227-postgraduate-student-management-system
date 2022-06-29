@@ -1,0 +1,53 @@
+<!DOCTYPE html>    
+<html>    
+<head>    
+    <title>Login Form</title>    
+    <!--<link rel="stylesheet" type="text/css" href="css/style.css">-->    
+</head>    
+<body>    
+    <h2>SignUp Page</h2><br>    
+    <div class="SignUp">    
+    <form id="SignUp" method="post" action="/api/user">    
+        <label><b>Name with initials</b></label>    
+        <input type="text" name="nameWithInitials" placeholder="NameWithInitials">    
+        <br><br>
+        <label><b>Name denoted by initials</b></label>    
+        <input type="text" name="fullName" placeholder="Name denoted by initials">    
+        <br><br>
+        <label><b>Postal Address</b></label>    
+        <input type="text" name="postalAddress" placeholder="Postal Address">    
+        <br><br>
+        <label><b>Email Address</b></label>    
+        <input type="text" name="email" placeholder="Email Address">    
+        <br><br>
+        <label><b>Contact Number</b></label>    
+        <input type="text" name="telNo" placeholder="Contact Number">    
+        <br><br>
+        <label><b>Supervisors</b></label>    
+        <input type="text" name="supervisors" placeholder="Supervisors">    
+        <br><br>
+        <input type="radio" id="html" name="regState" value="Registered">
+        <label for="html">Registered</label><br>
+        <br><br>
+        <label><b>reg Np</b></label>    
+        <input type="text" name="regNo" placeholder="Register Number">    
+        <br><br>
+        
+        <input type="radio" id="css" name="regState" value="Prospective">
+        <label for="css">Prospective</label><br>
+        <br><br>
+        <!-- <label><b>researchArea</b></label>    
+        <input type="text" name="researchArea" placeholder="researchArea">    
+        <br><br> -->
+
+        <label><b>Password     
+        </b>    
+        </label>    
+        <input type="Password" name="password" id="Pass" placeholder="Password">    
+        <br><br>    
+        <button type="submit">SignUp</button>
+        <br><br>      
+    </form>   
+</div>    
+</body>    
+</html>   
