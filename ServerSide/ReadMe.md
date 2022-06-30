@@ -2,7 +2,7 @@
 
 ## ToDo
     - Get array from the front end to supervisors
-    - After the registering user, admin should be notified by email to  approve it
+    - After the registering user, admin should be notified by email to  approve it (Connect Email send class)
     - Check the registeredUser.js to registered schema is nessary or not
     - Send Email to user after the approving
 
