@@ -12,6 +12,8 @@ import dotenv from "dotenv";
 import { prospectiveUser, registeredUser, UserDB } from "../model/user.js";
 import mongoose from "mongoose";
 import { RegisteredDB } from "../model/registeredUser.js";
+import { MailSender } from "../Email/mailSender.js";
+import moment from "moment";
 
 dotenv.config({path: 'config.env'});
 
@@ -97,8 +99,17 @@ export const signUp = async (req, res) => {
                     httpOnly: true,
                     maxAge: maxAge*1000,     // 3hrs in ms
                 });
+
+                const admin = UserDB.findOne({role: "admin"});
+
+                /* // Sending Email to the admin
+                const regDate = moment().add(10, "s").format();
+                new MailSender(admin.email, regDate, "admin").sendEmail(); */
+
+                /**@ToDo Send Mail o the admin that new user is registered */
+
                 res.status(208).send({message: 'data inserted successfully', user});
-                /**@Todo Send Mail to admin to approve */
+                
             })
             .catch(err => {
                 res.status(500).send({
