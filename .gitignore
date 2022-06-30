@@ -1,2 +1,3 @@
 Email/node_modules
 ServerSide/Email/.env.auth
+ServerSide/config.env
