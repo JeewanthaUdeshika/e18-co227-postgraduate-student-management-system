@@ -1,7 +1,4 @@
-Email/node_modules
-Email/secure.js
-Email/indexold.js
-Email/secureold.js
-Email/.env
-Email/.env.test
-Email/old/
+ServerSide/Email/node_modules
+ServerSide/Email/.env.auth
+ServerSide/node_modules
+ServerSide/config.env
