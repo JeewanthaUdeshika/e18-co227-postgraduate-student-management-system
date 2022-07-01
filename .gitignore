@@ -1,4 +1,4 @@
-ServerSide/Email/node_modules
-ServerSide/Email/.env.auth
+ServerSide/node_modules
+ServerSide/.env.auth
 ServerSide/node_modules
 ServerSide/config.env
