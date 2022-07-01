@@ -1,8 +1,16 @@
 const content = {
-  admin: `New user is Applied.`,
-  notify: `You have 2 weeks remaining for submission`,
-  regSuccess: `Registration was successfull`,
-  unkown: "Unknown Content",
+  admin: {
+    message: "Registration was Successfull!",
+    subject: "Registration",
+  },
+  notify: {
+    message: "You Have 2 weeks Remaining For the Submission",
+    subject: "Deadline",
+  },
+  regSuccess: {
+    message: "Regsitration Was Successfull",
+    subject: "Registration",
+  },
 };
 
 export default content;

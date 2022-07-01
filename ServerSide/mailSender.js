@@ -56,10 +56,12 @@ class MailSender {
         // cc: secure_configuration.EMAIL_LIST_CC,
 
         // Subject of Email
-        subject: "Sending Email using Node.js",
+        subject: details[this.property].subject,
 
         // This would be the text of email body
-        text: details[this.property],
+        // text: details[this.property],
+
+        html: `<h2>${details[this.property].message}</h2>`,
 
         attachments: [
           {
