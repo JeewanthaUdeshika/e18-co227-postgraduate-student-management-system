@@ -15,15 +15,16 @@ dotenv.config({ path: ".env.auth" }); //Read the .env file
 
 class MailSender {
   // Constructor to set the email list
-  constructor(emailList, regDate, sender, property) {
+  constructor(emailList, regDate, sender, property, linkApproval) {
     this.emailList = emailList;
     this.regDate = regDate;
     this.sender = sender;
     this.property = property;
+    this.linkApproval = linkApproval;
   }
 
   // Mail sending Function
-  sendEmail() {
+  async sendEmail() {
     // console.log(moment().format("HH:mm:ss"));
 
     //All the security_configs are in a seperate file for security purposes
@@ -59,9 +60,14 @@ class MailSender {
         subject: details[this.property].subject,
 
         // This would be the text of email body
-        // text: details[this.property],
+        text:
+          this.linkApproval !== "admin"
+            ? `${details[this.property].message}.Click here to approve ${
+                this.linkApproval
+              }`
+            : details[this.property].message,
 
-        html: `<h2>${details[this.property].message}</h2>`,
+        // html: `<h2>${details[this.property].message}</h2>`,
 
         attachments: [
           {
@@ -71,7 +77,7 @@ class MailSender {
         ],
       };
 
-      scheduleJob(new Date(this.regDate), () => {
+      await scheduleJob(new Date(this.regDate), () => {
         // verify connection configuration
         transporter.verify(function (error, success) {
           if (error) {
