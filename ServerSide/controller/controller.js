@@ -12,7 +12,7 @@ import dotenv from "dotenv";
 import { prospectiveUser, registeredUser, UserDB } from "../model/user.js";
 import mongoose from "mongoose";
 import { RegisteredDB } from "../model/registeredUser.js";
-import { MailSender } from "../Email/mailSender.js";
+import { MailSender } from "../mailSender.js";
 import moment from "moment";
 
 dotenv.config({path: 'config.env'});
@@ -83,7 +83,7 @@ export const signUp = async (req, res) => {
         // save the data in the database
         user
             .save(user)
-            .then(data =>{
+            .then(async data =>{
                 const maxAge = 3*60*60;     // Expiration time 3hrs
                 // Generating token to send
                 const token = jwt.sign(
@@ -100,15 +100,16 @@ export const signUp = async (req, res) => {
                     maxAge: maxAge*1000,     // 3hrs in ms
                 });
 
-                const admin = UserDB.findOne({role: "admin"});
+                const admin = await UserDB.findOne({role: "admin"});
+                let emailList = [admin.email];
+                                
+                console.log(admin.email);
 
-                /* // Sending Email to the admin
+                // Sending Email to the admin informing that new user is registered
                 const regDate = moment().add(10, "s").format();
-                new MailSender(admin.email, regDate, "admin").sendEmail(); */
+                new MailSender(emailList, regDate, "admin").sendEmail();
 
-                /**@ToDo Send Mail o the admin that new user is registered */
-
-                res.status(208).send({message: 'data inserted successfully', user});
+                res.status(208).send({message: 'Data inserted successfully', user});
                 
             })
             .catch(err => {
@@ -211,8 +212,13 @@ export const approveStudent = async (req, res) => {
             reseachProgram: user.reseachProgram,
             RegisteredDate: RegDate
         });
+
+        /** Send Email to user that he is approved */
+        const regDate = moment().add(10, "s").format();
+        new MailSender(user.email, regDate, "regSuccess").sendEmail();
         res.status(200).send({message: "User  approved by admin"});
-        /**@ToDo Send Email to user that he is approved */
+        
+
 
     }
     else{
