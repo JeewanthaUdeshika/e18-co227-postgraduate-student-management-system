@@ -15,9 +15,10 @@ dotenv.config({ path: ".env.auth" }); //Read the .env file
 
 class MailSender {
   // Constructor to set the email list
-  constructor(emailList, regDate, property) {
+  constructor(emailList, regDate, sender, property) {
     this.emailList = emailList;
     this.regDate = regDate;
+    this.sender = sender;
     this.property = property;
   }
 
@@ -42,7 +43,7 @@ class MailSender {
 
       const mailConfigurations = {
         // It should be a string of sender email
-        from: `Ishan Maduranga ${process.env.EMAIL_USERNAME}`,
+        from: `${this.sender} ${process.env.EMAIL_USERNAME}`,
 
         // Comma Separated list of mails
         bcc: this.emailList,

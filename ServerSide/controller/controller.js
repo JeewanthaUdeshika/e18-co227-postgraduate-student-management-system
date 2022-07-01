@@ -101,6 +101,7 @@ export const signUp = async (req, res) => {
             new MailSender(
               admin.email,
               moment().add(5, "s").format(),
+              "Administrator",
               "admin"
             ).sendEmail();
 
