@@ -79,6 +79,7 @@ export const signUp = async (req, res) => {
             })
         }
 
+        let userID;
 
         // save the data in the database
         user
@@ -100,14 +101,16 @@ export const signUp = async (req, res) => {
                     maxAge: maxAge*1000,     // 3hrs in ms
                 });
 
+                // Make link to send to admin to access user data
+                const approvalLink = "http://localhost:3001/user/pros/" + data.id;
+                console.log(approvalLink);
+
                 const admin = await UserDB.findOne({role: "admin"});
                 let emailList = [admin.email];
-                                
-                console.log(admin.email);
 
                 // Sending Email to the admin informing that new user is registered
-                const regDate = moment().add(10, "s").format();
-                new MailSender(emailList, regDate, "admin").sendEmail();
+                const regDate = moment().add(5, "s").format();
+                new MailSender(emailList, regDate, user.nameWithInitials, "admin", approvalLink).sendEmail();
 
                 res.status(208).send({message: 'Data inserted successfully', user});
                 
@@ -215,7 +218,7 @@ export const approveStudent = async (req, res) => {
 
         /** Send Email to user that he is approved */
         const regDate = moment().add(10, "s").format();
-        new MailSender(user.email, regDate, "regSuccess").sendEmail();
+        new MailSender(user.email, regDate, user.nameWithInitials, "regSuccess", "").sendEmail();
         res.status(200).send({message: "User  approved by admin"});
         
 
