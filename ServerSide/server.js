@@ -17,7 +17,7 @@ import { connectDB } from "./database/connection.js";
 const app = express();
 
 dotenv.config({path: 'config.env'});    // Path for the .env file
-const PORT = process.env.PORT || 8080;  // Getting the port from env file
+const PORT = process.env.PORT || 5000;  // Getting the port from env file
 
 // Connect with the database
 connectDB();
