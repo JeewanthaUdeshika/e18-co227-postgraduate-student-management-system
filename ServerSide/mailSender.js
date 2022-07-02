@@ -64,7 +64,7 @@ class MailSender {
 
         // This would be the text of email body
         text:
-          details[this.property] === "admin"
+          this.property === "admin"
             ? `${details[this.property].message}.Click here to approve ${
                 this.linkApproval
               }`
