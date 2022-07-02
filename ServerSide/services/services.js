@@ -18,7 +18,8 @@ const __dirname = path.dirname(__filename);
 ////
 
 export const gotologin = (req, res)=>{
-    res.sendFile(path.join(__dirname, '../view/login.html'));
+    // res.sendFile(path.join(__dirname, '../view/login.html'));
+    res.render("login");
 }
 
 export const gotosignup = (req, res)=>{
@@ -32,7 +33,8 @@ export const getUser = async (req, res)=>{
     const user = await UserDB.findById(userID, '-password');
 
     if(user){
-        return res.status(200).json(user);
+        res.render('unRegUser', {userData: user});
+        //return res.status(200).json(user);
     }
     else{
         return res.status(404).send({message: "User not found"});

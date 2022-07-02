@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>Unregistered User</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1">User to Approve</span>
+    </nav>
+    <table class = "table table-hover">
+        <thead class="thead-dark">
+            <tr class="table-warning">
+                <th>Name</th>
+                <th>Full Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>TelNo</th>
+                <th>Supervisors</th>
+                <th>Research Area</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <td><%= userData.nameWithInitials %></td>
+            <td><%= userData.fullName %></td>
+            <td><%= userData.postalAddress %></td>
+            <td><%= userData.email %></td>
+            <td><%= userData.telNo %></td>
+            <td><%= userData.supervisors %></td>
+            <td><%= userData.researchArea %></td>
+            
+        </tbody>
+    </table>
+    <a href="/admin/approve/<%= userData.id %>"><button class="btn btn-danger">Approve</button></a>
+    
+</body>
+</html>
