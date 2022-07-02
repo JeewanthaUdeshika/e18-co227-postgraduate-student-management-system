@@ -42,7 +42,7 @@ class MailSender {
 
     const mailConfigurations = {
       // It should be a string of sender email
-      from: `Ishan Maduranga ${process.env.EMAIL_USERNAME}`,
+      from: `PG Student Management System ${process.env.EMAIL_USERNAME}`,
 
       // Comma Separated list of mails
       bcc: this.emailList,
