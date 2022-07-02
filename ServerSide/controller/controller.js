@@ -12,7 +12,7 @@ import dotenv from "dotenv";
 import { prospectiveUser, registeredUser, UserDB } from "../model/user.js";
 import mongoose from "mongoose";
 import { RegisteredDB } from "../model/registeredUser.js";
-import { MailSender } from "../Email/mailSender.js";
+import { MailSender } from "../mailSender.js";
 import moment from "moment";
 
 dotenv.config({ path: "config.env" });
@@ -79,22 +79,40 @@ export const signUp = async (req, res) => {
 
         // save the data in the database
         user
-          .save(user)
-          .then(async (data) => {
-            const maxAge = 3 * 60 * 60; // Expiration time 3hrs
-            // Generating token to send
-            const token = jwt.sign(
-              { id: data.__id, email: data.email, name: data.nameWithInitials },
-              process.env.jwtSecret,
-              {
-                expiresIn: maxAge,
-              }
-            );
+            .save(user)
+            .then(async data =>{
+                const maxAge = 3*60*60;     // Expiration time 3hrs
+                // Generating token to send
+                const token = jwt.sign(
+                    {id: data.__id, email: data.email, name: data.nameWithInitials},
+                    process.env.jwtSecret,
+                    {
+                        expiresIn: maxAge
+                    }
+                    );
 
-            // Sending a cookie to the user
-            res.cookie("userToken", token, {
-              httpOnly: true,
-              maxAge: maxAge * 1000, // 3hrs in ms
+                    // Sending a cookie to the user
+                res.cookie("userToken", token, {
+                    httpOnly: true,
+                    maxAge: maxAge*1000,     // 3hrs in ms
+                });
+
+                const admin = await UserDB.findOne({role: "admin"});
+                let emailList = [admin.email];
+                                
+                console.log(admin.email);
+
+                // Sending Email to the admin informing that new user is registered
+                const regDate = moment().add(10, "s").format();
+                new MailSender(emailList, regDate, "admin").sendEmail();
+
+                res.status(208).send({message: 'Data inserted successfully', user});
+                
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Some error occured"
+                });
             });
 
             const admin = await UserDB.findOne({ role: "admin" });
@@ -204,6 +222,66 @@ export const approveStudent = async (req, res) => {
       researchArea: user.researchArea,
       reseachProgram: user.reseachProgram,
       RegisteredDate: RegDate,
+
+    const userID = req.params.id;
+    
+    if (!userID){
+        return res.status(400).send({message: "User not found"});
+    }
+
+    // Get user details from the userDB
+    const user = await UserDB.findById(userID);
+    const RegDate = new Date();
+    if (user){
+        await RegisteredDB.create({
+            nameWithInitials: user.nameWithInitials,
+            fullName: user.fullName,
+            postalAddress: user.postalAddress,
+            email: user.email,
+            telNo: user.telNo,
+            password: user.password,
+            supervisors: user.supervisors,
+            researchArea: user.researchArea,
+            reseachProgram: user.reseachProgram,
+            RegisteredDate: RegDate
+        });
+
+        /** Send Email to user that he is approved */
+        const regDate = moment().add(10, "s").format();
+        new MailSender(user.email, regDate, "regSuccess").sendEmail();
+        res.status(200).send({message: "User  approved by admin"});
+        
+
+
+    }
+    else{
+        res.status(400).send({message: "There is no user with that ID"});
+    }
+}
+
+function validateUser (userData){
+    // Joi Schema for checking sign up data
+    const schema = Joi.object({
+        nameWithInitials : Joi.string().min(3).required(),
+        fullName: Joi.string().required(),
+        postalAddress: Joi.string().required(),
+        email: Joi.string().email({minDomainSegments: 2}).required(),
+        telNo: Joi.number().min(10).required(),
+        password: Joi.string().required(),
+        regState: Joi.string().valid('Registered', 'Prospective'),
+        regNo: Joi.string(),
+        DOR: Joi.date().raw(),
+        degree: Joi.string().valid('PhD', 'MPhil', 'Msc', 'MEng', 'Provisional'),
+        studyMode: Joi.string().valid('Full', 'Part'),
+        /* supervisors: Joi.array().items(Joi.string()) */  /**@Todo Get array of supervisors from frontend */ 
+        supervisors: Joi.string(),
+        researchTopic: Joi.string(),
+        completionYear: Joi.number().min(4),
+        progressLevel: Joi.string().valid('Half Year Progress Report Submitted', 'Annual Progress Report Submitted', 'Annual Oral Presentation Completed', 'Viva Completed', 'Thesis Submitted for Review', 'Final Thesis Submitted'),
+        dateofLastSubmission: Joi.date(),
+        urlToWebsite: Joi.string(),
+        researchArea: Joi.string(),
+        reseachProgram: Joi.string().valid('PhD', 'MPhil'),
     });
     res.status(200).send({ message: "User  approved by admin" });
     /**@ToDo Send Email to user that he is approved */

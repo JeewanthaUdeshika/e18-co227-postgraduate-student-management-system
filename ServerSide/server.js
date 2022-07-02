@@ -23,7 +23,7 @@ const PORT = process.env.PORT || 5000;  // Getting the port from env file
 connectDB();
 
 // Make data encoding method to http body
-app.use(bodyParser.json({extended: true}));
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 // Get cookie parser
 app.use(cookieParser());

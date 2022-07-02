@@ -1,4 +1,5 @@
 const content = {
+
   admin: {
     message: "Registration was Successfull!",
     subject: "Registration",

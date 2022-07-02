@@ -15,12 +15,14 @@ dotenv.config({ path: ".env.auth" }); //Read the .env file
 
 class MailSender {
   // Constructor to set the email list
+
   constructor(emailList, regDate, sender, property, linkApproval) {
     this.emailList = emailList;
     this.regDate = regDate;
     this.sender = sender;
     this.property = property;
     this.linkApproval = linkApproval;
+
   }
 
   // Mail sending Function
@@ -28,6 +30,7 @@ class MailSender {
     // console.log(moment().format("HH:mm:ss"));
 
     //All the security_configs are in a seperate file for security purposes
+
     // If the user tried to access unknown property this won't be executed
 
     if (details[this.property] !== undefined) {
@@ -105,6 +108,7 @@ class MailSender {
     } else {
       console.log(`Unknown Property Accessed!!`);
     }
+
   }
 }
 
