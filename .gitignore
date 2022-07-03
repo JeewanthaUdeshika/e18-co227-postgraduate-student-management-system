@@ -3,3 +3,4 @@ ServerSide/.env.auth
 ServerSide/node_modules
 ServerSide/config.env
 
+ServerSide/config.env

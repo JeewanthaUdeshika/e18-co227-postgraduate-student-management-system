@@ -8,17 +8,16 @@
 import mongoose from "mongoose";
 
 const staffSchema = new mongoose.Schema({
-    name: {
+    google: {
+        id: {
         type: String,
-        required: true
-    },
-    email: {
+        },
+        name: {
         type: String,
-        required: true,
-    },
-    password: {
+        },
+        email: {
         type: String,
-        required: true
+        },
     },
     role: {
         type: String,
