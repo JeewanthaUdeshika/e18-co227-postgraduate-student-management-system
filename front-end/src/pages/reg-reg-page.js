@@ -15,7 +15,7 @@ class RegisteredRegPage extends Component {
 
     render() { 
         return ( 
-            <div class="container">
+            <div>
                 <Navbar/>
 
                 <div style={{marginTop: "70px"}}>
