@@ -6,7 +6,7 @@
  */
 
 import express from "express";
-import {gotologin, gotosignup} from '../services/services.js';
+import {getUser, gotologin, gotosignup} from '../services/services.js';
 import { approveStudent, login, signUp } from "../controller/controller.js";
 import { adminAuth } from "../Middleware/auth.js";
 
@@ -43,6 +43,18 @@ route.post('/user/signup', signUp);
  */
   route.get('/admin/approve/:id', adminAuth, approveStudent);
 
+/**
+ * @description Route to get user details with given id. Only admin can get information of  unregistered student
+ * @method GET
+ */
+route.get('/user/pros/:id', adminAuth, getUser);
+
+/**
+ * @description Route to get user details with given id. Only admin can get information of  unregistered student
+ * @method GET
+ */
+ route.get('/user/:id', /* userAuth, */ getUser);
+/**@ToDo Make userAuth for identify the user */
 
   // Check admin
   route.get('/admin',adminAuth, (req, res)=>{
