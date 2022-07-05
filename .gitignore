@@ -2,8 +2,3 @@ ServerSide/node_modules
 ServerSide/.env.auth
 ServerSide/node_modules
 ServerSide/config.env
-
-<<<<<<< HEAD
-ServerSide/config.env
-=======
->>>>>>> 2ee0a3266aca603fd36c277dd113b079b0762680

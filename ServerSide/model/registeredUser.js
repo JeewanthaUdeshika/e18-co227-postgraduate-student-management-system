@@ -79,7 +79,7 @@
  );
  
  // Make the document model
- export const RegisteredDB = mongoose.model('registeredUser', userSchema);
+ export const RegisteredDB = mongoose.model('registereduser', userSchema);
  
  
  

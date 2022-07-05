@@ -5,32 +5,14 @@
     <!--<link rel="stylesheet" type="text/css" href="css/style.css">--> 
 </head>    
 <body>
-    
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-      <script>
-        function handleCredentialResponse(response) {
-          console.log("Encoded JWT ID token: " + response.credential);
-        }
-        window.onload = function () {
-          google.accounts.id.initialize({
-            client_id: "102556293879-vvjrlpm3g49o4dd27m07rkvdnkhlm0lq.apps.googleusercontent.com",
-            callback: handleCredentialResponse
-          });
-          google.accounts.id.renderButton(
-            document.getElementById("buttonDiv"),
-            { theme: "outline", size: "large" }  // customization attributes
-          );
-          google.accounts.id.prompt(); // also display the One Tap dialog
-        }
-    </script>
 
     <h2>Login Page</h2><br>    
     <div class="login">    
     <form id="login" method="post" action="/user/login">    
-        <label><b>User Name     
+        <label><b>Email    
         </b>    
         </label>    
-        <input type="text" name="nameWithInitials" placeholder="Username">    
+        <input type="text" name="email" placeholder="Email">    
         <br><br>    
         <label><b>Password     
         </b>    
@@ -45,8 +27,11 @@
         Forgot <a href="#">Password</a>    
     </form>
     <a href="http://localhost:3001/sign_up"><button>Sign Up</button></a>
-    <br><br>     
-    <div id="buttonDiv"></div>
+    <br><br>
+    
+    <h3>If you are staff member, Login here</h3>
+    <a href="/auth/google"><button> Login with google</button></a>
+    
 </div>    
 </body>    
 </html>   

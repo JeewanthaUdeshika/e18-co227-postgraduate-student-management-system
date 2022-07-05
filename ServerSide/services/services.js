@@ -19,7 +19,7 @@ const __dirname = path.dirname(__filename);
 
 export const gotologin = (req, res)=>{
     // res.sendFile(path.join(__dirname, '../view/login.html'));
-    res.render("login");
+    res.render("login.ejs"/* , {name: req.user.name, role: req.user.role} */);
 }
 
 export const gotosignup = (req, res)=>{
@@ -29,6 +29,7 @@ export const gotosignup = (req, res)=>{
 export const getUser = async (req, res)=>{
     // Get user id from the link
     const userID = req.params.id;
+    console.log("id from get user function" + userID);
     // Get user from the userdata base without password
     const user = await UserDB.findById(userID, '-password');
 

@@ -12,6 +12,7 @@
  import { prospectiveUser, registeredUser, UserDB } from "../model/user.js";
  import mongoose from "mongoose";
  import { RegisteredDB } from "../model/registeredUser.js";
+ import { StaffDB } from "../model/staff.js";
  import { MailSender } from "../mailSender.js";
  import moment from "moment";
  
@@ -223,6 +224,7 @@
    }
  };
  
+
  function validateUser(userData) {
    // Joi Schema for checking sign up data
    const schema = Joi.object({
@@ -257,5 +259,39 @@
  
    return schema.validate(userData);
  }
- 
- // This function is to add specific user to main database
+
+ export const addStaff = async (req, res) => {
+    // Find if there is that email
+    const email = req.body.email;
+    
+    console.log(req.body);
+
+    const userExists = await StaffDB.findOne({ email: email });
+    if (userExists) {
+      return res.status(409).send({ message: "User already exists1" });
+    }
+
+    // Make the model
+    const staff = new StaffDB({
+      name: req.body.name,
+      email: req.body.email,
+      role: req.body.role,
+    })
+
+    staff
+      .save(staff)
+      .then( data =>{
+        let emailList = [data.email];
+        // Sending Email to the admin informing that new user is registered
+        const regDate = moment().add(5, "s").format();
+        new MailSender(emailList, regDate, 'Administrator', "staffAdd", "").sendEmail();
+
+        res.status(208).send({message: `${data.role} added successfully`, data});
+      })
+      .catch(err=>{
+        res.status(500).send({
+            message: err.message || "Some error ocurred"
+        });
+    });
+  };
+
