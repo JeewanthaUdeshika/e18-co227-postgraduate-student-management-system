@@ -15,8 +15,8 @@ import Profile from './components/profile';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Profile/>
-    //<LoginPage/>
-    //<RegisterBasic/>
+    // <LoginPage/>
+    // <RegisterBasic/>
     //<RegisteredRegPage/>
     //<ProRegPage/>
     );
