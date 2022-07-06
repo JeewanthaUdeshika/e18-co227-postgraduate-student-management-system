@@ -8,11 +8,17 @@ class Registration extends Component {
         super(props);
     }
 
-
+    // Inputs of the form
     state = {
+      nameWithInitials: null,
+      nameDenotedByinitials: null,
+      postalAddress: null,
+      email: null,
+      contactNumber: null,
       password: null,
       confirmedPassword: null,
-      registrationStatus: null
+      registrationStatus: null,
+      
     }
 
     
@@ -25,15 +31,33 @@ class Registration extends Component {
       if(selectedState === "registered"){
         console.log("Registered is Selected");
         this.passwordCheck();
+        this.printInputs();
         }
 
       else{
         console.log("Provisional is selected");
         this.passwordCheck();
+        this.printInputs();
       }
       
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    // Function for checking inputs for debugging
+
+    printInputs = () => {
+      console.log(this.state.nameWithInitials);
+      console.log(this.state.nameDenotedByinitials);
+      console.log(this.state.postalAddress);
+      console.log(this.state.email);
+      console.log(this.state.contactNumber);
+      // console.log(this.state.inputList);
+    }
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // Functions related to password
 
     // Function to get input password
     getPassword =(event) => {
@@ -66,6 +90,38 @@ class Registration extends Component {
     }
 
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Fun ctions for get the inputs
+
+    getName = (event) => {
+      this.setState({nameWithInitials: event.target.value});         // Set name with initail in the state
+    }
+
+
+    getinitials = (event) => {
+      this.setState({nameDenotedByinitials: event.target.value});   // Set name denoted by initail in the state
+    }
+
+
+    getAddress = (event) => {
+      this.setState({postalAddress: event.target.value});           // Set Address in the state
+    }
+
+
+    getEmail = (event) => {
+      this.setState({email: event.target.value});                   // Set Email address in the state
+    }
+
+    
+    getContact = (event) => {
+      this.setState({contactNumber: event.target.value});   // Set name with initail in the state
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
     /*
     Get some message from props
     */
@@ -91,31 +147,41 @@ class Registration extends Component {
 
 
 
-                <div class="col-12"  style={{fontSize: '20px', fontWeight: 'bold'}}>
+                <div class="col-12"  style={{fontSize: '20px', fontWeight: 'bold'}}
+                  onInput={this.getName}
+                  >
                   <label for="nameWithInitials" class="form-label">Name With Initials</label>
                   <input type="text" class="form-control" id="nameWithInitials" placeholder="Name with Initials" required/>
                 </div>
 
 
-                <div class="col-12"  style={{fontSize: '20px', fontWeight: 'bold'}}>
+                <div class="col-12"  style={{fontSize: '20px', fontWeight: 'bold'}}
+                  onInput={this.getinitials}
+                  >
                   <label for="initials" class="form-label">Name Denoted by Initials</label>
                   <input type="text" class="form-control" id="initials" placeholder="Name Denoted by Initials" required/>
                 </div>
                     
 
-                <div class="col-12"  style={{fontSize: '20px', fontWeight: 'bold'}}>
+                <div class="col-12"  style={{fontSize: '20px', fontWeight: 'bold'}}
+                  onInput={this.getAddress}
+                  >
                   <label for="address" class="form-label">Postal Address</label>
                   <input type="text" class="form-control" id="address" placeholder="Postal Address" required/>
                 </div>
 
 
-                <div class="col-md-6"  style={{fontSize: '20px', fontWeight: 'bold'}}>
+                <div class="col-md-6"  style={{fontSize: '20px', fontWeight: 'bold'}}
+                  onInput={this.getEmail}
+                  >
                   <label for="email" class="form-label">E-Mail Address</label>
                   <input type="email" class="form-control" id="email" placeholder="E-Mail Address" required/>
                 </div>
 
 
-                <div class="col-md-6"  style={{fontSize: '20px', fontWeight: 'bold'}}>
+                <div class="col-md-6"  style={{fontSize: '20px', fontWeight: 'bold'}}
+                  onInput={this.getContact}
+                  >
                   <label for="contactNumber" class="form-label">Contact Number</label>
                   <input type="text" class="form-control" id="contactNumber" placeholder="Contact Number" required/>
                 </div>
