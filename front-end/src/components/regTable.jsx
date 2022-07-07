@@ -65,7 +65,7 @@ class RegTable extends Component {
                         <th scope="col">Full Name of the Student</th>
                         <th scope="col">Registration Status</th>
                         {/* <th scope="col">Approval Status</th> */}
-                        <th scope="col">Profile</th>
+                        <th scope="col">Profile <span>(Go to Profile for approval)</span></th>
                     </tr>
                 </thead>
 
