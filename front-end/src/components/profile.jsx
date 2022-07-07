@@ -157,8 +157,12 @@ class Profile extends Component {
                     </p>
 
 
+        
+                    <a href="#" class="btn btn-success">Approve</a>
+                    
+                    <a href='#' class="btn btn-danger" style={{marginLeft: '25px'}}>Decline</a>
+                        
 
-                    <a href="#" class="btn btn-primary">Edit Profile</a>
                 </div>
 
 
