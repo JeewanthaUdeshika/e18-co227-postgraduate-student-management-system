@@ -9,16 +9,20 @@ import RegisteredRegPage from './pages/reg-reg-page';
 import ProRegPage from './pages/pro-reg-page';
 import RegisterBasic from './pages/register-basic';
 import Profile from './components/profile';
+import RegTable from './components/regTable';
+import MainInfo from './components/dashboard/mainInfo';
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Profile/>
+    // <Profile/>
     // <LoginPage/>
     // <RegisterBasic/>
-    //<RegisteredRegPage/>
-    //<ProRegPage/>
+    // <RegisteredRegPage/>
+    <ProRegPage/>
+    // <RegTable/>
+    // <MainInfo/>
     );
 
 // If you want to start measuring performance in your app, pass a function

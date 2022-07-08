@@ -18,40 +18,36 @@ class Registration extends Component {
       password: null,
       confirmedPassword: null,
       registrationStatus: null,
+      userData: null
       
     }
 
     
     // Handling form with changes of registered state
     handelRegChange = (regState) => {
-      let selectedState = regState.target.value;                    // Variable for get selected state
       this.setState({registrationStatus: regState.target.value});   // Set registered Student Attribute of state
-      console.log(selectedState);
-
-      if(selectedState === "registered"){
-        console.log("Registered is Selected");
-        this.passwordCheck();
-        this.printInputs();
-        }
-
-      else{
-        console.log("Provisional is selected");
-        this.passwordCheck();
-        this.printInputs();
-      }
-      
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////
-    // Function for checking inputs for debugging
+    // Function for Submitting Data password
+  
+    submitData = () => {
 
-    printInputs = () => {
-      console.log(this.state.nameWithInitials);
-      console.log(this.state.nameDenotedByinitials);
-      console.log(this.state.postalAddress);
-      console.log(this.state.email);
-      console.log(this.state.contactNumber);
-      // console.log(this.state.inputList);
+      let dataArray = [];           // Data Array to Store data
+
+      // Assign data for data Array
+      dataArray[0] = this.state.nameWithInitials;
+      dataArray[1] = this.state.nameDenotedByinitials;
+      dataArray[2] = this.state.postalAddress;
+      dataArray[3] = this.state.email;
+      dataArray[4] = this.state.contactNumber;
+      dataArray[5] = this.state.password;
+      dataArray[6] = this.state.registrationStatus;
+
+      this.setState({userData: dataArray});     // Set state of user
+
+      console.log(dataArray);                   // For debuggin purpose
+    
     }
 
 
@@ -61,32 +57,36 @@ class Registration extends Component {
 
     // Function to get input password
     getPassword =(event) => {
-      let password = event.target.value;                // Get the entered Passowrd
-      this.setState({password: event.target.value});    // Set password attribute of state
+      this.setState({password: event.target.value});          // Set password attribute of state
     }
 
 
     // Function to get input confirmed password
     getConfirmed =(event) => {
-      let confirmedPassword = event.target.value;             // Get the entered Confirmed Passowrd
       this.setState({confirmedPassword: event.target.value}); // Set confirmed password value of state
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
     // Check whether both password inputs are same or not
-    passwordCheck = (event) =>{
+    confirmData = (event) =>{
       let password = this.state.password;                     // Get entered paswword
       let confirmedPassword = this.state.confirmedPassword;   // Get Confirmed password
 
-      if(password === confirmedPassword){
-        // ToDo: implement task when both password inputs are same
-        console.log('Access granted');
+      if(password === confirmedPassword){                     // Check the password
+
+        this.submitData();                                    // Submit data into the array
+        console.log('Access granted');                        // For Debugging purpose
       }
 
       else{
-        // ToDo: implement task for incorrected password verification
-        console.log("Incorrect Password");
+
+        console.log("Incorrect Password");                    // For debuggin purposes
       }
+
+      event.preventDefault();                                 // Pevent from default action
     }
 
 
@@ -133,7 +133,13 @@ class Registration extends Component {
 
     
             <main class="form-signin w-100 m-auto">
-              <form class="row g-3">
+
+
+              <form class="row g-3" 
+
+                onSubmit={this.confirmData}
+
+              >
 
 
                 <body class="text-center">
@@ -241,14 +247,4 @@ class Registration extends Component {
  
 export default Registration;
 
-
-// Form Floating Example
-/*
-
- <div class="form-floating">
-                  <input type="text" class="form-control" id="contactNumber" placeholder="Contact Number" required/>
-                  <label for="contactNumber">Contact Number</label>
-                </div>
-
-                */
 
