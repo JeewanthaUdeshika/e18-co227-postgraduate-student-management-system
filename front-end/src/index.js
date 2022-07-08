@@ -10,6 +10,7 @@ import ProRegPage from './pages/pro-reg-page';
 import RegisterBasic from './pages/register-basic';
 import Profile from './components/profile';
 import RegTable from './components/regTable';
+import MainInfo from './components/dashboard/mainInfo';
 
 
 
@@ -18,9 +19,10 @@ root.render(
     // <Profile/>
     // <LoginPage/>
     // <RegisterBasic/>
-    //<RegisteredRegPage/>
-    //<ProRegPage/>
-    <RegTable/>
+    // <RegisteredRegPage/>
+    <ProRegPage/>
+    // <RegTable/>
+    // <MainInfo/>
     );
 
 // If you want to start measuring performance in your app, pass a function

@@ -9,45 +9,36 @@ class RegTable extends Component {
     }
 
 
-    state = { 
-        columnNumber: 0
-     }
-
-
-
-
-     // Function to increment column Number
-
-    columnIncrement = () => {
-        let number = this.state.columnNumber;
-        number = number + 1;
-        this.setState({columnNumber: number});
-        return this.state.columnNumber;
-    }
-
-
-
    
     dataOfTable =() =>{
+        // get table row data
+        // const column = Object.keys(TableData[0]);
 
-         // get table row data
-        const column = Object.keys(TableData[0]);
+        // console.log(column);
 
-        // this.columnIncrement();
+        /*
+        1). The property of the column (fullName) shoould be changed to propert of JSON object that gives name of the user
+        2). Object should be retrived as JSON array to fill the Table
+
+        */
+
+        const column = ['fullName']; 
+
+
+                                                
     
         return TableData.map((data)=>{
-        return(
-            <tr> 
-                        
-                {  
-                    column.map((v)=>{
-                        return (<td>{data[v]}</td>)
-                    })
-                }
-                
-                <td><a href='#'>View Profile</a></td>
-            </tr>
-        )
+            return(
+                <tr> 
+                            
+                    {  
+                        column.map((v)=>{
+                            return (<td><a href='#' style={{textDecoration: 'none'}}>{data[v]}</a></td>)
+                        })
+                    }
+                    
+                </tr>
+            )
         })
     }
 
@@ -58,14 +49,12 @@ class RegTable extends Component {
             
             <div class="container">
 
+            <h1 style={{fontWeight: 'lighter'}}>Applied Students (To be Registerted)</h1>
+
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        {/* <th scope="col">#</th> */}
-                        <th scope="col">Full Name of the Student</th>
-                        <th scope="col">Registration Status</th>
-                        {/* <th scope="col">Approval Status</th> */}
-                        <th scope="col">Profile <span>(Go to Profile for approval)</span></th>
+                        <th scope="col" style={{fontSize: '25px'}}>Full Name of the Student</th>
                     </tr>
                 </thead>
 

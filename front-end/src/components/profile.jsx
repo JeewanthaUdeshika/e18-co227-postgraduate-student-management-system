@@ -28,7 +28,7 @@ class Profile extends Component {
         email: "someone@gmail.com",                                                     // E-Mail address of the user
         contactNumber: '0766624632',                                                    // Conrtact Number of the user
         researchTitle: "Research Title",                                                // Research Title of the user
-        supervisor: 'Prof. Roshan Ragel',                                               // Supervisor/s
+        supervisor: 'DR. Upul Jayasinghe',                                              // Supervisor/s
         degree: 'PhD',                                                                  // Type of degree
         timeperiod: 'Full Time',                                                        // Time period of the degree programme
 

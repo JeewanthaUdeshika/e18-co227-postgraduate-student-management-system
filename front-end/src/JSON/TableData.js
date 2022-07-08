@@ -5,4 +5,5 @@ const TableData=[
     {fullName:"Lakshan Wijekoon", regState:'provisional'}
     
 ]
+
 export default TableData;
