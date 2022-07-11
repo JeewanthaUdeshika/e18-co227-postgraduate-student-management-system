@@ -14,12 +14,13 @@ const options = {discriminatorKey: 'kind'};
 const userSchema = new mongoose.Schema({
     nameWithInitials: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     fullName: {
         type: String,
         required: true,
-        unique: true
+        trim: true,
     },
     postalAddress: {
         type: String,
@@ -34,7 +35,6 @@ const userSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    // TODO : These password and username should be encrypted using bcrypt
     password: {
         type: String,
         required: true
@@ -43,9 +43,10 @@ const userSchema = new mongoose.Schema({
         type: Array,
         default: []
     },
-    role: {
+    state: {
         type: String,
-        enum: ['admin', 'student', 'supervisor'],       /**@Todo This should be updated as you want */
+        enum: ['approved', 'not approved'],
+        default: 'not approved'
     }
 },
 options);

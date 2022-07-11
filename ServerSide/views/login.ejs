@@ -2,16 +2,20 @@
 <html>    
 <head>    
     <title>Login Form</title>    
-    <!--<link rel="stylesheet" type="text/css" href="css/style.css">-->    
+    <!--<link rel="stylesheet" type="text/css" href="css/style.css">--> 
 </head>    
-<body>    
-    <h2>Login Page</h2><br>    
+<body>
+
+    <h2>Login Page</h2><br>
+    <% if (messages.error){ %>
+        <%= messages.error %>
+      <% } %>    
     <div class="login">    
     <form id="login" method="post" action="/user/login">    
-        <label><b>User Name     
+        <label><b>Email    
         </b>    
         </label>    
-        <input type="text" name="nameWithInitials" placeholder="Username">    
+        <input type="text" name="email" placeholder="Email">    
         <br><br>    
         <label><b>Password     
         </b>    
@@ -23,9 +27,15 @@
         <input type="checkbox" id="check">    
         <span>Remember me</span>    
         <br><br>    
-        Forgot <a href="#">Password</a>    
     </form>
-    <a href="http://localhost:3001/sign_up"><button>Sign Up</button></a>     
+    <a href="http://localhost:3001/user/signup"><button>Sign Up</button></a>
+    <br><br>
+    <a href="http://localhost:3001/forgotPassword"><button>Forgot Password</button></a>
+    <br><br>
+    
+    <h3>If you are staff member, Login here</h3>
+    <a href="/auth/google"><button> Login with google</button></a>
+    
 </div>    
 </body>    
 </html>   
