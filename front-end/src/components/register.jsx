@@ -8,62 +8,118 @@ class Registration extends Component {
         super(props);
     }
 
-
+    // Inputs of the form
     state = {
+      nameWithInitials: null,
+      nameDenotedByinitials: null,
+      postalAddress: null,
+      email: null,
+      contactNumber: null,
       password: null,
       confirmedPassword: null,
-      registrationStatus: null
+      registrationStatus: null,
+      userData: null
+      
     }
 
     
     // Handling form with changes of registered state
     handelRegChange = (regState) => {
-      let selectedState = regState.target.value;                    // Variable for get selected state
       this.setState({registrationStatus: regState.target.value});   // Set registered Student Attribute of state
-      console.log(selectedState);
+    }
 
-      if(selectedState === "registered"){
-        console.log("Registered is Selected");
-        this.passwordCheck();
-        }
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    // Function for Submitting Data password
+  
+    submitData = () => {
 
-      else{
-        console.log("Provisional is selected");
-        this.passwordCheck();
-      }
-      
+      let dataArray = [];           // Data Array to Store data
+
+      // Assign data for data Array
+      dataArray[0] = this.state.nameWithInitials;
+      dataArray[1] = this.state.nameDenotedByinitials;
+      dataArray[2] = this.state.postalAddress;
+      dataArray[3] = this.state.email;
+      dataArray[4] = this.state.contactNumber;
+      dataArray[5] = this.state.password;
+      dataArray[6] = this.state.registrationStatus;
+
+      this.setState({userData: dataArray});     // Set state of user
+
+      console.log(dataArray);                   // For debuggin purpose
+    
     }
 
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // Functions related to password
+
     // Function to get input password
     getPassword =(event) => {
-      let password = event.target.value;                // Get the entered Passowrd
-      this.setState({password: event.target.value});    // Set password attribute of state
+      this.setState({password: event.target.value});          // Set password attribute of state
     }
 
 
     // Function to get input confirmed password
     getConfirmed =(event) => {
-      let confirmedPassword = event.target.value;             // Get the entered Confirmed Passowrd
       this.setState({confirmedPassword: event.target.value}); // Set confirmed password value of state
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
     // Check whether both password inputs are same or not
-    passwordCheck = (event) =>{
+    confirmData = (event) =>{
       let password = this.state.password;                     // Get entered paswword
       let confirmedPassword = this.state.confirmedPassword;   // Get Confirmed password
 
-      if(password === confirmedPassword){
-        // ToDo: implement task when both password inputs are same
-        console.log('Access granted');
+      if(password === confirmedPassword){                     // Check the password
+
+        this.submitData();                                    // Submit data into the array
+        console.log('Access granted');                        // For Debugging purpose
       }
 
       else{
-        // ToDo: implement task for incorrected password verification
-        console.log("Incorrect Password");
+
+        console.log("Incorrect Password");                    // For debuggin purposes
       }
+
+      event.preventDefault();                                 // Pevent from default action
     }
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Fun ctions for get the inputs
+
+    getName = (event) => {
+      this.setState({nameWithInitials: event.target.value});         // Set name with initail in the state
+    }
+
+
+    getinitials = (event) => {
+      this.setState({nameDenotedByinitials: event.target.value});   // Set name denoted by initail in the state
+    }
+
+
+    getAddress = (event) => {
+      this.setState({postalAddress: event.target.value});           // Set Address in the state
+    }
+
+
+    getEmail = (event) => {
+      this.setState({email: event.target.value});                   // Set Email address in the state
+    }
+
+    
+    getContact = (event) => {
+      this.setState({contactNumber: event.target.value});   // Set name with initail in the state
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 
     /*
@@ -77,7 +133,13 @@ class Registration extends Component {
 
     
             <main class="form-signin w-100 m-auto">
-              <form class="row g-3">
+
+
+              <form class="row g-3" 
+
+                onSubmit={this.confirmData}
+
+              >
 
 
                 <body class="text-center">
@@ -91,31 +153,41 @@ class Registration extends Component {
 
 
 
-                <div class="col-12"  style={{fontSize: '20px', fontWeight: 'bold'}}>
+                <div class="col-12"  style={{fontSize: '20px', fontWeight: 'bold'}}
+                  onInput={this.getName}
+                  >
                   <label for="nameWithInitials" class="form-label">Name With Initials</label>
                   <input type="text" class="form-control" id="nameWithInitials" placeholder="Name with Initials" required/>
                 </div>
 
 
-                <div class="col-12"  style={{fontSize: '20px', fontWeight: 'bold'}}>
+                <div class="col-12"  style={{fontSize: '20px', fontWeight: 'bold'}}
+                  onInput={this.getinitials}
+                  >
                   <label for="initials" class="form-label">Name Denoted by Initials</label>
                   <input type="text" class="form-control" id="initials" placeholder="Name Denoted by Initials" required/>
                 </div>
                     
 
-                <div class="col-12"  style={{fontSize: '20px', fontWeight: 'bold'}}>
+                <div class="col-12"  style={{fontSize: '20px', fontWeight: 'bold'}}
+                  onInput={this.getAddress}
+                  >
                   <label for="address" class="form-label">Postal Address</label>
                   <input type="text" class="form-control" id="address" placeholder="Postal Address" required/>
                 </div>
 
 
-                <div class="col-md-6"  style={{fontSize: '20px', fontWeight: 'bold'}}>
+                <div class="col-md-6"  style={{fontSize: '20px', fontWeight: 'bold'}}
+                  onInput={this.getEmail}
+                  >
                   <label for="email" class="form-label">E-Mail Address</label>
                   <input type="email" class="form-control" id="email" placeholder="E-Mail Address" required/>
                 </div>
 
 
-                <div class="col-md-6"  style={{fontSize: '20px', fontWeight: 'bold'}}>
+                <div class="col-md-6"  style={{fontSize: '20px', fontWeight: 'bold'}}
+                  onInput={this.getContact}
+                  >
                   <label for="contactNumber" class="form-label">Contact Number</label>
                   <input type="text" class="form-control" id="contactNumber" placeholder="Contact Number" required/>
                 </div>
@@ -175,14 +247,4 @@ class Registration extends Component {
  
 export default Registration;
 
-
-// Form Floating Example
-/*
-
- <div class="form-floating">
-                  <input type="text" class="form-control" id="contactNumber" placeholder="Contact Number" required/>
-                  <label for="contactNumber">Contact Number</label>
-                </div>
-
-                */
 
