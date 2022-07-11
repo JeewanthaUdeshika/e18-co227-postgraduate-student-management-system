@@ -6,7 +6,10 @@
 </head>    
 <body>
 
-    <h2>Login Page</h2><br>    
+    <h2>Login Page</h2><br>
+    <% if (messages.error){ %>
+        <%= messages.error %>
+      <% } %>    
     <div class="login">    
     <form id="login" method="post" action="/user/login">    
         <label><b>Email    
@@ -24,9 +27,10 @@
         <input type="checkbox" id="check">    
         <span>Remember me</span>    
         <br><br>    
-        Forgot <a href="#">Password</a>    
     </form>
-    <a href="http://localhost:3001/sign_up"><button>Sign Up</button></a>
+    <a href="http://localhost:3001/user/signup"><button>Sign Up</button></a>
+    <br><br>
+    <a href="http://localhost:3001/user/forgotPassword"><button>Forgot Password</button></a>
     <br><br>
     
     <h3>If you are staff member, Login here</h3>

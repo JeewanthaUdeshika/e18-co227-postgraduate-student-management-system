@@ -74,7 +74,14 @@
     },
     URLtoWebsite: {
         type: String
+    },
+    passwordResetToken: {
+        type: String
+    },
+    passwordResetExpires: {
+        type: Date
     }
+
 }
  );
  

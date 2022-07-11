@@ -15,6 +15,8 @@
  import { StaffDB } from "../model/staff.js";
  import { MailSender } from "../mailSender.js";
  import moment from "moment";
+ import sendEmail from "../utils/email.js";
+ import crypto from "crypto";
  
  dotenv.config({ path: "config.env" });
  
@@ -27,8 +29,8 @@
      return;
    } else {
      // Find if there is that username
-     const username = req.body.nameWithInitials;
-     const userExists = await UserDB.findOne({ nameWithInitials: username });
+     const useremail = req.body.email;
+     const userExists = await UserDB.findOne({ email: useremail });
      if (userExists) {
        return res.status(409).send({ message: "User already exists" });
      }
@@ -75,6 +77,7 @@
              supervisors: req.body.supervisors,
              researchArea: req.body.researchArea,
              reseachProgram: req.body.reseachProgram,
+             state: req.body.state
            });
          }
  
@@ -82,46 +85,20 @@
          user
            .save(user)
            .then(async (data) => {
-             const maxAge = 3 * 60 * 60; // Expiration time 3hrs
-             // Generating token to send
-             const token = jwt.sign(
-               { id: data.__id, email: data.email, name: data.nameWithInitials },
-               process.env.jwtSecret,
-               {
-                 expiresIn: maxAge,
-               }
-             );
- 
-             // Sending a cookie to the user
-             res.cookie("userToken", token, {
-               httpOnly: true,
-               maxAge: maxAge * 1000, // 3hrs in ms
-             });
  
              // Make link to send to admin to access user data
-             const approvalLink = "http://localhost:3001/user/pros/" + data.id;
+             const approvalLink = "http://localhost:3001/admin/approve";
+             req.session.current_url = approvalLink;
              console.log(approvalLink);
  
-             const admin = await UserDB.findOne({role: "admin"});
+             const admin = await StaffDB.findOne({role: "admin"});
              let emailList = [admin.email];
  
              // Sending Email to the admin informing that new user is registered
              const regDate = moment().add(5, "s").format();
              new MailSender(emailList, regDate, user.nameWithInitials, "admin", approvalLink).sendEmail();
  
-             res.status(208).send({message: 'Data inserted successfully', user});
- 
-             // const admin = await UserDB.findOne({ role: "admin" });
-             // new MailSender(
-             // admin.email,
-             // moment().add(5, "s").format(),
-             // "Administrator",
-             // "admin"
-             // ).sendEmail();
- 
-             /**@ToDo Send Mail o the admin that new user is registered */
- 
-            
+             res.status(208).send({message: 'Data inserted successfully', user});            
            })
            .catch((err) => {
              res.status(500).send({
@@ -132,64 +109,6 @@
      } catch (err) {
        res.status(401).send({ message: "User not created", error: err.message });
      }
-   }
- };
- 
- // Controller function for login
- export const login = async (req, res) => {
-   const username = req.body.nameWithInitials;
-   const password = req.body.password;
- 
-   // Check the username and password is present
-   if (!username || !password) {
-     return res
-       .status(400)
-       .send({ message: "Username  or Password not present" });
-   }
- 
-   // If username or password present
-   try {
-     // Find in the databse that username exists
-     const user = await UserDB.findOne({ nameWithInitials: username });
- 
-     if (!user) {
-       res.status(401).send({
-         message: "Login not successfull",
-         error: "User not found",
-       });
-     } else {
-       // Decript the password and compare it
-       bcrypt.compare(password, user.password).then((result) => {
-         if (result) {
-           const maxAge = 3 * 60 * 60; // time that cookie lasts
- 
-           // Make the token
-           const token = jwt.sign(
-             { id: user.__id, email: user.email, name: user.nameWithInitials },
-             process.env.jwtSecret,
-             {
-               expiresIn: maxAge,
-             }
-           );
- 
-           // Send it as cookie
-           res.cookie("userToken", token, {
-             httpOnly: true,
-             maxAge: maxAge * 1000,
-           });
-           res.status(200).send({ message: `Hi ${user.nameWithInitials}` });
-         } else {
-           res.status(400).send({
-             message: "Username or Password incorrect",
-           });
-         }
-       });
-     }
-   } catch (error) {
-     res.status(400).send({
-       message: "An error occured",
-       error: error.message,
-     });
    }
  };
  
@@ -217,6 +136,8 @@
        reseachProgram: user.reseachProgram,
        RegisteredDate: RegDate,
      });
+     user.state = 'approved';
+     await user.save();
      res.status(200).send({ message: "User  approved by admin" });
      /**@ToDo Send Email to user that he is approved */
    } else {
@@ -295,3 +216,121 @@
     });
   };
 
+
+  // Controller function for fogot password
+  export const forgotPassword = async (req, res, next) => {
+    // 1) get user based on POSTed email
+    const user = await RegisteredDB.findOne({ email: req.body.email });
+    if (!user) {
+      return res.status(404).json({message: "There is no user with this email"});
+    }
+  
+    // 2) Generate the random reset token
+    const resetToken = createPasswordResetToken(user);
+    //   Save this doc to the database
+    // turn off all the validators
+    await user.save({ validateBeforeSave: false });
+  
+    // 3) send it to user's email
+    const resetURL = `${req.protocol}://${req.get(
+      'host'
+    )}/user/resetPassword/${resetToken}`;         
+  
+    const message = `Reset You password from here: ${resetURL}.\nIf you did'nt forget your password please ignore this..`;
+  
+    try {
+      await sendEmail({
+        email: user.email,
+        subject: 'Your password reset token.Valid only for 10 mins',
+        message,
+      });
+  
+      res.status(200).json({
+        status: 'success',
+        message: 'Token sent to email',
+      });
+    } catch (err) {
+      // In any case of error reset these
+      user.passwordResetToken = undefined;
+      user.passwordResetExpires = undefined;
+      await user.save({ validateBeforeSave: false });
+  
+      return res.status(500).json({message: "Somthing error  occured with sending email"});
+    }
+  };
+
+
+// Function for  create reset password token
+const createPasswordResetToken = (user) => {
+  const resetToken = crypto.randomBytes(32).toString('hex');
+
+  user.passwordResetToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+
+  // console.log({ resetToken }, this.passwordResetToken);
+  // will be expired after 10 mins
+  user.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+
+  // we need to send the plain text via email
+  return resetToken;
+};
+
+
+  // Controller function for reset password
+export const resetPassword = async (req, res, next) => {
+  // 1) Get user based on the token
+  const hashedToken = crypto
+    .createHash('sha256')
+    .update(req.params.token)
+    .digest('hex');
+
+  const user = await RegisteredDB.findOne({
+    passwordResetToken: hashedToken,
+    // Check whether the link has expired
+    passwordResetExpires: { $gt: Date.now() },
+  });
+
+  // 2) If the token has not expired  , and there is user  , set the new password
+  if (!user) {
+    return res.status(400).json({message: "Token is invalid or has expired!"})
+  }
+
+  console.log("ERROR POINT");
+  // console.log(hashedPW);
+  //   Update the password
+  user.password = await bcrypt.hash(req.body.password, 10);
+  // user.passwordConfirm = req.body.passwordConfirm;
+
+  //   delete the passwordResetToken
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
+
+  //   save the modified doc
+  await user.save();
+  // 3) update ChangedPasswordAt property for the user
+  // 4) log the user in , send JWT
+  // createSendToken(user, 200, res);
+  res.status(200).json({message: "Password update successful"});
+
+  next();
+};
+
+// update the logged user password
+export const updatePassword = async (req, res, next) => {
+  // 1) get the user from the collection
+  const user = await RegisteredDB.findById(req.user.id);
+
+  // 2) check if the POSTed current password is correct
+  if (!(await bcrypt.compare(req.body.passwordCurrent, user.password))) {
+    return res.status(401).json({message: 'Your current password is wrong!'});
+  }
+  // 3) If so , update the password
+  user.password = await bcrypt.hash(req.body.password, 10);
+  // user.passwordConfirm = req.body.passwordConfirm;
+  await user.save();
+
+  // 4) log user in , send the JWT
+  res.status(200).json({message: "Password change successfull"});
+};

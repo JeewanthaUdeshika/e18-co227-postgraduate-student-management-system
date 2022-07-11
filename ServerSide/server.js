@@ -13,7 +13,7 @@ import passport from "passport";            // For user authentication
 import flash from "express-flash";          // For organize error messages
 import session from "express-session";      // For manage different sessions with user
 
-import routes from './routes/routes.js';
+import routes from './routes/router.js';
 import { connectDB } from "./database/connection.js";
 import { initalizePassport } from "./Middleware/passport-config.js";
 
@@ -40,10 +40,18 @@ app.use(flash());       // For get all the error messsages etc.
 app.use(session({
     secret: process.env.SECRET, // secret key to encriptions
     resave: false,              // When nothing is changed, dont resave
-    saveUninitialized: false    // Dont dave empty values in the session
+    saveUninitialized: false,    // Dont dave empty values in the session
 }));
 app.use(passport.initialize()); // Initialize the passport module in every route
 app.use(passport.session());    // allow passport to use "express-session"
+
+/////////////////////////////////////////////////////////////
+/* app.use(function(req, res, next){
+    req.session.lastUrl = req.originalUrl;
+});
+ */
+////////////////////////////////////////////////////////////
+
 
 
 /**@Warning This section is only for check user interface, remove this when font end is connected */ 

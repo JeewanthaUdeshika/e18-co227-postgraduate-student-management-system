@@ -23,7 +23,7 @@ export const initalizePassport = (passport) => {
         const user = await RegisteredDB.findOne({email: email});
 
         console.log(password);
-        console.log(user);
+        console.log(user.id);
 
         // If there is no user with given email
         if (!user){
