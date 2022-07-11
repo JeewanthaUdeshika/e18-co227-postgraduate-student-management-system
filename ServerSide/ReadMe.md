@@ -2,9 +2,9 @@
 
 ## ToDo
     - Get array from the front end to supervisors
-    - After the registering user, admin should be notified by email to  approve it (Connect Email send class)
     - Check the registeredUser.js to registered schema is nessary or not
-    - Send Email to user after the approving
+    - Make email as primary key when checking user is already there
+    - Add Functionality for tha adding staff members (Only for admins)
 
 ### In model/user.js
     - There will be data that appllying to the degree program
