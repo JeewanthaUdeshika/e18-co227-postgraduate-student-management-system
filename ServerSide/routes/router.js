@@ -111,8 +111,8 @@
    * @description Rouute to forgot password
    * @method POST
    */
-   route.get('/user/forgotPassword', (req, res)=> {     ///////
-    res.render('forgot');
+   route.get('/forgotPassword', (req, res)=> {     ///////
+      res.render('forgot');
    });
   
   /**
