@@ -28,7 +28,7 @@ import uploadImg from '../../assets/cloud-upload-regular-240.png';
 //////////////////////////////////////////////////////////////////////////////////////////////
 // File Frop to input
 
-const DropFileInput = props => {
+const DropFileInput = (props) => {
 
     const wrapperRef = useRef(null);
 
@@ -67,12 +67,14 @@ const DropFileInput = props => {
 
     ////////////////////////////////////////////////////////////////////////////////////////
 
+
+
     return (
 
         <Card variant="outlined" style={{width: '800px' , boxShadow: 'none', padding: '20px'}}>
             
             <div className='text-center'>
-                <h3 style={{fontWeight: 'lighter'}}>Upload your 3 Months Report</h3>
+                <h3 style={{fontWeight: 'lighter'}}>Upload Your Submission Here</h3>
             </div>
 
             <div style={{marginTop: '10px', marginBottom: '10px'}}>

@@ -13,6 +13,8 @@ import RegTable from './components/regTable';
 import MainInfo from './components/dashboard/mainInfo';
 import ButtonGroupMain from './components/dashboard/buttonGroupMain';
 import StudentDashBoard from './components/dashboard/studentDashboard';
+import Submission from './components/dashboard/submission';
+import SubmissionDashboard from './pages/submissionDashboard';
 
 
 
@@ -26,7 +28,8 @@ root.render(
     // <RegTable/>
     // <MainInfo/>
     // <ButtonGroupMain/>
-    <StudentDashBoard/>
+    // <StudentDashBoard/>
+    <SubmissionDashboard/>
 
     );
 
