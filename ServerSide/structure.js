@@ -12,6 +12,10 @@ const content = {
     message: "Regsitration Was Successfull",
     subject: "Registration",
   },
+  staffAdd: {
+    message: "You have been added as staff member to the Postgraduate Student Management System",
+    subject: "Added as Staff Member",
+  }
 };
 
 export default content;
