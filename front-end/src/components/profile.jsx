@@ -1,5 +1,8 @@
-import React, { Component } from 'react';       // Import React to component
+import { width } from '@mui/system';
+import { Button } from 'bootstrap';
+import React, { Component } from 'react';                      // Import React to component
 import profilePicture from '../images/profile-picture.jpg';    // import profile picture
+import Download from '../images/download.png'
 
 
 
@@ -36,8 +39,40 @@ class Profile extends Component {
             github: "Github Link",
             linkedin: "LinkedIn Link",
             otherLinks: "Other Links"
-        }
+        },
+
+        // variable related to edit profile function
+        readOnly: true,
+        editConfirm: true,                  // State related to the visibility of edits confirmation
+        approveConfirm: false,              // State related to the visibility of approve confirmation
+        borderStyle: 'none',
+
     }
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Functions related to the Edit Profile
+
+    // Change readonly state
+
+    editProfile = () =>{
+        this.setState({readOnly: false});                   // Set editable inputs
+        this.setState({editConfirm: false})                 // Show edit confirm and cancel buttons
+        this.setState({approveConfirm: true})               // Hide approval related buttons
+        this.setState({borderStyle: 'solid'});              // Set boarder Style
+    }
+
+    confirmEdit = () => {
+        this.setState({readOnly: true});                    // Set editable inputs
+        this.setState({editConfirm: true})                  // Hide edit confirm and cancel buttons
+        this.setState({approveConfirm: false})              // show approval buttons
+        this.setState({borderStyle: 'none'});               // Set boarder Style
+
+    }
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     render() { 
@@ -69,23 +104,49 @@ class Profile extends Component {
 
                     <p className='card-text-right' style={{fontSize: '17px'}}>
                         <span style={{ fontWeight: 'bold' }}>Registration Number : </span>
-                        {this.state.registrationNumber}
+                        {/* {this.state.registrationNumber} */}
+
+
+                        <input type="text" Value={this.state.registrationNumber} readOnly= {this.state.readOnly}
+                            style={{borderStyle: this.state.borderStyle , outline: 'none' , width: '250px', borderRadius: '5px', borderWidth: '1px'}}
+                        >     
+                        </input> 
+                    
+
                     </p>
 
 
                     <p className='card-text-right' style={{fontSize: '17px'}}>
                         <span style={{ fontWeight: 'bold' }}>Address : </span>
-                        {this.state.address}
+                        {/* {this.state.address} */}
+
+                        <input type='text' Value={this.state.address} readOnly= {this.state.readOnly}
+                            style={{borderStyle:  this.state.borderStyle, outline: 'none' , width: '600px', borderRadius: '5px', borderWidth: '1px'}}
+                        >     
+                        </input>
+
                     </p>
 
                     <p className='card-text-right' style={{fontSize: '17px'}}>
                         <span style={{ fontWeight: 'bold' }}>E-Mail : </span>
-                        {this.state.email}
+                        {/* {this.state.email} */}
+
+                        <input type='text' Value={this.state.email} readOnly= {this.state.readOnly}
+                            style={{borderStyle:  this.state.borderStyle, outline: 'none' , width: '400px', borderRadius: '5px', borderWidth: '1px'}}
+                        >       
+                        </input>
+
                     </p>
 
                     <p className='card-text-right' style={{fontSize: '17px'}}>
                         <span style={{ fontWeight: 'bold' }}>Contact Number : </span>
-                        {this.state.contactNumber}
+                        {/* {this.state.contactNumber} */}
+
+                        <input type='text' Value={this.state.contactNumber} readOnly= {this.state.readOnly}
+                            style={{borderStyle:  this.state.borderStyle, outline: 'none' , width: '200px', borderRadius: '5px', borderWidth: '1px'}}
+                        >       
+                        </input>
+
                     </p>
 
 
@@ -105,25 +166,50 @@ class Profile extends Component {
 
                     <p className='card-text-right' style={{fontSize: '17px'}}>
                         <span style={{ fontWeight: 'bold' }}>Research Title : </span>
-                        {this.state.researchTitle}
+                        {/* {this.state.researchTitle} */}
+
+                        <input type='text' Value={this.state.researchTitle} readOnly= {this.state.readOnly}
+                            style={{borderStyle:  this.state.borderStyle, outline: 'none' , width: '500px', borderRadius: '5px', borderWidth: '1px'}}
+                        >       
+                        </input>
+
                     </p>
 
 
                     <p className='card-text-right' style={{fontSize: '17px'}}>
                         <span style={{ fontWeight: 'bold' }}>Supervisor/s : </span>
-                        {this.state.supervisor}
+                        {/* {this.state.supervisor} */}
+
+                        <input type='text' Value={this.state.supervisor} readOnly= {this.state.readOnly}
+                            style={{borderStyle:  this.state.borderStyle, outline: 'none' , width: '500px', borderRadius: '5px', borderWidth: '1px'}}
+                        >       
+                        </input>
+
                     </p>
 
 
                     <p className='card-text-right' style={{fontSize: '17px'}}>
                         <span style={{ fontWeight: 'bold' }}>Degree : </span>
-                        {this.state.degree}
+                        {/* {this.state.degree} */}
+
+                        <input type='text' Value={this.state.degree} readOnly= {this.state.readOnly}
+                            style={{borderStyle:  this.state.borderStyle , outline: 'none' , width: '100px', borderRadius: '5px', borderWidth: '1px'}}
+                        >       
+                        </input>
+
                     </p>
 
 
                     <p className='card-text-right' style={{fontSize: '17px'}}>
                         <span style={{ fontWeight: 'bold' }}>Time Period : </span>
-                        {this.state.timeperiod}
+                        {/* {this.state.timeperiod} */}
+
+
+                        <input type='text' Value={this.state.timeperiod} readOnly= {this.state.readOnly}
+                            style={{borderStyle:  this.state.borderStyle, outline: 'none' , width: '150px', borderRadius: '5px', borderWidth: '1px'}}
+                        >       
+                        </input>
+
                     </p>
 
 
@@ -141,26 +227,111 @@ class Profile extends Component {
 
                     <p className='card-text-right' style={{fontSize: '17px'}}>
                         <span style={{ fontWeight: 'bold' }}>GitHub : </span>
-                        {this.state.links.github}
+                        {/* {this.state.links.github} */}
+
+                        <input type='text' Value={this.state.links.github} readOnly= {this.state.readOnly}
+                            style={{borderStyle:  this.state.borderStyle, outline: 'none' , width: '500px', borderRadius: '5px', borderWidth: '1px'}}
+                        >       
+                        </input>
+
                     </p>
 
 
                     <p className='card-text-right' style={{fontSize: '17px'}}>
                         <span style={{ fontWeight: 'bold' }}>LinkedIn : </span>
-                        {this.state.links.linkedin}
+                        {/* {this.state.links.linkedin} */}
+
+
+                        <input type='text' Value={this.state.links.linkedin} readOnly= {this.state.readOnly}
+                            style={{borderStyle:  this.state.borderStyle, outline: 'none' , width: '500px', borderRadius: '5px', borderWidth: '1px'}}
+                        >       
+                        </input>
+
                     </p>
 
 
                     <p className='card-text-right' style={{fontSize: '17px'}}>
                         <span style={{ fontWeight: 'bold' }}>Personal Website / Other : </span>
-                        {this.state.links.otherLinks}
+                        {/* {this.state.links.otherLinks} */}
+
+                        <input type='text' Value={this.state.links.otherLinks} readOnly= {this.state.readOnly}
+                            style={{borderStyle:  this.state.borderStyle, outline: 'none' , width: '500px', borderRadius: '5px', borderWidth: '1px'}}
+                        >       
+                        </input>
+
                     </p>
 
 
-        
-                    <a href="#" class="btn btn-success">Approve</a>
-                    
-                    <a href='#' class="btn btn-danger" style={{marginLeft: '25px'}}>Decline</a>
+                    {/* Files And Others */}
+
+                    <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '20px', marginTop: '25px'}}>
+
+                        <h4 style={{ color: 'gray', fontWeight: 'lighter'}}>User Files</h4>
+                        <div style={{flex: 1, height: '3px', backgroundColor: '#DADCE0', marginLeft: '15px'}} />
+
+                    </div>
+
+
+                    <p className='card-text-right' style={{fontSize: '17px'}}>
+                        <span style={{ fontWeight: 'bold' }}>Download User Files by clicking DOWNLOAD Button </span>
+
+                        <button class="btn btn-default">
+                            <img src={Download} width="60px" height="60px"/>
+                        </button>
+
+                    </p>
+
+
+
+
+                    {/* Buttons to take actions */}
+
+                <div class='row'>
+
+                    <div class='col-sm'>
+                        <button type="button" class="btn btn-success" hidden={this.state.approveConfirm}>
+                            APPROVE
+                        </button>
+
+                        <button type="button" class="btn btn-danger" hidden={this.state.approveConfirm}
+                            style={{marginLeft: '25px'}}
+                        >
+                            DECLINE
+                        </button>
+
+                        <button onClick={this.editProfile} class="btn btn-primary" hidden={this.state.approveConfirm}
+                            style={{marginLeft: '25px'}}
+                        >
+                            EDIT PROFILE
+                        </button>
+
+                    </div>
+
+
+                    {/* Buttons To confirm edits or cancel edits */}
+
+                    <div class='col-sm'>
+
+
+                        <div class="text-center">
+
+                            <button class="btn btn-success" hidden={this.state.editConfirm} onClick={this.confirmEdit}>
+                                CONFIRM
+                            </button>
+
+                            <button class="btn btn-danger" hidden={this.state.editConfirm}
+                                style={{marginLeft: '25px'}}
+                                onClick={this.confirmEdit}
+                            >
+                                CANCEL
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
                         
 
                 </div>
