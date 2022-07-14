@@ -8,14 +8,17 @@
 import express from "express";    // Import the express framework
 import dotenv from "dotenv";     // Module for use secure data from anouther file (.env)
 import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";   // Module for use middlewares
 import passport from "passport";            // For user authentication
 import flash from "express-flash";          // For organize error messages
 import session from "express-session";      // For manage different sessions with user
+import helmet from "helmet";                // Add Http  security headers
+import xss from 'xss-clean';                // For data sanitization against XSS
+import cors from  'cors';
 
 import routes from './routes/router.js';
 import { connectDB } from "./database/connection.js";
 import { initalizePassport } from "./Middleware/passport-config.js";
+
 
 
 
@@ -35,7 +38,7 @@ initalizePassport(passport);
 
 app.use(bodyParser.json());                         // Make data encoding method to http body
 app.use(bodyParser.urlencoded({extended: true}));   // Make data encoding method to http body
-app.use(cookieParser());        // Get cookie parser
+// app.use(cookieParser());        // Get cookie parser
 app.use(flash());       // For get all the error messsages etc.
 app.use(session({
     secret: process.env.SECRET, // secret key to encriptions
@@ -44,6 +47,10 @@ app.use(session({
 }));
 app.use(passport.initialize()); // Initialize the passport module in every route
 app.use(passport.session());    // allow passport to use "express-session"
+app.use(helmet());
+app.use(xss());
+app.use(cors());
+
 
 /////////////////////////////////////////////////////////////
 /* app.use(function(req, res, next){
@@ -64,5 +71,5 @@ app.use('/', routes);
 
 // Listening to the port
 app.listen(PORT, ()=>{
-    console.log(`Server is running on  http://localhost:${PORT}`);
+    console.log(`Server is running on Port: ${PORT}`);
 });

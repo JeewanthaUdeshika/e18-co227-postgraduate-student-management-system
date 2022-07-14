@@ -7,9 +7,11 @@
 
  import express from "express";
  import {getForgotPW, getToApprove, getUser, gotoApprove, gotologin, gotosignup} from '../services/services.js';
- import { addStaff, approveStudent, forgotPassword, resetPassword, signUp, updatePassword } from "../controller/controller.js";
+ import { addStaff, approveStudent, forgotPassword, resetPassword, signUp, submission, updatePassword, updatePhotoData, uploadUserPhoto } from "../controller/controller.js";
  import { isAdmin, isLogged } from "../Middleware/auth.js";
  import passport from "passport";
+ import multer from 'multer';
+ import {studentSubmission, userDocUpload} from "../utils/storages.js";
  
  // Get Router from express
  const route = express.Router();
@@ -27,13 +29,13 @@
  * @description Route to go to user approvement page
  * @method GET
  */
- route.get('/admin/approve/:id', isAdmin, approveStudent);  /////////
+ route.post('/admin/approve', isAdmin, approveStudent);  /////////
 
  /**
   * @description Rouute to add new staff member for the database
   * @method POST
   */
-   route.post('/admin/addStaff', isAdmin, addStaff);
+   route.post('/admin/addStaff', /* isAdmin, */ addStaff);
  
  /**
   * @descripion Route to get unregistered users
@@ -45,7 +47,7 @@
   * @descripion Route to go to the approve page
   * @method GET
   */
-  route.get('/admin/approve', isAdmin, gotoApprove);        ////////
+  route.get('/admin/approve/:id', isAdmin, gotoApprove);        ////////
  
    /////////////// Only for Demo ////////////////
    // To Check admin
@@ -97,7 +99,7 @@
     * @description Route to register an user
     * @method POST
     */  
-   route.post('/user/signup', signUp);            ////////
+   route.post('/user/signup', userDocUpload.single('docs'),  signUp);            ////////
    
    /**
    * @description Route to get user details with given id. Only admin can get information of  unregistered student
@@ -131,7 +133,19 @@
    * @description Route to update password
    * @method PATCH
    */
-   route.patch('/user/updatePassword/', isLogged, updatePassword);    //////
+  route.patch('/user/updatePassword/', isLogged, updatePassword);    //////
+
+  /**
+   * @description Route to upload profile picture
+   * @mehtod PATCH
+   */
+  route.patch('/user/uploadpp', isLogged, uploadUserPhoto, updatePhotoData);
+
+    /**
+   * @description Route to upload user submissions
+   * @mehtod PATCH
+   */
+  route.post('/user/submit', isLogged, studentSubmission.single('submission'), submission);
 
 
  ///////////////////////////////////// AUTH //////////////////////////////////////////////////
