@@ -8,7 +8,7 @@
 <body>    
     <h2>SignUp Page</h2><br>    
     <div class="SignUp">    
-    <form id="SignUp" method="post" action="/api/user">    
+    <form id="SignUp" method="post" action="/user/signup" enctype="multipart/form-data">    
         <label><b>Name with initials</b></label>    
         <input type="text" name="nameWithInitials" placeholder="NameWithInitials">    
         <br><br>
@@ -30,9 +30,9 @@
         <input type="radio" id="html" name="regState" value="Registered">
         <label for="html">Registered</label><br>
         <br><br>
-        <label><b>reg Np</b></label>    
+        <!-- <label><b>reg Np</b></label>    
         <input type="text" name="regNo" placeholder="Register Number">    
-        <br><br>
+        <br><br> -->
         
         <input type="radio" id="css" name="regState" value="Prospective">
         <label for="css">Prospective</label><br>
@@ -45,6 +45,9 @@
         </b>    
         </label>    
         <input type="Password" name="password" id="Pass" placeholder="Password">    
+        <br><br>
+        <label for="html">Proporsal</label><br>
+        <input type="file" id="html" name="docs">
         <br><br>    
         <button type="submit">SignUp</button>
         <br><br>      

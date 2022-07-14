@@ -8,5 +8,47 @@
 </head>
 <body>
     <h1>Approve Page</h1>
+    <div class="SignUp">    
+        <form id="SignUp" method="post" action="/admin/approve">    
+            <label><b>Name with initials</b></label>    
+            <input type="text" name="nameWithInitials" value= <%= userData.nameWithInitials %> >    
+            <br><br>
+            <label><b>Name denoted by initials</b></label>    
+            <input type="text" name="fullName" value= <%= userData.fullName %> >    
+            <br><br>
+            <label><b>Postal Address</b></label>    
+            <input type="text" name="postalAddress" value=<%= userData.postalAddress %> >    
+            <br><br>
+            <label><b>Email Address</b></label>    
+            <input type="text" name="email" value=<%= userData.email %> >    
+            <br><br>
+            <label><b>Contact Number</b></label>    
+            <input type="text" name="telNo" value=<%= userData.telNo %> >    
+            <br><br>
+            <label><b>Supervisors</b></label>    
+            <input type="text" name="supervisors" value = <%= userData.supervisors %> >    
+            <br><br>
+            <!-- <input type="radio" id="html" name="regState" value="Registered">
+            <label for="html">Registered</label><br>
+            <br><br>
+            <label><b>reg Np</b></label>    
+            <input type="text" name="regNo" placeholder="Register Number">    
+            <br><br>
+            
+            <input type="radio" id="css" name="regState" value="Prospective">
+            <label for="css">Prospective</label><br> -->
+            <br><br>
+            <!-- <label><b>researchArea</b></label>    
+            <input type="text" name="researchArea" placeholder="researchArea">    
+            <br><br> -->
+    
+            <!-- <label><b>Password     
+            </b>    
+            </label>    
+            <input type="Password" name="password" id="Pass" placeholder="Password">    
+            <br><br>     -->
+            <button type="submit">Approve</button>
+            <br><br>      
+        </form>
 </body>
 </html>

@@ -17,17 +17,21 @@
  import moment from "moment";
  import sendEmail from "../utils/email.js";
  import crypto from "crypto";
+ import multer from "multer";     // Module for file uploading process
+ 
  
  dotenv.config({ path: "config.env" });
  
  export const signUp = async (req, res) => {
+  console.log(req.body);
    // checking user entered data
    const { error } = validateUser(req.body);
  
    if (error) {
      res.status(400).send(error.details[0].message);
      return;
-   } else {
+   }
+   else {
      // Find if there is that username
      const useremail = req.body.email;
      const userExists = await UserDB.findOne({ email: useremail });
@@ -38,7 +42,7 @@
      try {
        let user;
        // encript the password to send to the database
-       bcrypt.hash(req.body.password, 10, (error, hashed) => {
+       await bcrypt.hash(req.body.password, 10, (error, hashed) => {
          if (error) {
            return res.status(401).send({
              message: "Password encryption failed",
@@ -77,17 +81,20 @@
              supervisors: req.body.supervisors,
              researchArea: req.body.researchArea,
              reseachProgram: req.body.reseachProgram,
-             state: req.body.state
+             state: req.body.state,
+             // docs: req.body.docs.filename
            });
          }
- 
+         
+         // console.log(req.body.docs.filename);
+
          // save the data in the database
          user
            .save(user)
            .then(async (data) => {
  
              // Make link to send to admin to access user data
-             const approvalLink = "http://localhost:3001/admin/approve";
+             const approvalLink = "http://localhost:3001/admin/toapprove";
              req.session.current_url = approvalLink;
              console.log(approvalLink);
  
@@ -113,7 +120,7 @@
  };
  
  // Function to approve student. This passes the data to regstered database
- export const approveStudent = async (req, res) => {
+/*  export const approveStudent = async (req, res) => {
    const userID = req.params.id;
  
    if (!userID) {
@@ -139,11 +146,72 @@
      user.state = 'approved';
      await user.save();
      res.status(200).send({ message: "User  approved by admin" });
-     /**@ToDo Send Email to user that he is approved */
+
+     // Sending Email to the user informing that user is approved by admin
+     const regDate = moment().add(5, "s").format();
+     new MailSender(user.email, regDate, user.nameWithInitials, "approved", "").sendEmail();
+
    } else {
      res.status(400).send({ message: "There is no user with that ID" });
    }
- };
+ }; */
+
+  // Function to approve student. This passes the data to regstered database
+ export const approveStudent = async (req, res) => {
+  // Get given data from the front end
+  // All the user data is loaded to the front end and submit them
+  const userData = req.body;
+
+  const user = await UserDB.findOne({email: userData.email});
+  const isApproved = await RegisteredDB.findOne({email: userData.email});
+
+  if (!(user) || (isApproved)){
+    res.status(400).json({message: 'There is no user with given email'});
+  }
+  else{
+    const RegDate = new Date();
+    await RegisteredDB.create(
+      {
+      nameWithInitials: userData.nameWithInitials,
+       fullName: userData.fullName,
+       postalAddress: userData.postalAddress,
+       email: userData.email,
+       telNo: userData.telNo,
+       password: user.password,         // Get password directly from the userDB
+       supervisors: userData.supervisors,
+       researchArea: userData.researchArea,
+       reseachProgram: userData.reseachProgram,
+       RegisteredDate: RegDate,
+      }
+    );
+    // Change the status of the user Database
+    user.status = 'approved';
+
+    // Set  default profile photo
+    user.photo = 'user.png';
+
+    res.status(200).send({ message: "User  approved by admin" });
+
+    // Sending Email to the user informing that user is approved by admin
+    const regDate = moment().add(5, "s").format();
+    new MailSender(user.email, regDate, user.nameWithInitials, "approved", "").sendEmail();
+
+    // Set reminders about the submission
+    /**@ToDo Set Dates that should send reminders*/
+    /**@ToDo Set input submissionn date*/
+    let submissionDate1;
+    let submissionDate2;
+    let submissionDate3;
+    let submissionDate4;
+
+    new MailSender(user.email, submissionDate1, user.nameWithInitials, "submission", "").sendEmail();
+    new MailSender(user.email, submissionDate2, user.nameWithInitials, "submission", "").sendEmail();
+    new MailSender(user.email, submissionDate3, user.nameWithInitials, "submission", "").sendEmail();
+    new MailSender(user.email, submissionDate4, user.nameWithInitials, "submission", "").sendEmail();
+
+  }
+  
+ }
  
 
  function validateUser(userData) {
@@ -334,3 +402,51 @@ export const updatePassword = async (req, res, next) => {
   // 4) log user in , send the JWT
   res.status(200).json({message: "Password change successfull"});
 };
+
+//////////////////////////////////////////////////////////////////////// UPLOAD PHOTO /////////////////////////////////////////////////////////
+// decide the file name and the destination
+const multerStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/img/users');
+  },
+  filename: (req, file, cb) => {
+    // Get the file extension
+    // {image/jpeg}
+    const ext = file.mimetype.split('/')[1];
+    // cb(null) means if there is no error
+    cb(null, `user-${req.user.id}-${Date.now()}.${ext}`);
+  },
+});
+
+// create a file filter
+const multerFilter = (req, file, cb) => {
+  // check whether the uploaded file is image
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  }
+};
+
+// upload
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+});
+
+// upload a single file
+export const uploadUserPhoto = upload.single('photo');
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Function for update database after the uploading photo
+export const updatePhotoData = async (req, res) => {
+  const userID = req.user.id;     // Getting user id from the cookie
+
+  // getting user object from the database
+  const user = await RegisteredDB.findByIdAndUpdate(userID, {photo: req.file.filename}, {new: true});
+  if (!user){
+    res.status(404).json({message: "Profile picture update failed"})
+  }
+  else{
+    res.status(200).json({message: "User update successfull", user});
+  }
+  
+}
