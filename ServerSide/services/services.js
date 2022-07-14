@@ -5,7 +5,6 @@
  * This file contains the all services(Rendering) of the application
  */
 
-
 import express from 'express';
 
 //// This is for render html...This should be deleted when fontend connected
@@ -14,8 +13,8 @@ import { fileURLToPath } from 'url';
 import { RegisteredDB } from '../model/registeredUser.js';
 import { UserDB } from '../model/user.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+/* const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename); */
 ////
 
 export const gotologin = (req, res)=>{
@@ -56,8 +55,9 @@ export const getToApprove = async (req, res) => {
 }
 
 // Method to render a approve page
-export const gotoApprove = (req, res) =>{
-    res.render('approve')
+export const gotoApprove = async (req, res) =>{
+    const user = await UserDB.findById(req.params.id);
+    res.render('approve', {userData: user});
 }
 
 // Method to render a approve page
