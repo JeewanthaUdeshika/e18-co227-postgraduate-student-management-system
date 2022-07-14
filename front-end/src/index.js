@@ -8,12 +8,26 @@ import LoginPage from './pages/loginPage';
 import RegisteredRegPage from './pages/reg-reg-page';
 import ProRegPage from './pages/pro-reg-page';
 import RegisterBasic from './pages/register-basic';
+import Profile from './components/profile';
+import RegTable from './components/regTable';
+import MainInfo from './components/dashboard/mainInfo';
+import ButtonGroupMain from './components/dashboard/buttonGroupMain';
+import StudentDashBoard from './components/dashboard/studentDashboard';
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <LoginPage/>
+    // <Profile/>
+    // <LoginPage/>
+    // <RegisterBasic/>
+    // <RegisteredRegPage/>
+    // <ProRegPage/>
+    // <RegTable/>
+    // <MainInfo/>
+    // <ButtonGroupMain/>
+    <StudentDashBoard/>
+
     );
 
 // If you want to start measuring performance in your app, pass a function
