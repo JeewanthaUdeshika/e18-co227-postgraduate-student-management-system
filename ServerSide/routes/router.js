@@ -7,10 +7,11 @@
 
  import express from "express";
  import {getForgotPW, getToApprove, getUser, gotoApprove, gotologin, gotosignup} from '../services/services.js';
- import { addStaff, approveStudent, forgotPassword, resetPassword, signUp, updatePassword, updatePhotoData, uploadUserPhoto } from "../controller/controller.js";
+ import { addStaff, approveStudent, forgotPassword, resetPassword, signUp, submission, updatePassword, updatePhotoData, uploadUserPhoto } from "../controller/controller.js";
  import { isAdmin, isLogged } from "../Middleware/auth.js";
  import passport from "passport";
  import multer from 'multer';
+ import {studentSubmission, userDocUpload} from "../utils/storages.js";
  
  // Get Router from express
  const route = express.Router();
@@ -34,7 +35,7 @@
   * @description Rouute to add new staff member for the database
   * @method POST
   */
-   route.post('/admin/addStaff', isAdmin, addStaff);
+   route.post('/admin/addStaff', /* isAdmin, */ addStaff);
  
  /**
   * @descripion Route to get unregistered users
@@ -98,7 +99,7 @@
     * @description Route to register an user
     * @method POST
     */  
-   route.post('/user/signup',  signUp);            ////////
+   route.post('/user/signup', userDocUpload.single('docs'),  signUp);            ////////
    
    /**
    * @description Route to get user details with given id. Only admin can get information of  unregistered student
@@ -139,6 +140,12 @@
    * @mehtod PATCH
    */
   route.patch('/user/uploadpp', isLogged, uploadUserPhoto, updatePhotoData);
+
+    /**
+   * @description Route to upload user submissions
+   * @mehtod PATCH
+   */
+  route.post('/user/submit', isLogged, studentSubmission.single('submission'), submission);
 
 
  ///////////////////////////////////// AUTH //////////////////////////////////////////////////

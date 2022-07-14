@@ -19,6 +19,10 @@ const content = {
   approved: {
     message: "You have been approved by admin",
     subject: "Registration on Post Graduate Program",
+  },
+  submission: {
+    message: "You have successfuly submitted your report",
+    subject: "Successfuly submitted",
   }
 };
 

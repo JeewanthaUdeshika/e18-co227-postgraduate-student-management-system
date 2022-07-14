@@ -8,16 +8,17 @@
 import express from "express";    // Import the express framework
 import dotenv from "dotenv";     // Module for use secure data from anouther file (.env)
 import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";   // Module for use middlewares
 import passport from "passport";            // For user authentication
 import flash from "express-flash";          // For organize error messages
 import session from "express-session";      // For manage different sessions with user
 import helmet from "helmet";                // Add Http  security headers
 import xss from 'xss-clean';                // For data sanitization against XSS
+import cors from  'cors';
 
 import routes from './routes/router.js';
 import { connectDB } from "./database/connection.js";
 import { initalizePassport } from "./Middleware/passport-config.js";
+
 
 
 
@@ -48,6 +49,7 @@ app.use(passport.initialize()); // Initialize the passport module in every route
 app.use(passport.session());    // allow passport to use "express-session"
 app.use(helmet());
 app.use(xss());
+app.use(cors());
 
 
 /////////////////////////////////////////////////////////////

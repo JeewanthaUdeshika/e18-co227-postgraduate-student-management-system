@@ -82,11 +82,11 @@
              researchArea: req.body.researchArea,
              reseachProgram: req.body.reseachProgram,
              state: req.body.state,
-             // docs: req.body.docs.filename
+             docs: req.file.filename
            });
          }
          
-         // console.log(req.body.docs.filename);
+         //console.log(req.file.filename);
 
          // save the data in the database
          user
@@ -449,4 +449,35 @@ export const updatePhotoData = async (req, res) => {
     res.status(200).json({message: "User update successfull", user});
   }
   
+}
+
+// Function for submissions
+export const submission = async (req, res) => {
+  // Get submission
+  const submissionNo = req.body.submission
+  // Get user ID
+  const userID = req.user.id;
+  // Get submitted  file name
+  const fileName = req.file.filename;
+
+  // Getting and update user from the data base
+  const user = await RegisteredDB.findById(userID);
+
+  if (!user){
+    res.status(404).json({message: 'Error while retrieving user'})
+  }
+  else{
+    // Set submitted file name
+    if(submissionNo == 1){
+      user.submission1 = fileName;            /**@ToDo Set registered user submission models */
+    }
+    /**@ToDo Add other submisions */
+    
+    user.save();
+    res.status(200).json({message: "User update successfull", user});
+
+    // Send email to  the submission
+    const regDate = moment().add(5, "s").format();
+    new MailSender(user.email, regDate, 'admin', "submission", "").sendEmail();
+  }
 }
