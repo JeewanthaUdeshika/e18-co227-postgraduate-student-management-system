@@ -24,104 +24,103 @@ dotenv.config({ path: "config.env" });
 export const signUp = async (req, res) => {
   console.log(req.body);
   // checking user entered data
-  const { error } = validateUser(req.body);
+  // const { error } = validateUser(req.body);
 
-  if (error) {
-    res.status(400).send(error.details[0].message);
-    return;
-  } else {
-    // Find if there is that username
-    const useremail = req.body.email;
-    const userExists = await UserDB.findOne({ email: useremail });
-    if (userExists) {
-      return res.status(409).send({ message: "User already exists" });
-    }
-
-    try {
-      let user;
-      // encript the password to send to the database
-      await bcrypt.hash(req.body.password, 10, (error, hashed) => {
-        if (error) {
-          return res.status(401).send({
-            message: "Password encryption failed",
-            error: error.message,
-          });
-        }
-
-        // Check the register status of user
-        if (req.body.regState === "Registered") {
-          user = new registeredUser({
-            nameWithInitials: req.body.nameWithInitials,
-            fullName: req.body.fullName,
-            postalAddress: req.body.postalAddress,
-            email: req.body.email,
-            telNo: req.body.telNo,
-            password: hashed,
-            supervisors: req.body.supervisors,
-            regNo: req.body.regNo,
-            DOR: req.body.DOR,
-            degree: req.body.degree,
-            studyMode: req.body.studyMode,
-            researchTopic: req.body.researchTopic,
-            completionYear: req.body.completionYear,
-            progressLevel: req.body.progressLevel,
-            dateofLastSubmission: req.body.dateofLastSubmission,
-            URLtoWebsite: req.body.URLtoWebsite,
-          });
-        } else if (req.body.regState === "Prospective") {
-          user = new prospectiveUser({
-            nameWithInitials: req.body.nameWithInitials,
-            fullName: req.body.fullName,
-            postalAddress: req.body.postalAddress,
-            email: req.body.email,
-            telNo: req.body.telNo,
-            password: hashed,
-            supervisors: req.body.supervisors,
-            researchArea: req.body.researchArea,
-            reseachProgram: req.body.reseachProgram,
-            state: req.body.state,
-            docs: req.file.filename,
-          });
-        }
-
-        //console.log(req.file.filename);
-
-        // save the data in the database
-        user
-          .save(user)
-          .then(async (data) => {
-            // Make link to send to admin to access user data
-            const approvalLink = "http://localhost:3001/admin/toapprove";
-            req.session.current_url = approvalLink;
-            console.log(approvalLink);
-
-            const admin = await StaffDB.findOne({ role: "admin" });
-            let emailList = [admin.email];
-
-            // Sending Email to the admin informing that new user is registered
-            const regDate = moment().add(5, "s").format();
-            new MailSender(
-              emailList,
-              regDate,
-              user.nameWithInitials,
-              "admin",
-              approvalLink
-            ).sendEmail();
-
-            res
-              .status(208)
-              .send({ message: "Data inserted successfully", user });
-          })
-          .catch((err) => {
-            res.status(500).send({
-              message: err.message || "Some error occured",
-            });
-          });
-      });
-    } catch (err) {
-      res.status(401).send({ message: "User not created", error: err.message });
-    }
+  // if (error) {
+  //   res.status(400).send(error.details[0].message);
+  //   return;
+  // } else {
+  // Find if there is that username
+  const useremail = req.body.email;
+  const userExists = await UserDB.findOne({ email: useremail });
+  if (userExists) {
+    return res.status(409).send({ message: "User already exists" });
   }
+
+  try {
+    let user;
+    // encript the password to send to the database
+    await bcrypt.hash(req.body.password, 10, (error, hashed) => {
+      if (error) {
+        return res.status(401).send({
+          message: "Password encryption failed",
+          error: error.message,
+        });
+      }
+
+      // Check the register status of user
+      if (req.body.registrationStatus === "registered") {
+        user = new registeredUser({
+          nameWithInitials: req.body.nameWithInitials,
+          fullName: req.body.nameDenotedByInitials,
+          postalAddress: req.body.postalAddress,
+          email: req.body.email,
+          telNo: req.body.contactNumber,
+          password: hashed,
+          supervisors: req.body.supervisors,
+          regNo: req.body.registrationNumber,
+          DOR: req.body.dateOfRegistration,
+          degree: req.body.degreeSelect,
+          studyMode: req.body.modeOfStudy,
+          researchTopic: req.body.researchTopic,
+          completionYear: req.body.yearOfCompletion,
+          progressLevel: req.body.progressLevel,
+          dateofLastSubmission: req.body.progressDate,
+          URLtoWebsite: req.body.url,
+        });
+      } else if (req.body.registrationStatus === "prospective") {
+        user = new prospectiveUser({
+          nameWithInitials: req.body.nameWithInitials,
+          fullName: req.body.nameDenotedByInitials,
+          postalAddress: req.body.postalAddress,
+          email: req.body.email,
+          telNo: req.body.contactNumber,
+          password: hashed,
+          supervisors: req.body.supervisors,
+          researchArea: req.body.researchArea,
+          reseachProgram: req.body.reseachProgram,
+          // state: req.body.state,
+          docs: req.file.filename,
+        });
+      }
+
+      //console.log(req.file.filename);
+      // console.log(user);
+      // save the data in the database
+      user
+        .save(user)
+        .then(async (data) => {
+          // Make link to send to admin to access user data
+          const approvalLink = "http://localhost:3001/admin/toapprove";
+          req.session.current_url = approvalLink;
+          console.log(approvalLink);
+
+          const admin = await StaffDB.findOne({ role: "admin" });
+          let emailList = [admin.email];
+
+          // Sending Email to the admin informing that new user is registered
+          const regDate = moment().add(5, "s").format();
+          new MailSender(
+            emailList,
+            regDate,
+            user.nameWithInitials,
+            "admin",
+            approvalLink
+          ).sendEmail();
+
+          res.status(201).send({ message: "Data inserted successfully", user });
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(500).send({
+            message: err || "Some error occured",
+          });
+        });
+    });
+  } catch (err) {
+    res.status(401).send({ message: "User not created", error: err.message });
+  }
+  // }
 };
 
 // Function to approve student. This passes the data to regstered database

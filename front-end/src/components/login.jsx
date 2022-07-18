@@ -22,10 +22,8 @@ const Login = () => {
     // console.log(values);
     try {
       const res = await axios({
-        // method: "GET",
         method: "POST",
         url: `http://localhost:3001/user/login`,
-        // url: "http://localhost:5000/api/v1/users/login",
         data: {
           email,
           password,
@@ -36,15 +34,11 @@ const Login = () => {
       // const token = res.data.token;
       // console.log(token);
 
-      if (res.data) {
-        // navigate("/components/profile");
-        alert("logged in successfully!!");
-        navigate("/profile");
-      }
+      alert("logged in successfully!!");
+      navigate("/profile");
     } catch (err) {
       alert("login failed");
       navigate("/register");
-      console.log(err);
     }
   };
 
