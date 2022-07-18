@@ -1,250 +1,315 @@
-import React, { Component } from 'react';   // Import React
-import '../styles/register.css';              // Import styles of login
-import registration from '../images/login.png';    // Import Login image
+import React, { useState } from "react"; // Import React
+import "../styles/register.css"; // Import styles of login
+import registration from "../images/login.png"; // Import Login image
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
+const Registration = () => {
+  // Inputs of the form
+  const navigate = useNavigate();
+  // Default basicInfo and passwordClass
+  const [passwordClass, setPasswordClass] = useState("form-control");
 
-class Registration extends Component {
-    constructor(props) {
-        super(props);
-    }
+  const [basicInfo, setbasicInfo] = useState({
+    nameWithInitials: "",
+    nameDenotedByInitials: "",
+    postalAddress: "",
+    email: "",
+    contactNumber: "",
+    password: "",
+    confirmedPassword: "",
+    registrationStatus: "",
+    // userData: "",
+  });
 
-    // Inputs of the form
-    state = {
-      nameWithInitials: null,
-      nameDenotedByinitials: null,
-      postalAddress: null,
-      email: null,
-      contactNumber: null,
-      password: null,
-      confirmedPassword: null,
-      registrationStatus: null,
-      userData: null
-      
-    }
+  // Click Event
+  const handleClick = (e) => {
+    e.preventDefault();
 
-    
-    // Handling form with changes of registered state
-    handelRegChange = (regState) => {
-      this.setState({registrationStatus: regState.target.value});   // Set registered Student Attribute of state
-    }
+    // Validate all the values are not empty strings
+    // const isValid = () => {
+    //   let validity = true;
+    //   Object.values(basicInfo).forEach((el) => {
+    //     if (el === "") {
+    //       validity = false;
+    //     }
+    //   });
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////
-    // Function for Submitting Data password
-  
-    submitData = () => {
+    //   return validity;
+    // };
 
-      let dataArray = [];           // Data Array to Store data
-
-      // Assign data for data Array
-      dataArray[0] = this.state.nameWithInitials;
-      dataArray[1] = this.state.nameDenotedByinitials;
-      dataArray[2] = this.state.postalAddress;
-      dataArray[3] = this.state.email;
-      dataArray[4] = this.state.contactNumber;
-      dataArray[5] = this.state.password;
-      dataArray[6] = this.state.registrationStatus;
-
-      this.setState({userData: dataArray});     // Set state of user
-
-      console.log(dataArray);                   // For debuggin purpose
-    
-    }
-
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // Functions related to password
-
-    // Function to get input password
-    getPassword =(event) => {
-      this.setState({password: event.target.value});          // Set password attribute of state
-    }
-
-
-    // Function to get input confirmed password
-    getConfirmed =(event) => {
-      this.setState({confirmedPassword: event.target.value}); // Set confirmed password value of state
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-    // Check whether both password inputs are same or not
-    confirmData = (event) =>{
-      let password = this.state.password;                     // Get entered paswword
-      let confirmedPassword = this.state.confirmedPassword;   // Get Confirmed password
-
-      if(password === confirmedPassword){                     // Check the password
-
-        this.submitData();                                    // Submit data into the array
-        console.log('Access granted');                        // For Debugging purpose
+    // console.log(isValid());
+    // If the data validation succeeded and password comparison is okay
+    // if (isValid()) {
+    if (basicInfo.password === basicInfo.confirmedPassword) {
+      // console.log(basicInfo);
+      if (basicInfo.registrationStatus === "registered") {
+        navigate("/regRegister", {
+          state: basicInfo,
+        });
+      } else if (basicInfo.registrationStatus === "prospective") {
+        navigate("/regProspective", {
+          state: basicInfo,
+        });
       }
+    }
+    // }
+  };
 
-      else{
-
-        console.log("Incorrect Password");                    // For debuggin purposes
+  // Check whether the password and confirm password are same
+  useEffect(() => {
+    if (basicInfo.password || basicInfo.confirmedPassword) {
+      if (
+        basicInfo.password === basicInfo.confirmedPassword &&
+        basicInfo.password.length >= 8 &&
+        basicInfo.confirmedPassword.length >= 8
+      ) {
+        setPasswordClass("form-control is-valid");
+      } else {
+        setPasswordClass("form-control is-invalid");
       }
-
-      event.preventDefault();                                 // Pevent from default action
     }
+  }, [basicInfo]);
 
+  // OnChange function , detects every change in inputs realtime
+  const handleChange = (e) => {
+    setbasicInfo({ ...basicInfo, [e.target.name]: e.target.value });
+  };
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Fun ctions for get the inputs
+  return (
+    <main className="form-signin w-100 m-auto">
+      <form className="row g-3" required onSubmit={(e) => handleClick(e)}>
+        <div className="text-center">
+          <img
+            className="mb-4"
+            src={registration}
+            alt=""
+            width="70"
+            height="70"
+          />
 
-    getName = (event) => {
-      this.setState({nameWithInitials: event.target.value});         // Set name with initail in the state
-    }
+          <h1
+            className="h3 mb-3 fw-normal"
+            style={{
+              fontFamily: "monospace",
+              fontSize: "40px",
+              fontWeight: "bolder",
+            }}
+          >
+            Registration
+          </h1>
+        </div>
 
+        <div
+          className="col-12"
+          style={{ fontSize: "20px", fontWeight: "bold" }}
+        >
+          <label htmlFor="nameWithInitials" className="form-label">
+            Name With Initials
+          </label>
+          <input
+            type="text"
+            className={
+              basicInfo.nameWithInitials !== ""
+                ? "form-control is-valid"
+                : "form-control is-invalid"
+            }
+            id="nameWithinitials"
+            name="nameWithInitials"
+            onChange={(e) => handleChange(e)}
+            placeholder="Name with Initials"
+            required
+          />
+        </div>
 
-    getinitials = (event) => {
-      this.setState({nameDenotedByinitials: event.target.value});   // Set name denoted by initail in the state
-    }
+        <div
+          className="col-12"
+          style={{ fontSize: "20px", fontWeight: "bold" }}
+        >
+          <label htmlFor="initials" className="form-label">
+            Name Denoted by Initials
+          </label>
+          <input
+            type="text"
+            className={
+              basicInfo.nameDenotedByInitials !== ""
+                ? "form-control is-valid"
+                : "form-control is-invalid"
+            }
+            id="nameDenotedByInitials"
+            name="nameDenotedByInitials"
+            onChange={(e) => handleChange(e)}
+            placeholder="Name Denoted by Initials"
+            required
+          />
+        </div>
 
+        <div
+          className="col-12"
+          style={{ fontSize: "20px", fontWeight: "bold" }}
+        >
+          <label htmlFor="address" className="form-label">
+            Postal Address
+          </label>
+          <input
+            type="text"
+            className={
+              basicInfo.postalAddress !== ""
+                ? "form-control is-valid"
+                : "form-control is-invalid"
+            }
+            id="postalAddress"
+            name="postalAddress"
+            onChange={(e) => handleChange(e)}
+            placeholder="Postal Address"
+            required
+          />
+        </div>
 
-    getAddress = (event) => {
-      this.setState({postalAddress: event.target.value});           // Set Address in the state
-    }
+        <div
+          className="col-md-6"
+          style={{ fontSize: "20px", fontWeight: "bold" }}
+        >
+          <label htmlFor="email" className="form-label">
+            E-Mail Address
+          </label>
+          <input
+            type="email"
+            className={
+              basicInfo.email !== ""
+                ? "form-control is-valid"
+                : "form-control is-invalid"
+            }
+            id="email"
+            name="email"
+            onChange={(e) => handleChange(e)}
+            placeholder="E-Mail Address"
+            required
+          />
+        </div>
 
+        <div
+          className="col-md-6"
+          style={{ fontSize: "20px", fontWeight: "bold" }}
+          // onInput={getContact}
+        >
+          <label htmlFor="contactNumber" className="form-label">
+            Contact Number
+          </label>
+          <input
+            // type="text"
+            type="tel"
+            className={
+              basicInfo.contactNumber !== ""
+                ? "form-control is-valid"
+                : "form-control is-invalid"
+            }
+            onChange={(e) => handleChange(e)}
+            id="contactNumber"
+            name="contactNumber"
+            placeholder="Contact Number"
+            required
+          />
+        </div>
 
-    getEmail = (event) => {
-      this.setState({email: event.target.value});                   // Set Email address in the state
-    }
+        <div
+          className="col-md-6"
+          style={{ fontSize: "20px", fontWeight: "bold" }}
+        >
+          <label htmlFor="password" className="form-label">
+            Password
+          </label>
+          <input
+            type="password"
+            // class="form-control"
+            className={passwordClass}
+            id="password"
+            placeholder="Password"
+            name="password"
+            minLength="8"
+            onChange={(e) => handleChange(e)}
+            required
+          />
+        </div>
 
-    
-    getContact = (event) => {
-      this.setState({contactNumber: event.target.value});   // Set name with initail in the state
-    }
+        <div
+          className="col-md-6"
+          style={{ fontSize: "20px", fontWeight: "bold" }}
+        >
+          <label htmlFor="confirmedPassword" className="form-label">
+            Confirm Password
+          </label>
+          <input
+            type="password"
+            className={passwordClass}
+            id="confirmedPassword"
+            placeholder="Confirm Password"
+            name="confirmedPassword"
+            minLength="8"
+            onChange={(e) => handleChange(e)}
+            required
+          />
+        </div>
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+        <div style={{ marginTop: "20px", marginBottom: "5px" }}>
+          <h1
+            style={{
+              marginBottom: "10px",
+              // fontWeight: "100px",
+              fontSize: "20px",
+              fontWeight: "bold",
+            }}
+          >
+            Registration Status
+          </h1>
 
+          <div
+            className="form-check"
+            onChange={(e) => handleChange(e)}
+            style={{ marginLeft: "40px" }}
+          >
+            <input
+              type="radio"
+              className="form-check-input"
+              id="registered"
+              value="registered"
+              name="registrationStatus"
+              required
+            />
+            <label className="form-check-label" htmlFor="registered">
+              Registered Student
+            </label>
+          </div>
 
+          <div
+            className="form-check"
+            onChange={(e) => handleChange(e)}
+            style={{ marginLeft: "40px" }}
+          >
+            <input
+              type="radio"
+              className="form-check-input"
+              id="prospective"
+              value="prospective"
+              name="registrationStatus"
+            />
+            <label className="form-check-label" htmlFor="prospective">
+              Prospective Student
+            </label>
+          </div>
+        </div>
 
-
-    /*
-    Get some message from props
-    */
-
-    render() { 
-        return (  
-
-            //<body class="text-center" >
-
-    
-            <main class="form-signin w-100 m-auto">
-
-
-              <form class="row g-3" 
-
-                onSubmit={this.confirmData}
-
-              >
-
-
-                <body class="text-center">
-
-                  <img class="mb-4" src={registration} alt="" width="70" height="70"/>
-
-                  <h1 class="h3 mb-3 fw-normal" style={{ fontFamily: 'monospace', fontSize: '40px', fontWeight: 'bolder'}}>Registration</h1>
-
-                </body>
-
-
-
-
-                <div class="col-12"  style={{fontSize: '20px', fontWeight: 'bold'}}
-                  onInput={this.getName}
-                  >
-                  <label for="nameWithInitials" class="form-label">Name With Initials</label>
-                  <input type="text" class="form-control" id="nameWithInitials" placeholder="Name with Initials" required/>
-                </div>
-
-
-                <div class="col-12"  style={{fontSize: '20px', fontWeight: 'bold'}}
-                  onInput={this.getinitials}
-                  >
-                  <label for="initials" class="form-label">Name Denoted by Initials</label>
-                  <input type="text" class="form-control" id="initials" placeholder="Name Denoted by Initials" required/>
-                </div>
-                    
-
-                <div class="col-12"  style={{fontSize: '20px', fontWeight: 'bold'}}
-                  onInput={this.getAddress}
-                  >
-                  <label for="address" class="form-label">Postal Address</label>
-                  <input type="text" class="form-control" id="address" placeholder="Postal Address" required/>
-                </div>
-
-
-                <div class="col-md-6"  style={{fontSize: '20px', fontWeight: 'bold'}}
-                  onInput={this.getEmail}
-                  >
-                  <label for="email" class="form-label">E-Mail Address</label>
-                  <input type="email" class="form-control" id="email" placeholder="E-Mail Address" required/>
-                </div>
-
-
-                <div class="col-md-6"  style={{fontSize: '20px', fontWeight: 'bold'}}
-                  onInput={this.getContact}
-                  >
-                  <label for="contactNumber" class="form-label">Contact Number</label>
-                  <input type="text" class="form-control" id="contactNumber" placeholder="Contact Number" required/>
-                </div>
-
-
-                <div class="col-md-6"  style={{fontSize: '20px', fontWeight: 'bold'}}>
-                  <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Password" onChange={this.getPassword} required/>
-                </div>
-
-
-                <div class="col-md-6"  style={{fontSize: '20px', fontWeight: 'bold'}}>
-                  <label for="confirmedPassword" class="form-label">Confirm Password</label>
-                  <input type="password" class="form-control" id="confirmedPassword" placeholder="Confirm Password" onChange={this.getConfirmed} required/>
-                </div>
-
-
-
-
-                <div style={{marginTop: '20px', marginBottom:'5px'}}>
-                
-                  <h1 style={{marginBottom: '10px', fontWeight: '100px', fontSize: '20px', fontWeight:'bold'}}>Registration Status</h1>
-
-                  <div class="form-check" 
-                    onChange={this.handelRegChange}  
-                    style={{marginLeft: '40px'}}>
-
-                    <input type="radio" class="form-check-input" id="registered" name="regState" value="registered"/>
-                    <label class="form-check-label" for="registered">Registered Student</label>
-                  </div>
-                  
-                  <div class="form-check" 
-                    onChange={this.handelRegChange}  
-                    style={{marginLeft: '40px'}}>
-
-
-                    <input type="radio" class="form-check-input" id="prospective" name="regState" value="prospective"/>
-                    <label class="form-check-label" for="prospective">Prospective Student</label>
-                  </div>
-
-                </div>
-
-                  
-                    
-                <body class='text-center'>
-                  <button class="w-100 btn btn-lg btn-primary" type="submit">Next</button>
-                </body>
-
-              </form>
-
-            </main> 
-          //</body>
-
-        );
-    }
-}
- 
+        <div className="text-center">
+          <button
+            className="w-100 btn btn-lg btn-primary"
+            type="submit"
+            // onClick={(e) => handleClick(e)}
+          >
+            Next
+          </button>
+        </div>
+      </form>
+    </main>
+  );
+};
 export default Registration;
-
-

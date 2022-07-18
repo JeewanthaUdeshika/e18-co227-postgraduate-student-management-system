@@ -3,7 +3,6 @@
  * Author: Jeewantha Ariyawansha
  * 
  * This file contains all the mongoDB schemas
- * If user selects as registered registered schema is merge into user schema. Otherwise prospectiveSchema merge into the userSchema
  */
 
 import mongoose from "mongoose";
@@ -16,12 +15,12 @@ const userSchema = new mongoose.Schema({
     nameWithInitials: {
         type: String,
         required: true,
-        //trim: true
+        trim: true
     },
     fullName: {
         type: String,
         required: true,
-        //trim: true,
+        trim: true,
     },
     postalAddress: {
         type: String,
@@ -101,9 +100,6 @@ const prospectiveSchema = new mongoose.Schema({
         type: String,
         enum: ['PhD', 'MPhil']
     },
-    docs: {
-        type: String
-    }
 });
 
 // Model  for registered students
@@ -111,3 +107,8 @@ export const registeredUser = UserDB.discriminator('Registered', registeredSchem
 // Model for prospective students
 export const prospectiveUser = UserDB.discriminator('Prospective', prospectiveSchema, options);
 
+
+/* // Discrimination of the registerStatus
+userSchema.path('regState').discriminator('Registered' ,registeredSchema);
+userSchema.path('regState').discriminator('Prospective' ,prospectiveSchema);
+ */
