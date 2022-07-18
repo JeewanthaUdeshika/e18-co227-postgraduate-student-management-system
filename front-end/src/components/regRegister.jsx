@@ -39,10 +39,11 @@ const RegRegister = () => {
       // Merge the objects
       finalDetails = { ...state, ...regDetails };
 
+      console.log(finalDetails);
       // Send the application data to the backend
       const res = await axios({
         method: "POST",
-        url: "http://localhost:3001/sub",
+        url: "http://localhost:3001/user/signup",
         data: finalDetails,
         withCredentials: true,
       });

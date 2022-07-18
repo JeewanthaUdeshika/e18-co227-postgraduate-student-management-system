@@ -16,7 +16,6 @@ const userSchema = new mongoose.Schema({
   fullName: {
     type: String,
     required: true,
-    unique: true,
   },
   postalAddress: {
     type: String,
@@ -26,6 +25,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     lowercase: true,
+    unique: true,
   },
   telNo: {
     type: Number,
@@ -56,11 +56,11 @@ const userSchema = new mongoose.Schema({
   },
   degree: {
     type: String,
-    enum: ["PhD", "MPhil", "Msc", "MEng", "Provisional"],
+    enum: ["phd", "mphill", "msc", "meng", "provisional"],
   },
   studyMode: {
     type: String,
-    enum: ["Full", "Part"],
+    enum: ["fullTime", "partTime"],
   },
   researchTopic: {
     type: String,
@@ -71,12 +71,12 @@ const userSchema = new mongoose.Schema({
   progressLevel: {
     type: String,
     enum: [
-      "Half Year Progress Report Submitted",
-      "Annual Progress Report Submitted",
-      "Annual Oral Presentation Completed",
-      "Viva Completed",
-      "Thesis Submitted for Review",
-      "Final Thesis Submitted",
+      "halfYearReportSubmitted",
+      "annualProgressReportSubmitted",
+      "annualOralPresentationSubmitted",
+      "vivaCompleted",
+      "thesisSubmittedForReview",
+      "finalThesisSubmitted",
     ],
   },
   dateofLastSubmission: {

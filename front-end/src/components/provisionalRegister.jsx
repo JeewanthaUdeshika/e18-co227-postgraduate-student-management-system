@@ -13,8 +13,7 @@ const ProvisionalRegister = () => {
     researchArea: "",
     researchProgram: "",
     supervisors: "",
-    attachments: "",
-    // userData: null,
+    docs: "",
   });
 
   // Submit Event
@@ -25,7 +24,7 @@ const ProvisionalRegister = () => {
       finalDetails = { ...state, ...prospectiveDetails };
       const res = await axios({
         method: "POST",
-        url: "http://localhost:3001/sub",
+        url: "http://localhost:3001/user/signup",
         data: finalDetails,
         withCredentials: true,
       });
@@ -51,7 +50,11 @@ const ProvisionalRegister = () => {
 
   return (
     <main className="form-signin w-100 m-auto">
-      <form className="row g-3" onSubmit={(e) => handleSubmit(e)}>
+      <form
+        className="row g-3"
+        onSubmit={(e) => handleSubmit(e)}
+        encType="multipart/form-data"
+      >
         <h1
           style={{
             fontSize: "35px",
@@ -175,16 +178,16 @@ const ProvisionalRegister = () => {
           </label>
           <input
             className={
-              prospectiveDetails.attachments !== ""
+              prospectiveDetails.docs !== ""
                 ? "form-control is-valid"
                 : "form-control is-invalid"
             }
             type="file"
-            name="attachments"
+            name="docs"
             onChange={(e) => handleChange(e)}
-            id="attachments"
+            id="docs"
             required
-            multiple
+            // multiple
           />
         </div>
 

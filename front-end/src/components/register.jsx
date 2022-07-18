@@ -19,28 +19,12 @@ const Registration = () => {
     password: "",
     confirmedPassword: "",
     registrationStatus: "",
-    // userData: "",
   });
 
   // Click Event
-  const handleClick = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validate all the values are not empty strings
-    // const isValid = () => {
-    //   let validity = true;
-    //   Object.values(basicInfo).forEach((el) => {
-    //     if (el === "") {
-    //       validity = false;
-    //     }
-    //   });
-
-    //   return validity;
-    // };
-
-    // console.log(isValid());
-    // If the data validation succeeded and password comparison is okay
-    // if (isValid()) {
     if (basicInfo.password === basicInfo.confirmedPassword) {
       // console.log(basicInfo);
       if (basicInfo.registrationStatus === "registered") {
@@ -53,7 +37,6 @@ const Registration = () => {
         });
       }
     }
-    // }
   };
 
   // Check whether the password and confirm password are same
@@ -78,7 +61,7 @@ const Registration = () => {
 
   return (
     <main className="form-signin w-100 m-auto">
-      <form className="row g-3" required onSubmit={(e) => handleClick(e)}>
+      <form className="row g-3" required onSubmit={(e) => handleSubmit(e)}>
         <div className="text-center">
           <img
             className="mb-4"
