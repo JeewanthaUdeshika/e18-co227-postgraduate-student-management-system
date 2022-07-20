@@ -15,9 +15,13 @@
     "js-cookie": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+<<<<<<< HEAD
+    "react-google-button": "^0.7.2",
+=======
     "react-form-with-constraints": "^0.18.0",
     "react-google-button": "^0.7.2",
     "react-router-dom": "^6.3.0",
+>>>>>>> fa4f0d98ff1a6aa138c26ff519bfd40b81eb5d3b
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
