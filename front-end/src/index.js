@@ -15,12 +15,14 @@ import ButtonGroupMain from './components/dashboard/buttonGroupMain';
 import StudentDashBoard from './components/dashboard/studentDashboard';
 import Submission from './components/dashboard/submission';
 import SubmissionDashboard from './pages/submissionDashboard';
+import Reviewer from './pages/reviewDashboard';
+import ResponsiveAppBar from './components/navbarNew';
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <ProfilePage/>
+    // <ProfilePage/>
     // <LoginPage/>
     // <RegisterBasic/>
     // <RegisteredRegPage/>
@@ -30,6 +32,8 @@ root.render(
     // <ButtonGroupMain/>
     // <StudentDashBoard/>
     // <SubmissionDashboard/>
+    // <Reviewer/>
+    <ResponsiveAppBar/>
 
     );
 

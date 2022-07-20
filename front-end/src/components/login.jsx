@@ -1,5 +1,7 @@
 import React, { Component } from 'react';   // Import React
 import login from '../images/login.png';    // Import Login image
+import GoogleButton from 'react-google-button'  // Import Google Sign in button
+
 
 
 
@@ -46,6 +48,10 @@ class Login extends Component {
                 
 
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+
+                <div className='text-center' style={{marginTop: '15px', marginBottom: '15px', marginLeft: '40px'}}>
+                  <GoogleButton width="500"/>
+                </div>
 
 
                 <div class="text-center" style={{marginTop: '30px'}}>
