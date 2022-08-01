@@ -40,7 +40,6 @@ const Login = () => {
     } catch (err) {
       alert("login failed");
       navigate("/register");
-
     }
   };
 
