@@ -1,15 +1,9 @@
-<<<<<<< HEAD
-import React, { Component } from 'react';   // Import React
-import login from '../images/login.png';    // Import Login image
-import GoogleButton from 'react-google-button'  // Import Google Sign in button
-
-=======
 import React, { useState } from "react"; // Import React
 import login from "../images/login.png"; // Import Login image
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import GoogleButton from "react-google-button";
->>>>>>> fa4f0d98ff1a6aa138c26ff519bfd40b81eb5d3b
+
 
 const Login = () => {
   // Navigator
@@ -41,45 +35,12 @@ const Login = () => {
       // const token = res.data.token;
       // console.log(token);
 
-<<<<<<< HEAD
-
-                <div class="form-floating">
-                  <input type="password" class="form-control" id="floatingPassword" placeholder="Password"/>
-                  <label for="floatingPassword">Password</label>
-                </div>
-            
-                <div class="checkbox mb-3" style={{alignItems: 'center', marginTop:'10px'}}>
-                  <label>
-                    <input type="checkbox" value="remember-me"/>
-                    &nbsp; Remember me
-                  </label>
-                </div>
-
-                
-
-                <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-
-                <div className='text-center' style={{marginTop: '15px', marginBottom: '15px', marginLeft: '40px'}}>
-                  <GoogleButton width="500"/>
-                </div>
-
-
-                <div class="text-center" style={{marginTop: '30px'}}>
-                  <p> Not Registered ? <a href='#'>Register</a></p>
-                </div>
-
-              </form>
-            </main> 
-          </body>
-          
-        );
-=======
       alert("logged in successfully!!");
       navigate("/profile");
     } catch (err) {
       alert("login failed");
       navigate("/register");
->>>>>>> fa4f0d98ff1a6aa138c26ff519bfd40b81eb5d3b
+
     }
   };
 

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -18,6 +17,8 @@ import Submission from './components/dashboard/submission';
 import SubmissionDashboard from './pages/submissionDashboard';
 import Reviewer from './pages/reviewDashboard';
 import ResponsiveAppBar from './components/navbarNew';
+import AdminDashboard from './components/dashboard/admin';
+import AdminPage from './pages/adminPage';
 
 
 
@@ -34,7 +35,9 @@ root.render(
     // <StudentDashBoard/>
     // <SubmissionDashboard/>
     // <Reviewer/>
-    <ResponsiveAppBar/>
+    // <ResponsiveAppBar/>
+    // <AdminDashboard/>
+    <AdminPage/>
 
     );
 
@@ -42,13 +45,3 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-=======
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import "bootstrap/dist/css/bootstrap.css";
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
->>>>>>> fa4f0d98ff1a6aa138c26ff519bfd40b81eb5d3b
