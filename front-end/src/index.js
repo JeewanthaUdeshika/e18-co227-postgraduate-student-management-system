@@ -20,6 +20,7 @@ import Reviewer from './pages/reviewDashboard';
 import ResponsiveAppBar from './components/navbarNew';
 import AdminDashboard from './components/dashboard/admin';
 import AdminPage from './pages/adminPage';
+import AppProcedure from './components/infoPages/procedure';
 
 
 
@@ -38,7 +39,8 @@ root.render(
     // <Reviewer/>
     // <ResponsiveAppBar/>
     // <AdminDashboard/>
-    <AdminPage/>
+    // <AdminPage/>
+    <AppProcedure/>
 
     );
 
