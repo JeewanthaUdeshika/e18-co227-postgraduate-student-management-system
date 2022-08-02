@@ -38,17 +38,17 @@ class ButtonGroupMain extends Component {
 
                 <Button key='main2'>Progress Review</Button>
 
-                <Button key='main3'>Format, Submission and Evalution of Thesis</Button>
+                <Button key='main3'>Format, Submission and Evaluation of Thesis</Button>
 
-                <Button key='main4'>Application of Examiners for Thesis</Button>
+                <Button key='main4'>Appointment of Examiners for Thesis</Button>
 
                 <Button key='admin'>Coordinator Dashboard</Button>
 
-                {/* <Button key='main5'>Application Procedure</Button>
+                <Button key='main5'>Submission Dashboard</Button>
                 
-                <Button key='main6'>Registration</Button>
+                <Button key='main6'>Review Dashboard</Button>
 
-                <Button key='main7'>Progress Review - MPhill/PhD</Button> */}
+                {/* <Button key='main7'>Progress Review - MPhill/PhD</Button> */}
 {/* 
                 <Button key='main8'>Minimum and Maximum Duration</Button>
 

@@ -34,7 +34,7 @@ function AppProcedure () {
                             marginLeft: '150px'
                         }}>
 
-                            <ld>
+                            <ul>
 
                                 <li>Application: <span><a href='http://eng.pdn.ac.lk/cerps/forms/RPGapplication.doc'>MS Word</a>/ 
                                 <a href='http://eng.pdn.ac.lk/cerps/forms/RPGapplication.pdf'>PDF</a></span></li>
@@ -51,7 +51,7 @@ function AppProcedure () {
                                     The application for a research-based programme should accompany a research proposal
                                     and the consent of one or more supervisors
 
-                        
+                                <ul>
                                     <li>
                                         Research Proposal &nbsp;
                                         <span>
@@ -82,6 +82,7 @@ function AppProcedure () {
                                             </a>
                                         </span>
                                     </li>
+                                </ul>
 
                                 </li>
 
@@ -90,7 +91,7 @@ function AppProcedure () {
                                     Get the duly completed application signed by the supervisor/s, and submit it to the Head
                                     of the Department of Study where you are planning to pursue your research.
                                 </li>
-                            </ld>
+                            </ul>
 
                         </div>
 
