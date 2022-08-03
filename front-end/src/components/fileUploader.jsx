@@ -1,12 +1,11 @@
 import { Card, CardContent } from '@mui/material';
 import React from 'react';
-import { useState } from 'react';
 
 
 
 function FileUploader() {
 
-    const [fileValue] = useState(null);     // Clear ethe Value of file
+
 
     return(
         <Card style={{width: '1000px'}}>
@@ -40,13 +39,13 @@ function FileUploader() {
                                                     <div className="controls">  
 
                                                         <div className="entry input-group upload-input-group">  
-                                                            <input className="form-control" name="file" type="file" value={fileValue}/> 
+                                                            <input className="form-control" name="file" type="file"/> 
                                                         </div>  
 
                                                     </div>  
 
                                                     <button style={{marginTop: '25px'}} className="btn btn-primary">Upload</button>
-                                                    <button style={{marginLeft: '25px', marginTop: '25px'}} className="btn btn-warning">Reset</button>    
+                                                      
                                                 
                                                 </div> 
 
