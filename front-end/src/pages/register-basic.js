@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Footer from "../components/footer";
-import Navbar from "../components/navbar";
+import ResponsiveAppBar from '../components/navbarNew';
 import Registration from "../components/register";
 
 
@@ -14,7 +14,7 @@ class RegisterBasic extends Component {
     render() { 
         return (
             <div>
-                <Navbar/>
+                <ResponsiveAppBar/>
 
                 <div style={{marginTop: '30px'}}>
                     <Registration/>

@@ -1,15 +1,14 @@
 import React from 'react';
-import Appointment from '../components/infoPages/appointment';
 import ButtonGroupMain from '../components/dashboard/buttonGroupMain';
 import Footer from '../components/footer';
 import ResponsiveAppBar from '../components/navbarNew';
+import Profile from '../components/profile';
 import { Grid } from '@mui/material';
-
 
 
 // Function for showing information pages on post graduate programme
 
-function AppointmentPage(){
+function UserProfile(){
 
     return(
 
@@ -27,7 +26,7 @@ function AppointmentPage(){
                         </Grid>
 
                         <Grid item xs={8}>
-                            <Appointment/>
+                            <Profile/>
                         </Grid>
 
                     </Grid>
@@ -43,4 +42,4 @@ function AppointmentPage(){
     )
 }
 
-export default AppointmentPage;
+export default UserProfile;

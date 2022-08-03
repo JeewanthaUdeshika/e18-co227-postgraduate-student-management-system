@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Submission from '../components/dashboard/submission';
-import Navbar from '../components/navbar';
+import ResponsiveAppBar from '../components/navbarNew';
 import Footer from '../components/footer';
 import ButtonGroupMain from '../components/dashboard/buttonGroupMain';
 import { Grid } from '@mui/material';
@@ -22,7 +22,7 @@ class SubmissionDashboard extends Component {
             <div>
 
                 <div style={{marginBottom: '100px'}}>
-                    <Navbar/>
+                    <ResponsiveAppBar/>
                 </div>
 
                 <div>

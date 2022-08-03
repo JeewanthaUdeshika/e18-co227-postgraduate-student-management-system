@@ -24,13 +24,14 @@ import ProcedurePage from './pages/procedurePage';
 import ProgressReviewPage from './pages/progressReviewPage';
 import FormatPage from './pages/formatPage';
 import AppointmentPage from './pages/appointmentPage';
-
-
+import HomePage from './pages/homePage';
+import AddStaffPage from './pages/addStaffPage';
+import UserProfile from './pages/userProfile';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    // <ProfilePage/>
+    //  <ProfilePage/>
     // <LoginPage/>
     // <RegisterBasic/>
     // <RegisteredRegPage/>
@@ -48,7 +49,10 @@ root.render(
     // <ProcedurePage/>
     // <ProgressReviewPage/>
     // <FormatPage/>
-    <AppointmentPage/>
+    // <AppointmentPage/>
+    // <App/>
+    // <AddStaffPage/>
+    <UserProfile/>
 
     );
 

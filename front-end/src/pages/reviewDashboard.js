@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from '../components/navbar';
+import ResponsiveAppBar from '../components/navbarNew';
 import Footer from '../components/footer';
 import ReviewerDashBoard from '../components/dashboard/reviewerDashboard';
 import ButtonGroupMain from '../components/dashboard/buttonGroupMain';
@@ -14,7 +14,7 @@ function Reviewer(params) {
         <div>
 
             <div style={{marginBottom: '100px'}}>
-                    <Navbar/>
+                    <ResponsiveAppBar/>
                 </div>
 
                 <div>

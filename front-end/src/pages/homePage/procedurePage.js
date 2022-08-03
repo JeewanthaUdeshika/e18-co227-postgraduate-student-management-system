@@ -1,33 +1,32 @@
 import React from 'react';
-import Appointment from '../components/infoPages/appointment';
-import ButtonGroupMain from '../components/dashboard/buttonGroupMain';
-import Footer from '../components/footer';
-import ResponsiveAppBar from '../components/navbarNew';
+import AppProcedure from '../../components/infoPages/procedure';
+import ButtonGroupHome from '../../components/homePage/buttonGroup';
+import Footer from '../../components/footer';
+import NavbarHome from '../../components/homePage/navbarHome';
 import { Grid } from '@mui/material';
-
 
 
 // Function for showing information pages on post graduate programme
 
-function AppointmentPage(){
+function ProcedurePageHome(){
 
     return(
 
 
         <div>
                 <div style={{marginBottom: '100px'}}>
-                    <ResponsiveAppBar/>
+                    <NavbarHome/>
                 </div>
 
                 <div>
                     <Grid container spacing={0}>
 
                         <Grid item xs={3} style={{marginLeft: '25px'}}>
-                            <ButtonGroupMain/>
+                            <ButtonGroupHome/>
                         </Grid>
 
                         <Grid item xs={8}>
-                            <Appointment/>
+                            <AppProcedure/>
                         </Grid>
 
                     </Grid>
@@ -43,4 +42,4 @@ function AppointmentPage(){
     )
 }
 
-export default AppointmentPage;
+export default ProcedurePageHome;

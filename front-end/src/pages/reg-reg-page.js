@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from '../components/navbar';
+import ResponsiveAppBar from '../components/navbarNew';
 import Footer from '../components/footer';
 import RegRegister from '../components/regRegister';
 
@@ -16,7 +16,7 @@ class RegisteredRegPage extends Component {
     render() { 
         return ( 
             <div>
-                <Navbar/>
+                <ResponsiveAppBar/>
 
                 <div style={{marginTop: "70px"}}>
                     <RegRegister/>

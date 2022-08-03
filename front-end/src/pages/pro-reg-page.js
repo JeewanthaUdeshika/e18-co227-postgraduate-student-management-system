@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from '../components/navbar';
+import ResponsiveAppBar from '../components/navbarNew';
 import Footer from '../components/footer';
 import Provisionalregister from '../components/provisionalRegister'
 
@@ -15,7 +15,7 @@ class ProRegPage extends Component {
         return (
             <div>
 
-                <Navbar/>
+                <ResponsiveAppBar/>
 
                 <div style={{marginTop: '70px'}}>
                     <Provisionalregister/>

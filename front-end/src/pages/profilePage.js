@@ -1,42 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Profile from '../components/profile';
-import Navbar from '../components/navbar';
+import ResponsiveAppBar from '../components/navbarNew';
 import Footer from '../components/footer';
 
 
 
 
-class ProfilePage extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-
-    state = {  }
-
-
-    render() { 
+function ProfilePage() {
+    
         return (  
 
 
             <div class='container'>
 
-                <div>
-                    <Navbar/>
+                <div style={{marginBottom: '10px'}}>
+                    <ResponsiveAppBar/>
                 </div>
 
                 <div class="row justify-content-md-center" style={{marginTop: '65px', marginBottom: '20px'}}>
                     <Profile/>
                 </div>
 
-                <div>
+                <div style={{marginTop: '10px'}}>
                     <Footer/>
                 </div>
 
             </div>
 
         );
-    }
 }
  
 export default ProfilePage;

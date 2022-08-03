@@ -26,8 +26,8 @@ function AppProcedure () {
                         marginTop: '20px'
                     }}>
                         <p style={{fontSize: '20px', fontWeight: 'bold'}}>
-                            The application forms may be obtained from the respctve Heads of Departments, Programme Cooordinators, 
-                            or Assitan Registrar, Faculty of Engineering, University of Peradeniya
+                            The application forms may be obtained from the respective Heads of Departments, Programme Coordinators, 
+                            or Assitant Registrar, Faculty of Engineering, University of Peradeniya
                         </p>
 
                         <div style={{

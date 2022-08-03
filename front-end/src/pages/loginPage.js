@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from '../components/navbar';
+import ResponsiveAppBar from '../components/navbarNew';
 import Footer from '../components/footer';
 import Login from '../components/login';
 
@@ -14,7 +14,7 @@ class LoginPage extends Component {
         return ( 
             <div class="container">
 
-                <Navbar/>
+                <ResponsiveAppBar/>
 
                 <div style={{marginTop: '50px'}}>
                     <Login/>
