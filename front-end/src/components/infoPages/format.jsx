@@ -96,7 +96,9 @@ function Format(){
                                             </table>
 
                                         </li>
-                                    </ul>
+                                    
+
+
 
                                         <li>
                                             The student should submit along with the thesis/report a certification by the
@@ -118,6 +120,7 @@ function Format(){
                                             </ul>
 
                                         </li>
+                                        </ul>
 
                                 </li> 
 

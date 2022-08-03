@@ -27,6 +27,7 @@ import AppointmentPage from './pages/appointmentPage';
 import HomePage from './pages/homePage';
 import AddStaffPage from './pages/addStaffPage';
 import UserProfile from './pages/userProfile';
+import FileUploadPage from './pages/fileUploadPage';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -40,7 +41,7 @@ root.render(
     // <MainInfo/>
     // <ButtonGroupMain/>
     // <StudentDashBoard/>
-    // <SubmissionDashboard/>
+    //  <SubmissionDashboard/>
     // <Reviewer/>
     // <ResponsiveAppBar/>
     // <AdminDashboard/>
@@ -52,7 +53,8 @@ root.render(
     // <AppointmentPage/>
     // <App/>
     // <AddStaffPage/>
-    <UserProfile/>
+    //<UserProfile/>
+    <FileUploadPage/>
 
     );
 
