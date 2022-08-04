@@ -9,6 +9,7 @@ import bcrypt from "bcrypt";
 import google from "passport-google-oauth2";
 import { RegisteredDB } from "../model/registeredUser.js";
 import { StaffDB } from "../model/staff.js";
+import { UserDB } from "../model/user.js";
 
 // Getting strategy methods from passport modules
 const LocalStrategy = local.Strategy;

@@ -40,3 +40,32 @@ const submissionStore = multer.diskStorage({
 })
  
 export const studentSubmission = multer({ storage: submissionStore });
+
+////////////// Profile Picture //////////////////////
+// decide the file name and the destination
+const photoStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/img/users');
+  },
+  filename: (req, file, cb) => {
+    // Get the file extension
+    // {image/jpeg}
+    /* const ext = file.mimetype.split('/')[1]; */
+    // cb(null) means if there is no error
+    cb(null, `user-${req.user.id}-${Date.now()}` + path.extname(file.originalname));
+  },
+});
+
+// create a file filter
+const photoFilter = (req, file, cb) => {
+  // check whether the uploaded file is image
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  }
+};
+
+// upload
+export const uploadUserPhoto = multer({
+  storage: photoStorage,
+  fileFilter: photoFilter,
+});

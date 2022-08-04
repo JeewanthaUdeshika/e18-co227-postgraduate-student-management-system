@@ -1,32 +1,33 @@
 import axios from "axios";
 import React, { useEffect } from "react"; // Import React to component
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import profilePicture from "../images/profile-picture.jpg"; // import profile picture
-// import Download from '../images/download.png'
+import Download from "../images/download.png";
 
 // Class to Create profile component
 
 const Profile = () => {
-  // const navigate = useNavigate();
-  const [state, setState] = useState({
+  // get the previous basic Info
+  const { state } = useLocation();
+
+  const [info, setInfo] = useState({
     profile: profilePicture, // Profile Picture
-    name: "Tharindu Chamod", // Name of User
-    // name: "", // Name of User
-    registrationNumber: "E/18/173", // Registration Number
-    address: "187/5, Sri Gunananda Mawatha, Medagoda, Warakapola", // Postal Address of the user
-    email: "someone@gmail.com", // E-Mail address of the user
-    contactNumber: "0766624632", // Conrtact Number of the user
-    researchArea: "Research Title", // Research Title of the user
-    supervisors: "DR. Upul Jayasinghe", // Supervisor/s
-    degree: "PhD", // Type of degree
-    timeperiod: "Full Time", // Time period of the degree programme
+    name: "...", // Name of User
+    registrationNumber: "...", // Registration Number
+    address: "...", // Postal Address of the user
+    email: "...", // E-Mail address of the user
+    contactNumber: "...", // Conrtact Number of the user
+    researchArea: "...", // Research Title of the user
+    supervisors: "...", // Supervisor/s
+    degree: "...", // Type of degree
+    timeperiod: "...", // Time period of the degree programme
 
     links: {
       // JSON object that contains socail media links of the user
-      github: "Github Link",
-      linkedin: "LinkedIn Link",
-      otherLinks: "Other Links",
+      github: "...",
+      linkedin: "...",
+      otherLinks: "...",
     },
 
     // variable related to edit profile function
@@ -37,25 +38,28 @@ const Profile = () => {
   });
 
   useEffect(() => {
+    console.log(state);
     async function getData() {
-      const { data } = await axios({
+      const data = await axios({
         method: "GET",
-        // `http://localhost:5000/api/v1/tours/5c88fa8cf4afda39709c2955`
-        // url: `http://localhost:3001/user/62d00f9226be79e782c6be84`,
-        url: "http://localhost:3001/user/profile",
-        withCredentials: true,
+        url: `http://localhost:3001/data/profile/${state}`,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
       });
 
-      console.log(data);
+      console.log(data.data.fullName);
 
-      setState({
-        ...state,
-        name: data.user.fullName,
-        email: data.user.email,
-        contactNumber: data.user.telNo,
-        researchArea: data.user.researchArea,
-        supervisors: data.user.supervisors,
-        address: data.user.postalAddress,
+      setInfo({
+        ...info,
+        name: data.data.fullName,
+        email: data.data.email,
+        contactNumber: data.data.telNo,
+        researchArea: data.data.researchArea,
+        supervisors: data.data.supervisors,
+        address: data.data.postalAddress,
       });
       // console.log(state.name);
     }
@@ -68,17 +72,23 @@ const Profile = () => {
   // Change readonly state
 
   const editProfile = () => {
-    setState({ ...state, readOnly: false }); // Set editable inputs
-    setState({ ...state, editConfirm: false }); // Show edit confirm and cancel buttons
-    setState({ ...state, approveConfirm: true }); // Hide approval related buttons
-    setState({ ...state, borderStyle: "solid" }); // Set boarder Style
+    setInfo({
+      ...info,
+      readOnly: false,
+      editConfirm: false,
+      approveConfirm: true,
+      borderStyle: "solid",
+    });
   };
 
   const confirmEdit = () => {
-    setState({ ...state, readOnly: true }); // Set editable inputs
-    setState({ ...state, editConfirm: true }); // Hide edit confirm and cancel buttons
-    setState({ ...state, approveConfirm: false }); // show approval buttons
-    setState({ ...state, borderStyle: "none" }); // Set boarder Style
+    setInfo({
+      ...info,
+      readOnly: true,
+      editConfirm: true,
+      approveConfirm: false,
+      borderStyle: "none",
+    });
   };
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -86,7 +96,7 @@ const Profile = () => {
     <div className="card" style={{ width: "800px" }}>
       <div className="text-center" style={{ marginTop: "20px" }}>
         <img
-          src={state.profile}
+          src={info.profile}
           width="170px"
           height="170px"
           className="rounded"
@@ -105,7 +115,7 @@ const Profile = () => {
             fontWeight: "bolder",
           }}
         >
-          {state.name}
+          {info.name}
         </p>
 
         <div
@@ -132,14 +142,14 @@ const Profile = () => {
 
         <p className="card-text-right" style={{ fontSize: "17px" }}>
           <span style={{ fontWeight: "bold" }}>Registration Number : </span>
-          {/* {this.state.registrationNumber} */}
+          {/* {this.info.registrationNumber} */}
 
           <input
             type="text"
-            value={state.registrationNumber}
-            readOnly={state.readOnly}
+            value={info.registrationNumber}
+            readOnly={info.readOnly}
             style={{
-              borderStyle: state.borderStyle,
+              borderStyle: info.borderStyle,
               outline: "none",
               width: "250px",
               borderRadius: "5px",
@@ -150,14 +160,14 @@ const Profile = () => {
 
         <p className="card-text-right" style={{ fontSize: "17px" }}>
           <span style={{ fontWeight: "bold" }}>Address : </span>
-          {/* {this.state.address} */}
+          {/* {this.info.address} */}
 
           <input
             type="text"
-            value={state.address}
-            readOnly={state.readOnly}
+            value={info.address}
+            readOnly={info.readOnly}
             style={{
-              borderStyle: state.borderStyle,
+              borderStyle: info.borderStyle,
               outline: "none",
               width: "600px",
               borderRadius: "5px",
@@ -168,14 +178,14 @@ const Profile = () => {
 
         <p className="card-text-right" style={{ fontSize: "17px" }}>
           <span style={{ fontWeight: "bold" }}>E-Mail : </span>
-          {/* {this.state.email} */}
+          {/* {this.info.email} */}
 
           <input
             type="text"
-            value={state.email}
-            readOnly={state.readOnly}
+            value={info.email}
+            readOnly={info.readOnly}
             style={{
-              borderStyle: state.borderStyle,
+              borderStyle: info.borderStyle,
               outline: "none",
               width: "400px",
               borderRadius: "5px",
@@ -186,14 +196,14 @@ const Profile = () => {
 
         <p className="card-text-right" style={{ fontSize: "17px" }}>
           <span style={{ fontWeight: "bold" }}>Contact Number : </span>
-          {/* {this.state.contactNumber} */}
+          {/* {this.info.contactNumber} */}
 
           <input
             type="text"
-            value={state.contactNumber}
-            readOnly={state.readOnly}
+            value={info.contactNumber}
+            readOnly={info.readOnly}
             style={{
-              borderStyle: state.borderStyle,
+              borderStyle: info.borderStyle,
               outline: "none",
               width: "200px",
               borderRadius: "5px",
@@ -228,14 +238,14 @@ const Profile = () => {
 
         <p className="card-text-right" style={{ fontSize: "17px" }}>
           <span style={{ fontWeight: "bold" }}>Research Area : </span>
-          {/* {this.state.researchTitle} */}
+          {/* {this.info.researchTitle} */}
 
           <input
             type="text"
-            value={state.researchArea}
-            readOnly={state.readOnly}
+            value={info.researchArea}
+            readOnly={info.readOnly}
             style={{
-              borderStyle: state.borderStyle,
+              borderStyle: info.borderStyle,
               outline: "none",
               width: "500px",
               borderRadius: "5px",
@@ -246,14 +256,14 @@ const Profile = () => {
 
         <p className="card-text-right" style={{ fontSize: "17px" }}>
           <span style={{ fontWeight: "bold" }}>Supervisor/s : </span>
-          {/* {this.state.supervisor} */}
+          {/* {this.info.supervisor} */}
 
           <input
             type="text"
-            value={state.supervisors}
-            readOnly={state.readOnly}
+            value={info.supervisors}
+            readOnly={info.readOnly}
             style={{
-              borderStyle: state.borderStyle,
+              borderStyle: info.borderStyle,
               outline: "none",
               width: "500px",
               borderRadius: "5px",
@@ -264,14 +274,14 @@ const Profile = () => {
 
         <p className="card-text-right" style={{ fontSize: "17px" }}>
           <span style={{ fontWeight: "bold" }}>Degree : </span>
-          {/* {this.state.degree} */}
+          {/* {this.info.degree} */}
 
           <input
             type="text"
-            value={state.degree}
-            readOnly={state.readOnly}
+            value={info.degree}
+            readOnly={info.readOnly}
             style={{
-              borderStyle: state.borderStyle,
+              borderStyle: info.borderStyle,
               outline: "none",
               width: "100px",
               borderRadius: "5px",
@@ -282,14 +292,14 @@ const Profile = () => {
 
         <p className="card-text-right" style={{ fontSize: "17px" }}>
           <span style={{ fontWeight: "bold" }}>Time Period : </span>
-          {/* {this.state.timeperiod} */}
+          {/* {this.info.timeperiod} */}
 
           <input
             type="text"
-            value={state.timeperiod}
-            readOnly={state.readOnly}
+            value={info.timeperiod}
+            readOnly={info.readOnly}
             style={{
-              borderStyle: state.borderStyle,
+              borderStyle: info.borderStyle,
               outline: "none",
               width: "150px",
               borderRadius: "5px",
@@ -322,58 +332,58 @@ const Profile = () => {
 
         <p className="card-text-right" style={{ fontSize: "17px" }}>
           <span style={{ fontWeight: "bold" }}>GitHub : </span>
-          {/* {this.state.links.github} */}
+          {/* {this.info.links.github} */}
 
-          <input
+          {/* <input
             type="text"
-            value={state.links.github}
-            readOnly={state.readOnly}
+            value={info.links.github}
+            readOnly={info.readOnly}
             style={{
-              borderStyle: state.borderStyle,
+              borderStyle: info.borderStyle,
               outline: "none",
               width: "500px",
               borderRadius: "5px",
               borderWidth: "1px",
             }}
-          ></input>
+          ></input> */}
         </p>
 
         <p className="card-text-right" style={{ fontSize: "17px" }}>
           <span style={{ fontWeight: "bold" }}>LinkedIn : </span>
-          {/* {this.state.links.linkedin} */}
+          {/* {this.info.links.linkedin} */}
 
-          <input
+          {/* <input
             type="text"
-            value={state.links.linkedin}
-            readOnly={state.readOnly}
+            value={info.links.linkedin}
+            readOnly={info.readOnly}
             style={{
-              borderStyle: state.borderStyle,
+              borderStyle: info.borderStyle,
               outline: "none",
               width: "500px",
               borderRadius: "5px",
               borderWidth: "1px",
             }}
-          ></input>
+          ></input> */}
         </p>
 
         <p className="card-text-right" style={{ fontSize: "17px" }}>
           <span style={{ fontWeight: "bold" }}>
             Personal Website / Other :{" "}
           </span>
-          {/* {this.state.links.otherLinks} */}
+          {/* {this.info.links.otherLinks} */}
 
-          <input
+          {/* <input
             type="text"
-            value={state.links.otherLinks}
-            readOnly={state.readOnly}
+            value={info.links.otherLinks}
+            readOnly={info.readOnly}
             style={{
-              borderStyle: state.borderStyle,
+              borderStyle: info.borderStyle,
               outline: "none",
               width: "500px",
               borderRadius: "5px",
               borderWidth: "1px",
             }}
-          ></input>
+          ></input> */}
         </p>
 
         {/* Files And Others */}
@@ -404,7 +414,7 @@ const Profile = () => {
           </span>
 
           <button className="btn btn-default">
-            {/* <img src={Download} width="60px" height="60px" /> */}
+            <img src={Download} width="60px" height="60px" />
             <span>
               <i className="fa fa-download" aria-hidden="true"></i>
             </span>
@@ -418,7 +428,7 @@ const Profile = () => {
             <button
               type="button"
               className="btn btn-success"
-              hidden={state.approveConfirm}
+              hidden={info.approveConfirm}
             >
               APPROVE
             </button>
@@ -426,7 +436,7 @@ const Profile = () => {
             <button
               type="button"
               className="btn btn-danger"
-              hidden={state.approveConfirm}
+              hidden={info.approveConfirm}
               style={{ marginLeft: "25px" }}
             >
               DECLINE
@@ -435,7 +445,7 @@ const Profile = () => {
             <button
               onClick={editProfile}
               className="btn btn-primary"
-              hidden={state.approveConfirm}
+              hidden={info.approveConfirm}
               style={{ marginLeft: "25px" }}
             >
               EDIT PROFILE
@@ -448,7 +458,7 @@ const Profile = () => {
             <div className="text-center">
               <button
                 className="btn btn-success"
-                hidden={state.editConfirm}
+                hidden={info.editConfirm}
                 onClick={confirmEdit}
               >
                 CONFIRM
@@ -456,7 +466,7 @@ const Profile = () => {
 
               <button
                 className="btn btn-danger"
-                hidden={state.editConfirm}
+                hidden={info.editConfirm}
                 style={{ marginLeft: "25px" }}
                 onClick={confirmEdit}
               >

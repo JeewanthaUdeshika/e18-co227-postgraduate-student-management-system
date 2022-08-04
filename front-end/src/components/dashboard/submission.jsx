@@ -1,513 +1,568 @@
-import { Alert, Button, Card, CardContent, CardHeader, Grid } from '@mui/material';
-import React, { Component } from 'react';       // Import react Component
-//import EventNoteIcon from '@mui/icons-material/EventNote';
+/**
+ * E / 18 / 173
+ * Authors - Kasthuripitiya K.A.I.M. , S.M.T.S.C. Ranasinghe
+ * Last Modified - 03/08/2022
+ */
 
+import { Alert, Button, Card, CardContent, Grid } from "@mui/material";
+import React, { useEffect } from "react"; // Import react Component
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
+const Submission = () => {
+  const navigate = useNavigate();
 
-class Submission extends Component {
-    constructor(props) {
-        super(props);
+  useEffect(() => {
+    async function getData() {
+      const res = await axios({
+        method: "GET",
+        url: `http://localhost:3001/auth/isStaff`,
+        withCredentials: true,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      });
+
+      console.log(res);
     }
+    getData();
+  }, []);
 
+  // State of submissions of the user
+  const [state, setState] = useState({
+    threeMonths: {
+      submissionStatus: "submitted",
+      reviewStatus: "reviewed",
+    },
 
+    year1Half: {
+      submissionStatus: "not-submitted",
+      reviewStatus: "not-reviewed",
+    },
 
-    // State of submissions of the user
+    year1Full: {
+      submissionStatus: "not-submitted",
+      reviewStatus: "not-reviewed",
+    },
 
-    state = { 
-        threeMonths : {
-            submissionStatus: 'submitted',
-            reviewStatus: 'reviewed'    
-        },
+    year2Half: {
+      submissionStatus: "not-submitted",
+      reviewStatus: "not-reviewed",
+    },
 
-        year1Half : {
-            submissionStatus: 'not-submitted',
-            reviewStatus: 'not-reviewed'
-        },
+    year2Full: {
+      submissionStatus: "not-submitted",
+      reviewStatus: "not-reviewed",
+    },
 
-        year1Full : {
-            submissionStatus: 'not-submitted',
-            reviewStatus: 'not-reviewed'
-        },
+    year3Half: {
+      submissionStatus: "not-submitted",
+      reviewStatus: "not-reviewed",
+    },
 
-        year2Half : {
-            submissionStatus: 'not-submitted',
-            reviewStatus: 'not-reviewed'
-        },
+    year3Full: {
+      submissionStatus: "submitted",
+      reviewStatus: "not-reviewed",
+    },
+  });
 
-        year2Full : {
-            submissionStatus: 'not-submitted',
-            reviewStatus: 'not-reviewed'
-        },
+  const handleClick = (e) => {
+    navigate("/fileUpload", {
+      state: e.target.id,
+    });
+  };
+  // function to set the button state enabled or disabled
+  const buttonState = (inp) => {
+    return inp.submissionStatus === "submitted" &&
+      inp.reviewStatus === "reviewed"
+      ? true
+      : false;
+  };
 
-        year3Half : {
-            submissionStatus: 'not-submitted',
-            reviewStatus: 'not-reviewed'
-        },
+  // function to set the visibility of the component
+  const setContentVisibility = (inp) => {
+    return inp.submissionStatus === "submitted" &&
+      inp.reviewStatus === "reviewed"
+      ? "visible"
+      : "hidden";
+  };
 
-        year3Full : {
-            submissionStatus: 'submitted',
-            reviewStatus: 'not-reviewed'
-        },
-
-        // Button Disable Status fro different buttons on Submission
-        button1Status: false,
-        button2Status: false,
-        button3Status: false,
-        button4Status: false,
-        button5Status: false,
-        button6Status: false,
-        button7Status: false,
-
-
-     }
-
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Submission Status Showing Function
-
-
-    submissionStatus =(event) => {
-
-        let submission = event;                                     // Get the current Submission name
-
-        if(submission.submissionStatus === 'submitted'){            // If He Submmitted the thesis show this alert
-            return(
-                <Alert severity="success" style={{fontSize: '14px', fontWeight:"bold"}}>
-                    SUBMITTED
-                </Alert>
-            )
-        }
-
-        else if(submission.submissionStatus === 'not-submitted'){   // If he not submitted the thesis show this alert
-            return(
-                <Alert severity="error" style={{fontSize: '14px', fontWeight:"bold"}}>
-                    NOT SUBMITTED
-                </Alert>
-            )
-        }
+  // function to update the submission status icon
+  const stateUpdateSubmission = (inp) => {
+    if (inp.submissionStatus === "submitted") {
+      return "success";
+    } else if (inp.submissionStatus === "not-submitted") {
+      return "error";
     }
+  };
 
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    // Review status shwoing function
-
-    reviewStatus = (event) =>{
-        let submission = event;                                     // Get the current submission name
-
-        if(submission.reviewStatus === 'not-reviewed'){
-            return(
-                <Alert severity="error" style={{fontSize: '14px', fontWeight:"bold"}}>
-                    NOT REVIEWED
-                </Alert>
-            )
-
-        }
-
-        else if(submission.reviewStatus === 'pending'){
-            return(
-                <Alert severity="warning" style={{fontSize: '14px', fontWeight:"bold"}}>
-                    REVIEW PENDING
-                </Alert>
-            )            
-        }
-
-        else if(submission.reviewStatus === 'reviewed'){
-            return(
-                <Alert severity="success" style={{fontSize: '14px', fontWeight:"bold"}}>
-                    REVIEWED
-                </Alert>
-            )
-        }
+  // function to update the review status icon
+  const stateUpdateReview = (inp) => {
+    if (inp.reviewStatus === "reviewed") {
+      return "success";
+    } else if (inp.reviewStatus === "pending") {
+      return "warning";
+    } else if (inp.reviewStatus === "not-reviewed") {
+      return "error";
     }
+  };
+
+  return (
+    <div className="container">
+      <div style={{ marginBottom: "25px" }}>
+        <Card>
+          <CardContent>
+            <Grid container spacing={1}>
+              <Grid item xs={8}>
+                <h3
+                  style={{
+                    fontFamily: "monospace",
+                    backgroundColor: "lightgreen",
+                    height: "50px",
+                  }}
+                >
+                  THREE MONTHS SUBMISSION
+                </h3>
+              </Grid>
+
+              <Grid item xs={4}>
+                <Grid container spacing={0.5}>
+                  <Grid item xs={6}>
+                    {
+                      <Alert
+                        severity={stateUpdateSubmission(state.threeMonths)}
+                        style={{ fontSize: "14px", fontWeight: "bold" }}
+                      >
+                        {state.threeMonths.submissionStatus.toUpperCase()}
+                      </Alert>
+                    }
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    {
+                      <Alert
+                        severity={stateUpdateReview(state.threeMonths)}
+                        style={{ fontSize: "14px", fontWeight: "bold" }}
+                      >
+                        {state.threeMonths.reviewStatus.toUpperCase()}
+                      </Alert>
+                    }
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <p style={{ fontSize: "20px" }}>
+              Upload Your 3 Months Submission Here.
+            </p>
+
+            <Button
+              variant="contained"
+              color="info"
+              id="1"
+              disabled={buttonState(state.threeMonths)}
+              onClick={(e) => handleClick(e)}
+            >
+              ADD SUBMISSION
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div
+        style={{
+          marginBottom: "25px",
+          contentVisibility: setContentVisibility(state.threeMonths),
+        }}
+      >
+        <Card>
+          <CardContent>
+            <Grid container spacing={1}>
+              <Grid item xs={8}>
+                <h3
+                  style={{
+                    fontFamily: "monospace",
+                    backgroundColor: "lightgreen",
+                    height: "50px",
+                  }}
+                >
+                  HALF YEARLY SUBMISSION (YEAR 1)
+                </h3>
+              </Grid>
+
+              <Grid item xs={4}>
+                <Grid container spacing={0.5}>
+                  <Grid item xs={6}>
+                    {
+                      <Alert
+                        severity={stateUpdateSubmission(state.year1Half)}
+                        style={{ fontSize: "14px", fontWeight: "bold" }}
+                      >
+                        {state.year1Half.submissionStatus.toUpperCase()}
+                      </Alert>
+                    }
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    {
+                      <Alert
+                        severity={stateUpdateReview(state.year1Half)}
+                        style={{ fontSize: "14px", fontWeight: "bold" }}
+                      >
+                        {state.year1Half.reviewStatus.toUpperCase()}
+                      </Alert>
+                    }
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <p style={{ fontSize: "20px" }}>
+              Upload your half yearly Submission of year 1 Here.
+            </p>
+
+            <Button
+              variant="contained"
+              color="info"
+              id="2"
+              disabled={buttonState(state.year1Half)}
+              onClick={(e) => handleClick(e)}
+            >
+              ADD SUBMISSION
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div
+        style={{
+          marginBottom: "25px",
+          contentVisibility: setContentVisibility(state.year1Half),
+        }}
+      >
+        <Card>
+          <CardContent>
+            <Grid container spacing={1}>
+              <Grid item xs={8}>
+                <h3
+                  style={{
+                    fontFamily: "monospace",
+                    backgroundColor: "lightgreen",
+                    height: "50px",
+                  }}
+                >
+                  YEARLY SUBMISSION (YEAR 1)
+                </h3>
+              </Grid>
+
+              <Grid item xs={4}>
+                <Grid container spacing={0.5}>
+                  <Grid item xs={6}>
+                    {
+                      <Alert
+                        severity={stateUpdateSubmission(state.year1Full)}
+                        style={{ fontSize: "14px", fontWeight: "bold" }}
+                      >
+                        {state.year1Full.submissionStatus.toUpperCase()}
+                      </Alert>
+                    }
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    {
+                      <Alert
+                        severity={stateUpdateReview(state.year1Full)}
+                        style={{ fontSize: "14px", fontWeight: "bold" }}
+                      >
+                        {state.year1Full.reviewStatus.toUpperCase()}
+                      </Alert>
+                    }
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <p style={{ fontSize: "20px" }}>
+              Upload Your Yearly Submission of year 1 Here.
+            </p>
+
+            <Button
+              variant="contained"
+              color="info"
+              id="3"
+              disabled={buttonState(state.year1Full)}
+              onClick={(e) => handleClick(e)}
+            >
+              ADD SUBMISSION
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div
+        style={{
+          marginBottom: "25px",
+          contentVisibility: setContentVisibility(state.year1Full),
+        }}
+      >
+        <Card>
+          <CardContent>
+            <Grid container spacing={1}>
+              <Grid item xs={8}>
+                <h3
+                  style={{
+                    fontFamily: "monospace",
+                    backgroundColor: "lightgreen",
+                    height: "50px",
+                  }}
+                >
+                  HARF YEARLY SUBMISSION (YEAR 2)
+                </h3>
+              </Grid>
+
+              <Grid item xs={4}>
+                <Grid container spacing={0.5}>
+                  <Grid item xs={6}>
+                    {
+                      <Alert
+                        severity={stateUpdateSubmission(state.year2Half)}
+                        style={{ fontSize: "14px", fontWeight: "bold" }}
+                      >
+                        {state.year2Half.submissionStatus.toUpperCase()}
+                      </Alert>
+                    }
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    {
+                      <Alert
+                        severity={stateUpdateReview(state.year2Half)}
+                        style={{ fontSize: "14px", fontWeight: "bold" }}
+                      >
+                        {state.year2Half.reviewStatus.toUpperCase()}
+                      </Alert>
+                    }
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <p style={{ fontSize: "20px" }}>
+              Upload Your half yearly Submission of year 2 Here.
+            </p>
+
+            <Button
+              variant="contained"
+              color="info"
+              id="4"
+              disabled={buttonState(state.year2Half)}
+              onClick={(e) => handleClick(e)}
+            >
+              ADD SUBMISSION
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div
+        style={{
+          marginBottom: "25px",
+          contentVisibility: setContentVisibility(state.year2Half),
+        }}
+      >
+        <Card>
+          <CardContent>
+            <Grid container spacing={1}>
+              <Grid item xs={8}>
+                <h3
+                  style={{
+                    fontFamily: "monospace",
+                    backgroundColor: "lightgreen",
+                    height: "50px",
+                  }}
+                >
+                  YEARLY SUBMISSION (YEAR 2)
+                </h3>
+              </Grid>
+
+              <Grid item xs={4}>
+                <Grid container spacing={0.5}>
+                  <Grid item xs={6}>
+                    {
+                      <Alert
+                        severity={stateUpdateSubmission(state.year2Full)}
+                        style={{ fontSize: "14px", fontWeight: "bold" }}
+                      >
+                        {state.year2Full.submissionStatus.toUpperCase()}
+                      </Alert>
+                    }
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    {
+                      <Alert
+                        severity={stateUpdateReview(state.year2Full)}
+                        style={{ fontSize: "14px", fontWeight: "bold" }}
+                      >
+                        {state.year2Full.reviewStatus.toUpperCase()}
+                      </Alert>
+                    }
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <p style={{ fontSize: "20px" }}>
+              Upload Your Yearly Submission of year 2 Here.
+            </p>
+
+            <Button
+              variant="contained"
+              color="info"
+              id="5"
+              disabled={buttonState(state.year2Full)}
+              onClick={(e) => handleClick(e)}
+            >
+              ADD SUBMISSION
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div
+        style={{
+          marginBottom: "25px",
+          contentVisibility: setContentVisibility(state.year2Full),
+        }}
+      >
+        <Card>
+          <CardContent>
+            <Grid container spacing={1}>
+              <Grid item xs={8}>
+                <h3
+                  style={{
+                    fontFamily: "monospace",
+                    backgroundColor: "lightgreen",
+                    height: "50px",
+                  }}
+                >
+                  HALF YEARLY SUBMISSION (YEAR 3)
+                </h3>
+              </Grid>
+
+              <Grid item xs={4}>
+                <Grid container spacing={0.5}>
+                  <Grid item xs={6}>
+                    {
+                      <Alert
+                        severity={stateUpdateSubmission(state.year3Half)}
+                        style={{ fontSize: "14px", fontWeight: "bold" }}
+                      >
+                        {state.year3Half.submissionStatus.toUpperCase()}
+                      </Alert>
+                    }
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    {
+                      <Alert
+                        severity={stateUpdateReview(state.year3Half)}
+                        style={{ fontSize: "14px", fontWeight: "bold" }}
+                      >
+                        {state.year3Half.reviewStatus.toUpperCase()}
+                      </Alert>
+                    }
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <p style={{ fontSize: "20px" }}>
+              Upload Your half yearly Submission of year 3 Here.
+            </p>
+
+            <Button
+              variant="contained"
+              color="info"
+              id="6"
+              disabled={buttonState(state.year3Half)}
+              onClick={(e) => handleClick(e)}
+            >
+              ADD SUBMISSION
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div
+        style={{
+          marginBottom: "25px",
+          contentVisibility: setContentVisibility(state.year3Half),
+        }}
+      >
+        <Card>
+          <CardContent>
+            <Grid container spacing={1}>
+              <Grid item xs={8}>
+                <h3
+                  style={{
+                    fontFamily: "monospace",
+                    backgroundColor: "lightgreen",
+                    height: "50px",
+                  }}
+                >
+                  YEARLY SUBMISSION (YEAR 3)
+                </h3>
+              </Grid>
+
+              <Grid item xs={4}>
+                <Grid container spacing={0.5}>
+                  <Grid item xs={6}>
+                    {
+                      <Alert
+                        severity={stateUpdateSubmission(state.year3Full)}
+                        style={{ fontSize: "14px", fontWeight: "bold" }}
+                      >
+                        {state.year3Full.submissionStatus.toUpperCase()}
+                      </Alert>
+                    }
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    {
+                      <Alert
+                        severity={stateUpdateReview(state.year3Full)}
+                        style={{ fontSize: "14px", fontWeight: "bold" }}
+                      >
+                        {state.year3Full.reviewStatus}
+                      </Alert>
+                    }
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <p style={{ fontSize: "20px" }}>
+              Upload Your yearly Submission of year 3 Here.
+            </p>
+
+            <Button
+              variant="contained"
+              color="info"
+              id="7"
+              disabled={buttonState(state.year3Full)}
+              onClick={(e) => handleClick(e)}
+            >
+              ADD SUBMISSIOM
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+};
 
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // Function to Change visibility of the Submission
-
-    submissionvisibility = (event) => {
-    
-        let subStatus = event.submissionStatus;                // get the submission Status of the Submission
-        let revStatus = event.reviewStatus;                    // get the review status of the submission
-
-        if((subStatus === 'submitted') && (revStatus === 'reviewed')){      // If Submitted and reviewed return visible
-            this.buttonStatus(); 
-            return 'visible';
-        }
-
-        else{                                                               // Otherwise return hidden as content visiblitit
-            return 'hidden';
-        }
-
-    }
-
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // Button to disable ADD SUMISSION Button when submission is submitted and reviewed
-
-    buttonStatus = () => {
-
-        if(this.state.threeMonths.reviewStatus === 'reviewed'){
-            this.setState({button1Status: true});
-        }
-
-        if(this.state.year1Half.reviewStatus === 'reviewed'){
-            this.setState({button2Status: true});
-        }
-
-        if(this.state.year1Full.reviewStatus === 'reviewed'){
-            this.setState({button3Status: true});
-        }
-
-        if(this.state.year2Half.reviewStatus === 'reviewed'){
-            this.setState({button4Status: true});
-        }
-
-        if(this.state.year2Full.reviewStatus === 'reviewed'){
-            this.setState({button5Status: true});
-        }
-
-        if(this.state.year3Half.reviewStatus === 'reviewed'){
-            this.setState({button6Status: true});
-        }
-
-        if(this.state.year3Full.reviewStatus === 'reviewed'){
-            this.setState({button7Status: true});
-        }
-        
-    }
-
-
-
-
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    render() { 
-        return (  
-        
-
-            <div className='container'>
-
-                <div style={{marginBottom: '25px'}}>
-                    <Card >
-
-                        <CardContent>
-
-                            <Grid container spacing={1}>
-
-                                <Grid item xs={8}>
-                                    <h3 style={{fontFamily: 'monospace' , backgroundColor: 'lightgreen', height: '50px'}}>
-                                        THREE MONTHS SUBMISSION
-                                    </h3>
-                                </Grid>
-
-                                <Grid item xs={4} >
-                                    <Grid container spacing={0.5}>
-                                        <Grid item xs={6}>
-                                            {this.submissionStatus(this.state.threeMonths)}
-                                        </Grid>
-
-                                        <Grid item xs={6}>
-                                            {this.reviewStatus(this.state.threeMonths)}
-                                        </Grid>
-
-                                    </Grid>    
-                                </Grid>
-
-                            </Grid>
-
-                            
-                            <p style={{fontSize: '20px'}}>Upload Your 3 Months Submission Here.</p>
-
-                            <Button variant='contained' color='info' id='button1' disabled={this.state.button1Status}>
-                                ADD SUBMISSION
-                            </Button>
-
-                        </CardContent>
-
-                    </Card>
-                </div>
-
-
-                <div style={{marginBottom: '25px', contentVisibility: this.submissionvisibility(this.state.threeMonths)}}>
-                    <Card>
-
-                        <CardContent>
-
-                        <Grid container spacing={1}>
-
-                            <Grid item xs={8}>
-                                <h3 style={{fontFamily: 'monospace' , backgroundColor: 'lightgreen', height: '50px'}}>
-                                    HALF YEARLY SUBMISSION (YEAR 1)
-                                </h3>
-                            </Grid>
-
-
-                            <Grid item xs={4} >
-                                    <Grid container spacing={0.5}>
-                                        <Grid item xs={6}>
-                                            {this.submissionStatus(this.state.year1Half)}
-                                        </Grid>
-
-                                        <Grid item xs={6}>
-                                            {this.reviewStatus(this.state.year1Half)}
-                                        </Grid>
-
-                                    </Grid>    
-                            </Grid>
-
-                        </Grid>
-
-                            
-                            <p style={{fontSize: '20px'}}>Upload your half yearly Submission of year 1 Here.</p>
-
-                            <Button variant='contained' color='info'  id='button2' disabled={this.state.button2Status}>
-                                ADD SUBMISSION
-                            </Button>
-
-                        </CardContent>
-
-                    </Card>
-                </div>
-
-
-
-                <div style={{marginBottom: '25px', contentVisibility: this.submissionvisibility(this.state.year1Half)}}>
-                    <Card>
-
-                        <CardContent>
-
-                        <Grid container spacing={1}>
-
-                            <Grid item xs={8}>
-                                <h3 style={{fontFamily: 'monospace' , backgroundColor: 'lightgreen', height: '50px'}}>
-                                    YEARLY SUBMISSION (YEAR 1)
-                                </h3>
-                            </Grid>
-
-
-                            <Grid item xs={4} >
-                                    <Grid container spacing={0.5}>
-                                        <Grid item xs={6}>
-                                            {this.submissionStatus(this.state.year1Full)}
-                                        </Grid>
-
-                                        <Grid item xs={6}>
-                                            {this.reviewStatus(this.state.year1Full)}
-                                        </Grid>
-
-                                    </Grid>    
-                            </Grid>
-
-                        </Grid>
-
-
-                            
-                            <p style={{fontSize: '20px'}}>Upload Your Yearly Submission of year 1 Here.</p>
-
-                            <Button variant='contained' color='info' id='button3' disabled={this.state.button3Status}>
-                                ADD SUBMISSION
-                            </Button>
-
-                        </CardContent>
-
-                    </Card>
-                </div>
-
-
-
-                <div style={{marginBottom: '25px', contentVisibility: this.submissionvisibility(this.state.year1Full)}}>
-                    <Card>
-
-                        <CardContent>
-
-                        <Grid container spacing={1}>
-
-                            <Grid item xs={8}>
-                                <h3 style={{fontFamily: 'monospace' , backgroundColor: 'lightgreen', height: '50px'}}>
-                                    HARF YEARLY SUBMISSION (YEAR 2)
-                                </h3>
-                            </Grid>
-
-
-                            <Grid item xs={4} >
-                                    <Grid container spacing={0.5}>
-                                        <Grid item xs={6}>
-                                            {this.submissionStatus(this.state.year2Half)}
-                                        </Grid>
-
-                                        <Grid item xs={6}>
-                                            {this.reviewStatus(this.state.year2Half)}
-                                        </Grid>
-
-                                    </Grid>    
-                            </Grid>
-
-                        </Grid>
-
-                            
-                            <p style={{fontSize: '20px'}}>Upload Your half yearly Submission of year 2 Here.</p>
-
-                            <Button variant='contained' color='info' id='button4' disabled={this.state.button4Status}>
-                                ADD SUBMISSION
-                            </Button>
-
-                        </CardContent>
-
-                    </Card>
-                </div>
-
-
-
-
-
-                <div style={{marginBottom: '25px', contentVisibility: this.submissionvisibility(this.state.year2Half)}}>
-                    <Card>
-
-                        <CardContent>
-
-                        <Grid container spacing={1}>
-
-                            <Grid item xs={8}>
-                                <h3 style={{fontFamily: 'monospace' , backgroundColor: 'lightgreen', height: '50px'}}>
-                                    YEARLY SUBMISSION (YEAR 2)
-                                </h3>
-                            </Grid>
-
-
-                            <Grid item xs={4} >
-                                    <Grid container spacing={0.5}>
-                                        <Grid item xs={6}>
-                                            {this.submissionStatus(this.state.year2Full)}
-                                        </Grid>
-
-                                        <Grid item xs={6}>
-                                            {this.reviewStatus(this.state.year2Full)}
-                                        </Grid>
-
-                                    </Grid>    
-                            </Grid>
-
-                        </Grid>
-
-                            
-                            <p style={{fontSize: '20px'}}>Upload Your Yearly Submission of year 2 Here.</p>
-
-                            <Button variant='contained' color='info' id='button5' disabled={this.state.button5Status}>
-                                ADD SUBMISSION
-                            </Button>
-
-                        </CardContent>
-
-                    </Card>
-                </div>
-
-
-
-
-                <div style={{marginBottom: '25px', contentVisibility: this.submissionvisibility(this.state.year2Full)}}>
-                    <Card>
-
-                        <CardContent>
-
-                        <Grid container spacing={1}>
-
-                            <Grid item xs={8}>
-                                <h3 style={{fontFamily: 'monospace' , backgroundColor: 'lightgreen', height: '50px'}}>
-                                    HALF YEARLY SUBMISSION (YEAR 3)
-                                </h3>
-                            </Grid>
-
-
-                            <Grid item xs={4} >
-                                    <Grid container spacing={0.5}>
-                                        <Grid item xs={6}>
-                                            {this.submissionStatus(this.state.year3Half)}
-                                        </Grid>
-
-                                        <Grid item xs={6}>
-                                            {this.reviewStatus(this.state.year3Half)}
-                                        </Grid>
-
-                                    </Grid>    
-                            </Grid>
-
-                        </Grid>
-
-                            
-                            <p style={{fontSize: '20px'}}>Upload Your half yearly Submission of year 3 Here.</p>
-
-                            <Button variant='contained' color='info' id='button6' disabled={this.state.button6Status}>
-                                ADD SUBMISSION
-                            </Button>
-
-                        </CardContent>
-
-                    </Card>
-                </div>
-
-
-
-
-                <div style={{marginBottom: '25px', contentVisibility: this.submissionvisibility(this.state.year3Half)}}>
-                    <Card>
-
-                        <CardContent>
-
-                        <Grid container spacing={1}>
-
-                            <Grid item xs={8}>
-                                <h3 style={{fontFamily: 'monospace' , backgroundColor: 'lightgreen', height: '50px'}}>
-                                    YEARLY SUBMISSION (YEAR 3)
-                                </h3>
-                            </Grid>
-
-
-                            <Grid item xs={4} >
-                                    <Grid container spacing={0.5}>
-                                        <Grid item xs={6}>
-                                            {this.submissionStatus(this.state.year3Full)}
-                                        </Grid>
-
-                                        <Grid item xs={6}>
-                                            {this.reviewStatus(this.state.year3Full)}
-                                        </Grid>
-
-                                    </Grid>    
-                            </Grid>
-
-                        </Grid>
-
-                            
-                            <p style={{fontSize: '20px'}}>Upload Your yearly Submission of year 3 Here.</p>
-
-                            <Button variant='contained' color='info' id='button7' disabled={this.state.button7Status}>
-                                ADD SUBMISSIOM
-                            </Button>
-
-                        </CardContent>
-
-                    </Card>
-                </div>
-
-
-            </div>
-
-
-        );
-    }
-}
- 
 export default Submission;
-
-
-
-// Submission is available after submitted submission is submitted and reviewed
-// After reviewed ADD SUBMISSIOn Button will be disabled, So Can't add any more submission
-
-

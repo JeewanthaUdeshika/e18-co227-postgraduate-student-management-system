@@ -13,10 +13,14 @@ import passport from "passport"; // For user authentication
 import flash from "express-flash"; // For organize error messages
 import session from "express-session"; // For manage different sessions with user
 
-import routes from "./routes/router.js";
 import { connectDB } from "./database/connection.js";
 import { initalizePassport } from "./Middleware/passport-config.js";
 import cors from "cors";
+import userRoute from "./routes/userRouter.js";
+import adminRoute from "./routes/adminRouter.js";
+import authRoute from "./routes/authRouter.js";
+import specialRoute from "./routes/specialRouter.js";
+import logger from "./logger.js";
 
 // Creating the express object
 const app = express();
@@ -25,6 +29,7 @@ app.use(
   cors({
     origin: "http://localhost:3000",
     credentials: true,
+    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
   })
 );
 
@@ -39,6 +44,8 @@ initalizePassport(passport);
 
 app.use(bodyParser.json()); // Make data encoding method to http body
 app.use(bodyParser.urlencoded({ extended: true })); // Make data encoding method to http body
+// app.use(express.urlencoded());
+// app.use(express.json());
 app.use(cookieParser()); // Get cookie parser
 app.use(flash()); // For get all the error messsages etc.
 app.use(
@@ -51,22 +58,14 @@ app.use(
 app.use(passport.initialize()); // Initialize the passport module in every route
 app.use(passport.session()); // allow passport to use "express-session"
 
-/////////////////////////////////////////////////////////////
-/* app.use(function(req, res, next){
-    req.session.lastUrl = req.originalUrl;
-});
- */
-////////////////////////////////////////////////////////////
-
-/**@Warning This section is only for check user interface, remove this when font end is connected */
-// import ejs from 'ejs';
-app.set("view engine", "ejs");
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-
 // Load router file
-app.use("/", routes);
+// app.use("/", routes);
+app.use("/user", userRoute);
+app.use("/admin", adminRoute);
+app.use("/auth", authRoute);
+app.use("/data", specialRoute);
 
 // Listening to the port
 app.listen(PORT, () => {
-  console.log(`Server is running on  http://localhost:${PORT}`);
+  logger.info(`Server is running on  http://localhost:${PORT}`);
 });

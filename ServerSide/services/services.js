@@ -12,7 +12,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { RegisteredDB } from "../model/registeredUser.js";
 import { UserDB } from "../model/user.js";
-
+import logger from "../logger.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 ////
@@ -39,7 +39,7 @@ export const gotosignup = (req, res) => {
 export const getUser = async (req, res) => {
   // Get user id from the link
   const userID = req.user.id;
-  console.log("id from get user function getUser" + userID);
+  logger.info("id from get user function" + userID);
   // Get user from the userdata base without password
   const unReg = await UserDB.findById(userID, "-password");
   const Reg = await RegisteredDB.findById(userID, "-password");
@@ -48,7 +48,7 @@ export const getUser = async (req, res) => {
 
   if (user) {
     // res.render("unRegUser", { userData: user });
-    return res.status(200).json({ user });
+    return res.status(200).json(user);
     //return res.status(200).json(user);
   } else {
     return res.status(404).json({ message: "User not found" });

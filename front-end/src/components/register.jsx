@@ -26,6 +26,8 @@ const Registration = () => {
     e.preventDefault();
 
     if (basicInfo.password === basicInfo.confirmedPassword) {
+      // Remove confirmed password
+      delete basicInfo.confirmedPassword;
       // console.log(basicInfo);
       if (basicInfo.registrationStatus === "registered") {
         navigate("/regRegister", {
@@ -283,11 +285,7 @@ const Registration = () => {
         </div>
 
         <div className="text-center">
-          <button
-            className="w-100 btn btn-lg btn-primary"
-            type="submit"
-            // onClick={(e) => handleClick(e)}
-          >
+          <button className="w-100 btn btn-lg btn-primary" type="submit">
             Next
           </button>
         </div>

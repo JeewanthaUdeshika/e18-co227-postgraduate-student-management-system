@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 const ProvisionalRegister = () => {
@@ -21,11 +23,16 @@ const ProvisionalRegister = () => {
     // Merge the objects
     e.preventDefault();
     try {
+      // Merge the two objects
       finalDetails = { ...state, ...prospectiveDetails };
+
+      console.log(finalDetails);
+
       const res = await axios({
         method: "POST",
         url: "http://localhost:3001/user/signup",
         data: finalDetails,
+        headers: { "Content-Type": "multipart/form-data" },
         withCredentials: true,
       });
 
@@ -33,10 +40,30 @@ const ProvisionalRegister = () => {
       console.log(res);
 
       // alert the user that submission completed
-      alert("Application Submitted Successfully!");
+      // alert("Application Submitted Successfully!");
+      toast.success("Application Submitted Successfully!!", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } catch (err) {
+      // alert("Application Submission Failed!");
       // if there is an error alert the user
-      alert("Application Submission Failed!");
+      console.log(err.response.data);
+      // Show the toast error
+      toast.error(err.response.data.message, {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
@@ -45,6 +72,13 @@ const ProvisionalRegister = () => {
     setProspectiveDetails({
       ...prospectiveDetails,
       [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleFileChange = (e) => {
+    setProspectiveDetails({
+      ...prospectiveDetails,
+      [e.target.name]: e.target.files[0],
     });
   };
 
@@ -184,7 +218,7 @@ const ProvisionalRegister = () => {
             }
             type="file"
             name="docs"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleFileChange(e)}
             id="docs"
             required
             // multiple
@@ -192,13 +226,10 @@ const ProvisionalRegister = () => {
         </div>
 
         <div className="col-12">
-          <button
-            type="submit"
-            className="btn btn-primary"
-            // onClick={(e) => handleClick(e)}
-          >
+          <button type="submit" className="btn btn-primary">
             Register
           </button>
+          <ToastContainer />
         </div>
       </form>
     </main>

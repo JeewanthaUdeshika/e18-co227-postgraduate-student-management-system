@@ -7,163 +7,118 @@
 
 import Joi from "joi";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 import { prospectiveUser, registeredUser, UserDB } from "../model/user.js";
-import mongoose from "mongoose";
 import { RegisteredDB } from "../model/registeredUser.js";
 import { StaffDB } from "../model/staff.js";
 import { MailSender } from "../mailSender.js";
 import moment from "moment";
 import sendEmail from "../utils/email.js";
 import crypto from "crypto";
-import multer from "multer"; // Module for file uploading process
-
-dotenv.config({ path: "config.env" });
+import logger from "../logger.js";
 
 export const signUp = async (req, res) => {
-  console.log(req.body);
+  logger.info(req.body);
   // checking user entered data
-  // const { error } = validateUser(req.body);
+  const { error } = validateUser(req.body);
+  // console.log(error);
+  if (error) {
+    res.status(400).json(error.details[0].message);
+    return;
+  } else {
+    // Find if there is that username
+    const useremail = req.body.email;
+    const userExists = await UserDB.findOne({ email: useremail });
+    if (userExists) {
+      return res.status(409).json({ message: "User already exists" });
+    }
 
-  // if (error) {
-  //   res.status(400).send(error.details[0].message);
-  //   return;
-  // } else {
-  // Find if there is that username
-  const useremail = req.body.email;
-  const userExists = await UserDB.findOne({ email: useremail });
-  if (userExists) {
-    return res.status(409).send({ message: "User already exists" });
-  }
-
-  try {
-    let user;
-    // encript the password to send to the database
-    await bcrypt.hash(req.body.password, 10, (error, hashed) => {
-      if (error) {
-        return res.status(401).send({
-          message: "Password encryption failed",
-          error: error.message,
-        });
-      }
-
-      // Check the register status of user
-      if (req.body.registrationStatus === "registered") {
-        user = new registeredUser({
-          nameWithInitials: req.body.nameWithInitials,
-          fullName: req.body.nameDenotedByInitials,
-          postalAddress: req.body.postalAddress,
-          email: req.body.email,
-          telNo: req.body.contactNumber,
-          password: hashed,
-          supervisors: req.body.supervisors,
-          regNo: req.body.registrationNumber,
-          DOR: req.body.dateOfRegistration,
-          degree: req.body.degreeSelect,
-          studyMode: req.body.modeOfStudy,
-          researchTopic: req.body.researchTopic,
-          completionYear: req.body.yearOfCompletion,
-          progressLevel: req.body.progressLevel,
-          dateofLastSubmission: req.body.progressDate,
-          URLtoWebsite: req.body.url,
-        });
-      } else if (req.body.registrationStatus === "prospective") {
-        user = new prospectiveUser({
-          nameWithInitials: req.body.nameWithInitials,
-          fullName: req.body.nameDenotedByInitials,
-          postalAddress: req.body.postalAddress,
-          email: req.body.email,
-          telNo: req.body.contactNumber,
-          password: hashed,
-          supervisors: req.body.supervisors,
-          researchArea: req.body.researchArea,
-          reseachProgram: req.body.reseachProgram,
-          // state: req.body.state,
-          docs: req.file.filename,
-        });
-      }
-
-      //console.log(req.file.filename);
-      // console.log(user);
-      // save the data in the database
-      user
-        .save(user)
-        .then(async (data) => {
-          // Make link to send to admin to access user data
-          const approvalLink = "http://localhost:3001/admin/toapprove";
-          req.session.current_url = approvalLink;
-          console.log(approvalLink);
-
-          const admin = await StaffDB.findOne({ role: "admin" });
-          let emailList = [admin.email];
-
-          // Sending Email to the admin informing that new user is registered
-          const regDate = moment().add(5, "s").format();
-          new MailSender(
-            emailList,
-            regDate,
-            user.nameWithInitials,
-            "admin",
-            approvalLink
-          ).sendEmail();
-
-          res.status(201).send({ message: "Data inserted successfully", user });
-        })
-        .catch((err) => {
-          console.log(err);
-          res.status(500).send({
-            message: err || "Some error occured",
+    try {
+      let user;
+      // encript the password to send to the database
+      await bcrypt.hash(req.body.password, 10, (error, hashed) => {
+        if (error) {
+          return res.status(401).json({
+            message: "Password encryption failed",
+            error: error.message,
           });
-        });
-    });
-  } catch (err) {
-    res.status(401).send({ message: "User not created", error: err.message });
+        }
+
+        // Check the register status of user
+        if (req.body.registrationStatus === "registered") {
+          user = new registeredUser({
+            nameWithInitials: req.body.nameWithInitials,
+            fullName: req.body.nameDenotedByInitials,
+            postalAddress: req.body.postalAddress,
+            email: req.body.email,
+            telNo: req.body.contactNumber,
+            password: hashed,
+            supervisors: req.body.supervisors,
+            regNo: req.body.registrationNumber,
+            DOR: req.body.dateOfRegistration,
+            degree: req.body.degreeSelect,
+            studyMode: req.body.modeOfStudy,
+            researchArea: req.body.researchArea,
+            completionYear: req.body.yearOfCompletion,
+            progressLevel: req.body.progressLevel,
+            dateofLastSubmission: req.body.progressDate,
+            URLtoWebsite: req.body.url,
+          });
+        } else if (req.body.registrationStatus === "prospective") {
+          user = new prospectiveUser({
+            nameWithInitials: req.body.nameWithInitials,
+            fullName: req.body.nameDenotedByInitials,
+            postalAddress: req.body.postalAddress,
+            email: req.body.email,
+            telNo: req.body.contactNumber,
+            password: hashed,
+            supervisors: req.body.supervisors,
+            researchArea: req.body.researchArea,
+            reseachProgram: req.body.reseachProgram,
+            // state: req.body.state,
+            docs: req.file.filename,
+          });
+        }
+
+        // logger.debug(req.file.filename);
+        logger.info(user);
+        // save the data in the database
+        user
+          .save(user)
+          .then(async (data) => {
+            // Make link to send to admin to access user data
+            const approvalLink = "http://localhost:3001/admin/toapprove";
+            req.session.current_url = approvalLink;
+            logger.info(approvalLink);
+
+            const admin = await StaffDB.findOne({ role: "admin" });
+            let emailList = [admin.email];
+
+            // Sending Email to the admin informing that new user is registered
+            const regDate = moment().add(5, "s").format();
+            new MailSender(
+              emailList,
+              regDate,
+              user.nameWithInitials,
+              "admin",
+              approvalLink
+            ).sendEmail();
+
+            res
+              .status(201)
+              .json({ message: "Data inserted successfully", user });
+          })
+          .catch((err) => {
+            logger.info(err);
+            res.status(500).json({
+              message: err || "Some error occured",
+            });
+          });
+      });
+    } catch (err) {
+      res.status(401).json({ message: "User not created", error: err.message });
+    }
   }
-  // }
 };
-
-// Function to approve student. This passes the data to regstered database
-// export const approveStudent = async (req, res) => {
-//   const userID = req.params.id;
-
-//   if (!userID) {
-//     return res.status(400).send({ message: "User not found" });
-//   }
-
-//   // Get user details from the userDB
-//   const user = await UserDB.findById(userID);
-//   const RegDate = new Date();
-//   if (user) {
-//     await RegisteredDB.create({
-//       nameWithInitials: user.nameWithInitials,
-//       fullName: user.fullName,
-//       postalAddress: user.postalAddress,
-//       email: user.email,
-//       telNo: user.telNo,
-//       password: user.password,
-//       supervisors: user.supervisors,
-//       researchArea: user.researchArea,
-//       reseachProgram: user.reseachProgram,
-//       RegisteredDate: RegDate,
-//     });
-//     user.state = "approved";
-//     await user.save();
-//     res.status(200).send({ message: "User  approved by admin" });
-
-//     // Sending Email to the user informing that user is approved by admin
-//     const regDate = moment().add(5, "s").format();
-//     new MailSender(
-//       user.email,
-//       regDate,
-//       user.nameWithInitials,
-//       "approved",
-//       ""
-//     ).sendEmail();
-//   } else {
-//     res.status(400).send({ message: "There is no user with that ID" });
-//   }
-// };
 
 // Function to approve student. This passes the data to regstered database
 export const approveStudent = async (req, res) => {
@@ -180,7 +135,7 @@ export const approveStudent = async (req, res) => {
     const RegDate = new Date();
     await RegisteredDB.create({
       nameWithInitials: userData.nameWithInitials,
-      fullName: userData.fullName,
+      fullName: userData.name,
       postalAddress: userData.postalAddress,
       email: userData.email,
       telNo: userData.telNo,
@@ -196,7 +151,10 @@ export const approveStudent = async (req, res) => {
     // Set  default profile photo
     user.photo = "user.png";
 
-    res.status(200).send({ message: "User  approved by admin" });
+    res.status(200).json({ message: "User  approved by admin" });
+
+    // Save the user document
+    user.save();
 
     // Sending Email to the user informing that user is approved by admin
     const regDate = moment().add(5, "s").format();
@@ -208,38 +166,63 @@ export const approveStudent = async (req, res) => {
       ""
     ).sendEmail();
 
+    // Getting admn email
+    const admin = await StaffDB.findOne({ role: "admin" });
+
     // Set reminders about the submission
-    /**@ToDo Set Dates that should send reminders*/
-    /**@ToDo Set input submissionn date*/
-    let submissionDate1;
-    let submissionDate2;
-    let submissionDate3;
-    let submissionDate4;
+    let submissionDate1 = moment().add(3, "M").format();
+    let submissionDate2 = moment().add(6, "M").format();
+    let submissionDate3 = moment().add(12, "M").format();
+    let submissionDate4 = moment().add(18, "M").format();
+    let submissionDate5 = moment().add(24, "M").format();
+    let submissionDate6 = moment().add(30, "M").format();
+    let submissionDate7 = moment().add(36, "M").format();
 
     new MailSender(
-      user.email,
+      admin.email,
       submissionDate1,
       user.nameWithInitials,
       "submission",
       ""
     ).sendEmail();
     new MailSender(
-      user.email,
+      admin.email,
       submissionDate2,
       user.nameWithInitials,
       "submission",
       ""
     ).sendEmail();
     new MailSender(
-      user.email,
+      admin.email,
       submissionDate3,
       user.nameWithInitials,
       "submission",
       ""
     ).sendEmail();
     new MailSender(
-      user.email,
+      admin.email,
       submissionDate4,
+      user.nameWithInitials,
+      "submission",
+      ""
+    ).sendEmail();
+    new MailSender(
+      admin.email,
+      submissionDate5,
+      user.nameWithInitials,
+      "submission",
+      ""
+    ).sendEmail();
+    new MailSender(
+      admin.email,
+      submissionDate6,
+      user.nameWithInitials,
+      "submission",
+      ""
+    ).sendEmail();
+    new MailSender(
+      admin.email,
+      submissionDate7,
       user.nameWithInitials,
       "submission",
       ""
@@ -247,50 +230,60 @@ export const approveStudent = async (req, res) => {
   }
 };
 
+// Function for user validation using Joi
 function validateUser(userData) {
   // Joi Schema for checking sign up data
   const schema = Joi.object({
     nameWithInitials: Joi.string().min(3).required(),
-    fullName: Joi.string().required(),
+    nameDenotedByInitials: Joi.string().required(),
     postalAddress: Joi.string().required(),
     email: Joi.string().email({ minDomainSegments: 2 }).required(),
-    telNo: Joi.number().min(10).required(),
+    contactNumber: Joi.string(),
     password: Joi.string().required(),
-    regState: Joi.string().valid("Registered", "Prospective"),
-    regNo: Joi.string(),
-    DOR: Joi.date().raw(),
-    degree: Joi.string().valid("PhD", "MPhil", "Msc", "MEng", "Provisional"),
-    studyMode: Joi.string().valid("Full", "Part"),
+    confirmedPassword: Joi.string(),
+    // regState: Joi.string().valid("Registered", "Prospective"),
+    registrationNumber: Joi.string(),
+    dateOfRegistration: Joi.date().raw(),
+    degreeSelect: Joi.string().valid(
+      "phd",
+      "mphill",
+      "msc",
+      "meng",
+      "provisional"
+    ),
+    modeOfStudy: Joi.string().valid("fullTime", "partTime"),
     /* supervisors: Joi.array().items(Joi.string()) */ /**@Todo Get array of supervisors from frontend */
     supervisors: Joi.string(),
     researchTopic: Joi.string(),
-    completionYear: Joi.number().min(4),
+    yearOfCompletion: Joi.string(),
     progressLevel: Joi.string().valid(
-      "Half Year Progress Report Submitted",
-      "Annual Progress Report Submitted",
-      "Annual Oral Presentation Completed",
-      "Viva Completed",
-      "Thesis Submitted for Review",
-      "Final Thesis Submitted"
+      "halfYearReportSubmitted",
+      "annualProgressReportSubmitted",
+      "annualOralPresentationSubmitted",
+      "vivaCompleted",
+      "thesisSubmittedForReview",
+      "finalThesisSubmitted"
     ),
-    dateofLastSubmission: Joi.date(),
-    urlToWebsite: Joi.string(),
+    progressDate: Joi.date(),
+    url: Joi.string(),
     researchArea: Joi.string(),
-    reseachProgram: Joi.string().valid("PhD", "MPhil"),
+    researchProgram: Joi.string(),
+    registrationStatus: Joi.string().valid("prospective", "registered"),
   });
 
   return schema.validate(userData);
 }
 
+// Function to add staff members
 export const addStaff = async (req, res) => {
   // Find if there is that email
   const email = req.body.email;
 
+  logger.info(req.body);
   console.log(req.body);
-
   const userExists = await StaffDB.findOne({ email: email });
   if (userExists) {
-    return res.status(409).send({ message: "User already exists1" });
+    return res.status(409).json({ message: "User already exists!" });
   }
 
   // Make the model
@@ -304,7 +297,8 @@ export const addStaff = async (req, res) => {
     .save(staff)
     .then((data) => {
       let emailList = [data.email];
-      // Sending Email to the admin informing that new user is registered
+
+      // Sending Email to the staff member that added as staff member
       const regDate = moment().add(5, "s").format();
       new MailSender(
         emailList,
@@ -314,12 +308,12 @@ export const addStaff = async (req, res) => {
         ""
       ).sendEmail();
 
-      res
+      return res
         .status(208)
-        .send({ message: `${data.role} added successfully`, data });
+        .json({ message: `${data.role} added successfully`, data });
     })
     .catch((err) => {
-      res.status(500).send({
+      return res.status(500).json({
         message: err.message || "Some error ocurred",
       });
     });
@@ -380,7 +374,7 @@ const createPasswordResetToken = (user) => {
     .update(resetToken)
     .digest("hex");
 
-  // console.log({ resetToken }, this.passwordResetToken);
+  logger.info({ resetToken }, this.passwordResetToken);
   // will be expired after 10 mins
   user.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
@@ -409,8 +403,8 @@ export const resetPassword = async (req, res, next) => {
       .json({ message: "Token is invalid or has expired!" });
   }
 
-  console.log("ERROR POINT");
-  // console.log(hashedPW);
+  logger.error("ERROR POINT");
+  logger.info(hashedPW);
   //   Update the password
   user.password = await bcrypt.hash(req.body.password, 10);
   // user.passwordConfirm = req.body.passwordConfirm;
@@ -446,39 +440,6 @@ export const updatePassword = async (req, res, next) => {
   // 4) log user in , send the JWT
   res.status(200).json({ message: "Password change successfull" });
 };
-
-//////////////////////////////////////////////////////////////////////// UPLOAD PHOTO /////////////////////////////////////////////////////////
-// decide the file name and the destination
-const multerStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "public/img/users");
-  },
-  filename: (req, file, cb) => {
-    // Get the file extension
-    // {image/jpeg}
-    const ext = file.mimetype.split("/")[1];
-    // cb(null) means if there is no error
-    cb(null, `user-${req.user.id}-${Date.now()}.${ext}`);
-  },
-});
-
-// create a file filter
-const multerFilter = (req, file, cb) => {
-  // check whether the uploaded file is image
-  if (file.mimetype.startsWith("image")) {
-    cb(null, true);
-  }
-};
-
-// upload
-const upload = multer({
-  storage: multerStorage,
-  fileFilter: multerFilter,
-});
-
-// upload a single file
-export const uploadUserPhoto = upload.single("photo");
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Function for update database after the uploading photo
 export const updatePhotoData = async (req, res) => {
@@ -516,6 +477,18 @@ export const submission = async (req, res) => {
     if (submissionNo == 1) {
       user.submission1 =
         fileName; /**@ToDo Set registered user submission models */
+    } else if (submissionNo == 2) {
+      user.submission2 = fileName;
+    } else if (submissionNo == 3) {
+      user.submission3 = fileName;
+    } else if (submissionNo == 4) {
+      user.submission4 = fileName;
+    } else if (submissionNo == 5) {
+      user.submission5 = fileName;
+    } else if (submissionNo == 6) {
+      user.submission6 = fileName;
+    } else if (submissionNo == 7) {
+      user.submission7 = fileName;
     }
     /**@ToDo Add other submisions */
 
