@@ -30,9 +30,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       lowercase: true,
+      unique: true,
     },
     telNo: {
-      type: Number,
+      type: String,
       required: true,
     },
     password: {
@@ -72,7 +73,7 @@ const registeredSchema = new mongoose.Schema({
     type: String,
     enum: ["fullTime", "partTime"],
   },
-  researchTopic: {
+  researchArea: {
     type: String,
   },
   completionYear: {

@@ -22,27 +22,21 @@ const ReviewTable = () => {
       const res = await axios({
         method: "GET",
         url: "http://localhost:3001/data/staff",
+        withCredentials: true,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
       });
 
+      console.log(res.data);
       setState({ ...state, result: res.data.staffUsers[0].students });
 
       //   console.log(state.result.students);
     }
     getData();
   }, []);
-
-  // Table data loading function
-  //   const dataOfTable = state.result.map((info) => {
-  //     return (
-  //       <tr key={info._id}>
-  //         <td>
-  //           <a href={`#`} style={{ textDecoration: "none" }}>
-  //             {info.students}
-  //           </a>
-  //         </td>
-  //       </tr>
-  //     );
-  //   });
 
   const getData = () => {
     return state.result.map((data) => {

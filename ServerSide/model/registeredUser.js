@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
     unique: true,
   },
   telNo: {
-    type: Number,
+    type: String,
     required: true,
   },
   password: {
@@ -60,9 +60,10 @@ const userSchema = new mongoose.Schema({
   },
   studyMode: {
     type: String,
-    enum: ["fullTime", "partTime"],
+    enum: ["fullTime", "partTime", "Not Set"],
+    default: "Not Set",
   },
-  researchTopic: {
+  researchArea: {
     type: String,
   },
   completionYear: {
@@ -93,6 +94,34 @@ const userSchema = new mongoose.Schema({
   },
   photo: {
     type: String,
+  },
+  submission1: {
+    type: String,
+    default: "NA",
+  },
+  submission2: {
+    type: String,
+    default: "NA",
+  },
+  submission3: {
+    type: String,
+    default: "NA",
+  },
+  submission4: {
+    type: String,
+    default: "NA",
+  },
+  submission5: {
+    type: String,
+    default: "NA",
+  },
+  submission6: {
+    type: String,
+    default: "NA",
+  },
+  submission7: {
+    type: String,
+    default: "NA",
   },
 });
 

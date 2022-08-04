@@ -1,8 +1,16 @@
+/**
+ * E / 18 / 173
+ * Authors - Kasthuripitiya K.A.I.M. , S.M.T.S.C. Ranasinghe
+ * Date - 02/08/2022
+ */
+
 import React, { useState } from "react"; // Import React
 import login from "../images/login.png"; // Import Login image
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import GoogleButton from "react-google-button";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const Login = () => {
@@ -10,6 +18,17 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [values, setValues] = useState({ email: "", password: "" });
+
+  const loginWithGoogle = async (e) => {
+    // e.preventDefault();
+    try {
+      window.open("http://localhost:3001/auth/google", "_self");
+      // navigate("/submission");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   // handleChange to detect the changes
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
@@ -19,11 +38,11 @@ const Login = () => {
     event.preventDefault();
 
     const { email, password } = values;
-    // console.log(email, password);
-    // console.log(values);
+
     try {
+      console.log(values);
       const res = await axios({
-        method: "POST",
+        method: "post",
         url: `http://localhost:3001/user/login`,
         data: {
           email,
@@ -32,14 +51,34 @@ const Login = () => {
         withCredentials: true,
       });
 
-      // const token = res.data.token;
-      // console.log(token);
+      console.log(res);
 
-      alert("logged in successfully!!");
-      navigate("/profile");
+      toast.success("logged in successfully!", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
+      // Go to the profile
+      navigate("/viewLogged");
     } catch (err) {
-      alert("login failed");
-      navigate("/register");
+      console.log(err);
+
+      // Show the toast error
+      toast.error(err.response.data, {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      // navigate("/register");
     }
   };
 
@@ -71,6 +110,7 @@ const Login = () => {
             className="form-control"
             id="email"
             placeholder="E-Mail Address"
+            required
             onChange={(e) => handleChange(e)}
           />
           <label htmlFor="floatingInput">Email</label>
@@ -82,7 +122,8 @@ const Login = () => {
             name="password"
             className="form-control"
             id="password"
-            placeholder="Password"
+            required
+            // placeholder="Password"
             onChange={(e) => handleChange(e)}
           />
           <label htmlFor="floatingPassword">Password</label>
@@ -97,13 +138,10 @@ const Login = () => {
             &nbsp; Remember me
           </label>
         </div>
-
-        <button
-          className="w-100 btn btn-lg btn-primary"
-          // onClick={(e) => handleSubmit(e)}
-        >
-          Sign in
-        </button>
+        <div>
+          <button className="w-100 btn btn-lg btn-primary">Sign in</button>
+          <ToastContainer />
+        </div>
         <div
           className="text-center"
           style={{ marginTop: "15px", marginBottom: "15px" }}
@@ -120,7 +158,7 @@ const Login = () => {
             marginLeft: "40px",
           }}
         >
-          <GoogleButton />
+          <GoogleButton onClick={(e) => loginWithGoogle(e)} />
         </div>
 
         <div className="text-center" style={{ marginTop: "30px" }}>

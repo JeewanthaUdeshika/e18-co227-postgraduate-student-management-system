@@ -22,7 +22,6 @@ class MailSender {
     this.sender = sender;
     this.property = property;
     this.linkApproval = linkApproval;
-
   }
 
   // Mail sending Function
@@ -108,7 +107,6 @@ class MailSender {
     } else {
       console.log(`Unknown Property Accessed!!`);
     }
-
   }
 }
 

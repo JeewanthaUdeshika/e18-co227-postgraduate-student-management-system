@@ -1,5 +1,13 @@
+/**
+ * E / 18 / 173
+ * Author - Kasthuripitiya K.A.I.M. , S.M.T.S.C. Ranasinghe
+ * Date - 02/08/2022
+ */
+
 import React, { useState } from "react";
 // import { useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 
@@ -16,21 +24,13 @@ const RegRegister = () => {
     degreeSelect: "",
     modeOfStudy: "",
     supervisors: "",
-    researchTopic: "",
+    researchArea: "",
     yearOfCompletion: "",
     progressLevel: "",
     progressDate: "",
-    profilePicture: "",
+    // profilePicture: "",
     url: "",
-    // userData: null,
   });
-
-  // Click event
-  // const handleClick = (e) => {
-  //   // Merge the objects
-  //   finalDetails = { ...state, ...regDetails };
-  //   console.log(finalDetails);
-  // };
 
   // Submit Event
   const handleSubmit = async (e) => {
@@ -44,6 +44,7 @@ const RegRegister = () => {
       const res = await axios({
         method: "POST",
         url: "http://localhost:3001/user/signup",
+        headers: { "Content-Type": "multipart/form-data" },
         data: finalDetails,
         withCredentials: true,
       });
@@ -52,10 +53,30 @@ const RegRegister = () => {
       console.log(res);
 
       // alert the user that submission completed
-      alert("Application Submitted Successfully!");
+      // alert("Application Submitted Successfully!");
+      toast.success("Application Submitted Successfully!!", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } catch (err) {
+      // alert("Application Submission Failed!");
       // if there is an error alert the user
-      alert("Application Submission Failed!");
+      console.log(err.response.data);
+      // Show the toast error
+      toast.error(err.response.data.message, {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
@@ -277,23 +298,23 @@ const RegRegister = () => {
 
         <div className="col-12">
           <label
-            htmlFor="researchTopic"
+            htmlFor="researchArea"
             className="form-label"
             style={{ fontWeight: "bold", fontSize: "20px" }}
           >
-            Research Topic
+            Research Area
           </label>
           <input
             type="text"
             className={
-              regDetails.researchTopic !== ""
+              regDetails.researchArea !== ""
                 ? "form-control is-valid"
                 : "form-control is-invalid"
             }
-            id="researchTopic"
-            name="researchTopic"
+            id="researchArea"
+            name="researchArea"
             onChange={(e) => handleChange(e)}
-            placeholder="Research Topic"
+            placeholder="Research Area"
             required
           />
         </div>
@@ -449,7 +470,7 @@ const RegRegister = () => {
           />
         </div>
 
-        <div className="col-12">
+        {/* <div className="col-12">
           <label
             htmlFor="profilePicture"
             className="form-label"
@@ -469,7 +490,7 @@ const RegRegister = () => {
             required
             onChange={(e) => handleChange(e)}
           />
-        </div>
+        </div> */}
 
         <div className="col-12" style={{ marginTop: "20px" }}>
           <label
@@ -486,7 +507,7 @@ const RegRegister = () => {
             // type="text"
             type="url"
             className={
-              regDetails.urls !== ""
+              regDetails.url !== ""
                 ? "form-control is-valid"
                 : "form-control is-invalid"
             }
@@ -507,6 +528,7 @@ const RegRegister = () => {
           >
             Register
           </button>
+          <ToastContainer />
         </div>
       </form>
     </main>
