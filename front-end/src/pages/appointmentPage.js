@@ -6,6 +6,10 @@ import ResponsiveAppBar from '../components/navbarNew';
 import { Grid } from '@mui/material';
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d976f636070c61b98f409ec93d32414559d85fc8
 // Function for showing information pages on post graduate programme
 
 function AppointmentPage(){
