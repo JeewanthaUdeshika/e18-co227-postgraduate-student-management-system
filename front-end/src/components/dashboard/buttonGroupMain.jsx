@@ -34,20 +34,22 @@ class ButtonGroupMain extends Component {
             >
 
     
-                <Button key='main1'>Preamble</Button>
+                <Button key='main1'>Application Procedure</Button>
 
-                <Button key='main2'>Taught Programmers</Button>
+                <Button key='main2'>Progress Review</Button>
 
-                <Button key='main3'>Research Programmers</Button>
+                <Button key='main3'>Format, Submission and Evaluation of Thesis</Button>
 
-                <Button key='main4'>Admission Requirements</Button>
+                <Button key='main4'>Appointment of Examiners for Thesis</Button>
 
-                <Button key='main5'>Application Procedure</Button>
+                <Button key='admin'>Coordinator Dashboard</Button>
+
+                <Button key='main5'>Submission Dashboard</Button>
                 
-                <Button key='main6'>Registration</Button>
+                <Button key='main6'>Review Dashboard</Button>
 
-                <Button key='main7'>Progress Review - MPhill/PhD</Button>
-
+                {/* <Button key='main7'>Progress Review - MPhill/PhD</Button> */}
+{/* 
                 <Button key='main8'>Minimum and Maximum Duration</Button>
 
                 <Button key='main9'>Course Requirements</Button>
@@ -58,7 +60,7 @@ class ButtonGroupMain extends Component {
 
                 <Button key='main12'>Registration and Tution Fees for MPhill/PhD</Button>
 
-                <Button key='main13'>Forms/ Downloads</Button>
+                <Button key='main13'>Forms/ Downloads</Button> */}
 
                 
 

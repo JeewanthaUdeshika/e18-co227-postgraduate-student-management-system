@@ -2,6 +2,9 @@ import React from "react"; // Import react for this component
 import TableData from "../JSON/TableData"; // Import test data JSON files for testing dynmical behaviour of table
 
 const RegTable = () => {
+
+  const student = ['Tharindu', 'Jeewantha', 'Ishan']
+
   const dataOfTable = () => {
     // get table row data
     // const column = Object.keys(TableData[0]);
@@ -13,6 +16,7 @@ const RegTable = () => {
         2). Object should be retrived as JSON array to fill the Table
 
         */
+
 
     const column = ["fullName"];
 
@@ -31,6 +35,8 @@ const RegTable = () => {
         </tr>
       );
     });
+
+
   };
 
   return (

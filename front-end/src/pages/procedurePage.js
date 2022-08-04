@@ -1,26 +1,19 @@
-import React, { Component } from 'react';
-import Submission from '../components/dashboard/submission';
-import ResponsiveAppBar from '../components/navbarNew';
-import Footer from '../components/footer';
+import React from 'react';
+import AppProcedure from '../components/infoPages/procedure';
 import ButtonGroupMain from '../components/dashboard/buttonGroupMain';
+import Footer from '../components/footer';
+import ResponsiveAppBar from '../components/navbarNew';
 import { Grid } from '@mui/material';
 
 
-class SubmissionDashboard extends Component {
-    constructor(props) {
-        super(props);
-    }
+// Function for showing information pages on post graduate programme
+
+function ProcedurePage(){
+
+    return(
 
 
-
-    state = {  }
-
-
-    render() { 
-        return ( 
-
-            <div>
-
+        <div>
                 <div style={{marginBottom: '100px'}}>
                     <ResponsiveAppBar/>
                 </div>
@@ -33,7 +26,7 @@ class SubmissionDashboard extends Component {
                         </Grid>
 
                         <Grid item xs={8}>
-                            <Submission/>
+                            <AppProcedure/>
                         </Grid>
 
                     </Grid>
@@ -46,8 +39,7 @@ class SubmissionDashboard extends Component {
 
             </div>
 
-         );
-    }
+    )
 }
- 
-export default SubmissionDashboard;
+
+export default ProcedurePage;
