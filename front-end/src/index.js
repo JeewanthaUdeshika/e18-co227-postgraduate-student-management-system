@@ -28,6 +28,7 @@ import HomePage from './pages/homePage';
 import AddStaffPage from './pages/addStaffPage';
 import UserProfile from './pages/userProfile';
 import FileUploadPage from './pages/fileUploadPage';
+import ReviewTable from './components/reviewTable';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -54,7 +55,8 @@ root.render(
     // <App/>
     // <AddStaffPage/>
     //<UserProfile/>
-    <FileUploadPage/>
+    <ReviewTable/>
+    // <FileUploadPage/>
 
     );
 
