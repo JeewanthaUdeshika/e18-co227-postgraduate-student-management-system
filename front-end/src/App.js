@@ -9,7 +9,6 @@ import Register from "./pages/register-basic";
 import RegRegister from "./pages/reg-reg-page";
 // import RegProspective from "./components/provisionalRegister";
 import RegProspective from "./components/provisionalRegister";
-<<<<<<< HEAD
 import NavBar from "./components/navbarNew";
 import MainInfo from "./components/dashboard/mainInfo";
 import Dashboard from "./components/dashboard/studentDashboard";
@@ -31,12 +30,6 @@ import ReviewerDashboard from "./pages/reviewDashboard";
 import FileUploader from "./pages/fileUploadPage";
 import ViewPage from "./pages/view";
 import ViewLoggedPage from "./pages/viewLogged";
-=======
-import ProcedurePageHome from "./pages/homePage/procedurePage";
-import AppointmentPageHome from "./pages/homePage/appointmentPage";
-import FormatPageHome from "./pages/homePage/formatPage";
-import ProgressReviewPageHome from "./pages/homePage/progressReviewPage";
->>>>>>> d976f636070c61b98f409ec93d32414559d85fc8
 
 function App() {
   return (

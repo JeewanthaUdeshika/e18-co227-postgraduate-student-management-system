@@ -22,7 +22,6 @@ const ReviewTable = () => {
       const res = await axios({
         method: "GET",
         url: "http://localhost:3001/data/staff",
-<<<<<<< HEAD
         withCredentials: true,
         headers: {
           Accept: "application/json",
@@ -32,10 +31,6 @@ const ReviewTable = () => {
       });
 
       console.log(res.data);
-=======
-      });
-
->>>>>>> d976f636070c61b98f409ec93d32414559d85fc8
       setState({ ...state, result: res.data.staffUsers[0].students });
 
       //   console.log(state.result.students);
@@ -43,22 +38,6 @@ const ReviewTable = () => {
     getData();
   }, []);
 
-<<<<<<< HEAD
-=======
-  // Table data loading function
-  //   const dataOfTable = state.result.map((info) => {
-  //     return (
-  //       <tr key={info._id}>
-  //         <td>
-  //           <a href={`#`} style={{ textDecoration: "none" }}>
-  //             {info.students}
-  //           </a>
-  //         </td>
-  //       </tr>
-  //     );
-  //   });
-
->>>>>>> d976f636070c61b98f409ec93d32414559d85fc8
   const getData = () => {
     return state.result.map((data) => {
       return (

@@ -5,11 +5,7 @@
  */
 import React from "react";
 import Footer from "../components/footer";
-<<<<<<< HEAD
 import Navbar from "../components/navbarNew";
-=======
-import ResponsiveAppBar from '../components/navbarNew';
->>>>>>> d976f636070c61b98f409ec93d32414559d85fc8
 import Registration from "../components/register";
 
 // Class for render page => Basic registration Page
@@ -24,17 +20,9 @@ const RegisterBasic = () => {
         <Registration />
       </div>
 
-<<<<<<< HEAD
       <Footer />
     </div>
   );
 };
-=======
-    state = {  } 
-    render() { 
-        return (
-            <div>
-                <ResponsiveAppBar/>
->>>>>>> d976f636070c61b98f409ec93d32414559d85fc8
 
 export default RegisterBasic;

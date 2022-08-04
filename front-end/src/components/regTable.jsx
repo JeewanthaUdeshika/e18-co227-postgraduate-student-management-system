@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const RegTable = () => {
-<<<<<<< HEAD
   const navigate = useNavigate();
   // Initially set the users object array to null
   const [state, setState] = useState({
@@ -21,43 +20,7 @@ const RegTable = () => {
     // console.log(info);
     navigate("/profile", {
       state: info._id,
-=======
-
-  const student = ['Tharindu', 'Jeewantha', 'Ishan']
-
-  const dataOfTable = () => {
-    // get table row data
-    // const column = Object.keys(TableData[0]);
-
-    // console.log(column);
-
-    /*
-        1). The property of the column (fullName) shoould be changed to propert of JSON object that gives name of the user
-        2). Object should be retrived as JSON array to fill the Table
-
-        */
-
-
-    const column = ["fullName"];
-
-    return TableData.map((data) => {
-      return (
-        <tr>
-          {column.map((v) => {
-            return (
-              <td>
-                <a href="#" style={{ textDecoration: "none" }}>
-                  {data[v]}
-                </a>
-              </td>
-            );
-          })}
-        </tr>
-      );
->>>>>>> d976f636070c61b98f409ec93d32414559d85fc8
     });
-
-
   };
 
   // Retrieve all the not approved students as an array and set it to state.result
