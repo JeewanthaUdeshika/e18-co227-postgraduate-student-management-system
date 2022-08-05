@@ -83,6 +83,9 @@ const ButtonGroupMain = () => {
     navigate("/admin"); // Navigate to format page
   };
 
+  const navigateToBeApproved = () => {
+    navigate("/regTable");
+  };
   return (
     // <Box sx={{display: 'block', '& > *': {m: 1,},}}>
 
@@ -141,6 +144,14 @@ const ButtonGroupMain = () => {
           sx={{ display: state.role === "admin" ? "block" : "none" }}
         >
           Add Staff Member
+        </Button>
+
+        <Button
+          key="main8"
+          sx={{ display: state.role === "admin" ? "block" : "none" }}
+          onClick={navigateToBeApproved}
+        >
+          Students' Applications
         </Button>
       </ButtonGroup>
     </div>

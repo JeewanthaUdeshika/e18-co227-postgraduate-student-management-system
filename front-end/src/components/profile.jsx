@@ -43,6 +43,7 @@ const Profile = () => {
       const data = await axios({
         method: "GET",
         url: `http://localhost:3001/data/profile/${state}`,
+        withCredentials: true,
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -50,7 +51,7 @@ const Profile = () => {
         },
       });
 
-      console.log(data.data.fullName);
+      console.log(data.data);
 
       setInfo({
         ...info,
