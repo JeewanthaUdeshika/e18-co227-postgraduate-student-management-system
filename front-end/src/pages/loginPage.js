@@ -5,14 +5,14 @@
  */
 
 import React from "react";
-import Navbar from "../components/navbarNew";
+import NavBarLogin from "../components/navbarLogin";
 import Footer from "../components/footer";
 import Login from "../components/login";
 
 const LoginPage = () => {
   return (
     <div className="container">
-      <Navbar />
+      <NavBarLogin />
 
       <div style={{ marginTop: "50px" }}>
         <Login />

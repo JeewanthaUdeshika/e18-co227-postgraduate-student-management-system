@@ -13,6 +13,7 @@ import { fileURLToPath } from "url";
 import { RegisteredDB } from "../model/registeredUser.js";
 import { UserDB } from "../model/user.js";
 import logger from "../logger.js";
+import { StaffDB } from "../model/staff.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 ////
@@ -43,8 +44,9 @@ export const getUser = async (req, res) => {
   // Get user from the userdata base without password
   const unReg = await UserDB.findById(userID, "-password");
   const Reg = await RegisteredDB.findById(userID, "-password");
+  const staffReg = await StaffDB.findById(userID, "-password");
 
-  let user = unReg || Reg;
+  let user = unReg || Reg || staffReg;
 
   if (user) {
     // res.render("unRegUser", { userData: user });

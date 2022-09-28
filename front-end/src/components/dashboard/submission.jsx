@@ -1,23 +1,25 @@
 /**
  * E / 18 / 173
  * Authors - Kasthuripitiya K.A.I.M. , S.M.T.S.C. Ranasinghe
- * Last Modified - 03/08/2022
+ * Last Modified - 28/09/2022
  */
 
 import { Alert, Button, Card, CardContent, Grid } from "@mui/material";
 import React, { useEffect } from "react"; // Import react Component
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
 const Submission = () => {
+  // Read the role of the user from the previous
+  // const { state } = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
     async function getData() {
       const res = await axios({
         method: "GET",
-        url: `http://localhost:3001/auth/isStaff`,
+        url: `http://localhost:3001/user/profile`,
         withCredentials: true,
         headers: {
           Accept: "application/json",
@@ -26,45 +28,84 @@ const Submission = () => {
         },
       });
 
-      console.log(res);
+      // Read the submission status and update them
+      setStateSubmission({
+        ...stateSubmission,
+        threeMonths: {
+          ...stateSubmission.threeMonths,
+          submissionStatus:
+            res.data.submission1 === "NA" ? "not-submitted" : "submitted",
+        },
+        year1Half: {
+          ...stateSubmission.year1Half,
+          submissionStatus:
+            res.data.submission2 === "NA" ? "not-submitted" : "submitted",
+        },
+        year1Full: {
+          ...stateSubmission.year1Full,
+          submissionStatus:
+            res.data.submission3 === "NA" ? "not-submitted" : "submitted",
+        },
+        year2Half: {
+          ...stateSubmission.year2Half,
+          submissionStatus:
+            res.data.submission4 === "NA" ? "not-submitted" : "submitted",
+        },
+        year2Full: {
+          ...stateSubmission.year2Full,
+          submissionStatus:
+            res.data.submission5 === "NA" ? "not-submitted" : "submitted",
+        },
+        year3Half: {
+          ...stateSubmission.year3Half,
+          submissionStatus:
+            res.data.submission6 === "NA" ? "not-submitted" : "submitted",
+        },
+        year3Full: {
+          ...stateSubmission.year3Full,
+          submissionStatus:
+            res.data.submission7 === "NA" ? "not-submitted" : "submitted",
+        },
+      });
+      // console.log(res.data.submission1);
     }
     getData();
   }, []);
 
   // State of submissions of the user
-  const [state, setState] = useState({
+  const [stateSubmission, setStateSubmission] = useState({
     threeMonths: {
-      submissionStatus: "submitted",
+      submissionStatus: "",
       reviewStatus: "reviewed",
     },
 
     year1Half: {
-      submissionStatus: "not-submitted",
+      submissionStatus: "",
       reviewStatus: "not-reviewed",
     },
 
     year1Full: {
-      submissionStatus: "not-submitted",
+      submissionStatus: "",
       reviewStatus: "not-reviewed",
     },
 
     year2Half: {
-      submissionStatus: "not-submitted",
+      submissionStatus: "",
       reviewStatus: "not-reviewed",
     },
 
     year2Full: {
-      submissionStatus: "not-submitted",
+      submissionStatus: "",
       reviewStatus: "not-reviewed",
     },
 
     year3Half: {
-      submissionStatus: "not-submitted",
+      submissionStatus: "",
       reviewStatus: "not-reviewed",
     },
 
     year3Full: {
-      submissionStatus: "submitted",
+      submissionStatus: "",
       reviewStatus: "not-reviewed",
     },
   });
@@ -133,10 +174,12 @@ const Submission = () => {
                   <Grid item xs={6}>
                     {
                       <Alert
-                        severity={stateUpdateSubmission(state.threeMonths)}
+                        severity={stateUpdateSubmission(
+                          stateSubmission.threeMonths
+                        )}
                         style={{ fontSize: "14px", fontWeight: "bold" }}
                       >
-                        {state.threeMonths.submissionStatus.toUpperCase()}
+                        {stateSubmission.threeMonths.submissionStatus.toUpperCase()}
                       </Alert>
                     }
                   </Grid>
@@ -144,10 +187,12 @@ const Submission = () => {
                   <Grid item xs={6}>
                     {
                       <Alert
-                        severity={stateUpdateReview(state.threeMonths)}
+                        severity={stateUpdateReview(
+                          stateSubmission.threeMonths
+                        )}
                         style={{ fontSize: "14px", fontWeight: "bold" }}
                       >
-                        {state.threeMonths.reviewStatus.toUpperCase()}
+                        {stateSubmission.threeMonths.reviewStatus.toUpperCase()}
                       </Alert>
                     }
                   </Grid>
@@ -163,7 +208,7 @@ const Submission = () => {
               variant="contained"
               color="info"
               id="1"
-              disabled={buttonState(state.threeMonths)}
+              disabled={buttonState(stateSubmission.threeMonths)}
               onClick={(e) => handleClick(e)}
             >
               ADD SUBMISSION
@@ -175,7 +220,7 @@ const Submission = () => {
       <div
         style={{
           marginBottom: "25px",
-          contentVisibility: setContentVisibility(state.threeMonths),
+          contentVisibility: setContentVisibility(stateSubmission.threeMonths),
         }}
       >
         <Card>
@@ -198,10 +243,12 @@ const Submission = () => {
                   <Grid item xs={6}>
                     {
                       <Alert
-                        severity={stateUpdateSubmission(state.year1Half)}
+                        severity={stateUpdateSubmission(
+                          stateSubmission.year1Half
+                        )}
                         style={{ fontSize: "14px", fontWeight: "bold" }}
                       >
-                        {state.year1Half.submissionStatus.toUpperCase()}
+                        {stateSubmission.year1Half.submissionStatus.toUpperCase()}
                       </Alert>
                     }
                   </Grid>
@@ -209,10 +256,10 @@ const Submission = () => {
                   <Grid item xs={6}>
                     {
                       <Alert
-                        severity={stateUpdateReview(state.year1Half)}
+                        severity={stateUpdateReview(stateSubmission.year1Half)}
                         style={{ fontSize: "14px", fontWeight: "bold" }}
                       >
-                        {state.year1Half.reviewStatus.toUpperCase()}
+                        {stateSubmission.year1Half.reviewStatus.toUpperCase()}
                       </Alert>
                     }
                   </Grid>
@@ -228,7 +275,7 @@ const Submission = () => {
               variant="contained"
               color="info"
               id="2"
-              disabled={buttonState(state.year1Half)}
+              disabled={buttonState(stateSubmission.year1Half)}
               onClick={(e) => handleClick(e)}
             >
               ADD SUBMISSION
@@ -240,7 +287,7 @@ const Submission = () => {
       <div
         style={{
           marginBottom: "25px",
-          contentVisibility: setContentVisibility(state.year1Half),
+          contentVisibility: setContentVisibility(stateSubmission.year1Half),
         }}
       >
         <Card>
@@ -263,10 +310,12 @@ const Submission = () => {
                   <Grid item xs={6}>
                     {
                       <Alert
-                        severity={stateUpdateSubmission(state.year1Full)}
+                        severity={stateUpdateSubmission(
+                          stateSubmission.year1Full
+                        )}
                         style={{ fontSize: "14px", fontWeight: "bold" }}
                       >
-                        {state.year1Full.submissionStatus.toUpperCase()}
+                        {stateSubmission.year1Full.submissionStatus.toUpperCase()}
                       </Alert>
                     }
                   </Grid>
@@ -274,10 +323,10 @@ const Submission = () => {
                   <Grid item xs={6}>
                     {
                       <Alert
-                        severity={stateUpdateReview(state.year1Full)}
+                        severity={stateUpdateReview(stateSubmission.year1Full)}
                         style={{ fontSize: "14px", fontWeight: "bold" }}
                       >
-                        {state.year1Full.reviewStatus.toUpperCase()}
+                        {stateSubmission.year1Full.reviewStatus.toUpperCase()}
                       </Alert>
                     }
                   </Grid>
@@ -293,7 +342,7 @@ const Submission = () => {
               variant="contained"
               color="info"
               id="3"
-              disabled={buttonState(state.year1Full)}
+              disabled={buttonState(stateSubmission.year1Full)}
               onClick={(e) => handleClick(e)}
             >
               ADD SUBMISSION
@@ -305,7 +354,7 @@ const Submission = () => {
       <div
         style={{
           marginBottom: "25px",
-          contentVisibility: setContentVisibility(state.year1Full),
+          contentVisibility: setContentVisibility(stateSubmission.year1Full),
         }}
       >
         <Card>
@@ -328,10 +377,12 @@ const Submission = () => {
                   <Grid item xs={6}>
                     {
                       <Alert
-                        severity={stateUpdateSubmission(state.year2Half)}
+                        severity={stateUpdateSubmission(
+                          stateSubmission.year2Half
+                        )}
                         style={{ fontSize: "14px", fontWeight: "bold" }}
                       >
-                        {state.year2Half.submissionStatus.toUpperCase()}
+                        {stateSubmission.year2Half.submissionStatus.toUpperCase()}
                       </Alert>
                     }
                   </Grid>
@@ -339,10 +390,10 @@ const Submission = () => {
                   <Grid item xs={6}>
                     {
                       <Alert
-                        severity={stateUpdateReview(state.year2Half)}
+                        severity={stateUpdateReview(stateSubmission.year2Half)}
                         style={{ fontSize: "14px", fontWeight: "bold" }}
                       >
-                        {state.year2Half.reviewStatus.toUpperCase()}
+                        {stateSubmission.year2Half.reviewStatus.toUpperCase()}
                       </Alert>
                     }
                   </Grid>
@@ -358,7 +409,7 @@ const Submission = () => {
               variant="contained"
               color="info"
               id="4"
-              disabled={buttonState(state.year2Half)}
+              disabled={buttonState(stateSubmission.year2Half)}
               onClick={(e) => handleClick(e)}
             >
               ADD SUBMISSION
@@ -370,7 +421,7 @@ const Submission = () => {
       <div
         style={{
           marginBottom: "25px",
-          contentVisibility: setContentVisibility(state.year2Half),
+          contentVisibility: setContentVisibility(stateSubmission.year2Half),
         }}
       >
         <Card>
@@ -393,10 +444,12 @@ const Submission = () => {
                   <Grid item xs={6}>
                     {
                       <Alert
-                        severity={stateUpdateSubmission(state.year2Full)}
+                        severity={stateUpdateSubmission(
+                          stateSubmission.year2Full
+                        )}
                         style={{ fontSize: "14px", fontWeight: "bold" }}
                       >
-                        {state.year2Full.submissionStatus.toUpperCase()}
+                        {stateSubmission.year2Full.submissionStatus.toUpperCase()}
                       </Alert>
                     }
                   </Grid>
@@ -404,10 +457,10 @@ const Submission = () => {
                   <Grid item xs={6}>
                     {
                       <Alert
-                        severity={stateUpdateReview(state.year2Full)}
+                        severity={stateUpdateReview(stateSubmission.year2Full)}
                         style={{ fontSize: "14px", fontWeight: "bold" }}
                       >
-                        {state.year2Full.reviewStatus.toUpperCase()}
+                        {stateSubmission.year2Full.reviewStatus.toUpperCase()}
                       </Alert>
                     }
                   </Grid>
@@ -423,7 +476,7 @@ const Submission = () => {
               variant="contained"
               color="info"
               id="5"
-              disabled={buttonState(state.year2Full)}
+              disabled={buttonState(stateSubmission.year2Full)}
               onClick={(e) => handleClick(e)}
             >
               ADD SUBMISSION
@@ -435,7 +488,7 @@ const Submission = () => {
       <div
         style={{
           marginBottom: "25px",
-          contentVisibility: setContentVisibility(state.year2Full),
+          contentVisibility: setContentVisibility(stateSubmission.year2Full),
         }}
       >
         <Card>
@@ -458,10 +511,12 @@ const Submission = () => {
                   <Grid item xs={6}>
                     {
                       <Alert
-                        severity={stateUpdateSubmission(state.year3Half)}
+                        severity={stateUpdateSubmission(
+                          stateSubmission.year3Half
+                        )}
                         style={{ fontSize: "14px", fontWeight: "bold" }}
                       >
-                        {state.year3Half.submissionStatus.toUpperCase()}
+                        {stateSubmission.year3Half.submissionStatus.toUpperCase()}
                       </Alert>
                     }
                   </Grid>
@@ -469,10 +524,10 @@ const Submission = () => {
                   <Grid item xs={6}>
                     {
                       <Alert
-                        severity={stateUpdateReview(state.year3Half)}
+                        severity={stateUpdateReview(stateSubmission.year3Half)}
                         style={{ fontSize: "14px", fontWeight: "bold" }}
                       >
-                        {state.year3Half.reviewStatus.toUpperCase()}
+                        {stateSubmission.year3Half.reviewStatus.toUpperCase()}
                       </Alert>
                     }
                   </Grid>
@@ -488,7 +543,7 @@ const Submission = () => {
               variant="contained"
               color="info"
               id="6"
-              disabled={buttonState(state.year3Half)}
+              disabled={buttonState(stateSubmission.year3Half)}
               onClick={(e) => handleClick(e)}
             >
               ADD SUBMISSION
@@ -500,7 +555,7 @@ const Submission = () => {
       <div
         style={{
           marginBottom: "25px",
-          contentVisibility: setContentVisibility(state.year3Half),
+          contentVisibility: setContentVisibility(stateSubmission.year3Half),
         }}
       >
         <Card>
@@ -523,10 +578,12 @@ const Submission = () => {
                   <Grid item xs={6}>
                     {
                       <Alert
-                        severity={stateUpdateSubmission(state.year3Full)}
+                        severity={stateUpdateSubmission(
+                          stateSubmission.year3Full
+                        )}
                         style={{ fontSize: "14px", fontWeight: "bold" }}
                       >
-                        {state.year3Full.submissionStatus.toUpperCase()}
+                        {stateSubmission.year3Full.submissionStatus.toUpperCase()}
                       </Alert>
                     }
                   </Grid>
@@ -534,10 +591,10 @@ const Submission = () => {
                   <Grid item xs={6}>
                     {
                       <Alert
-                        severity={stateUpdateReview(state.year3Full)}
+                        severity={stateUpdateReview(stateSubmission.year3Full)}
                         style={{ fontSize: "14px", fontWeight: "bold" }}
                       >
-                        {state.year3Full.reviewStatus}
+                        {stateSubmission.year3Full.reviewStatus}
                       </Alert>
                     }
                   </Grid>
@@ -553,7 +610,7 @@ const Submission = () => {
               variant="contained"
               color="info"
               id="7"
-              disabled={buttonState(state.year3Full)}
+              disabled={buttonState(stateSubmission.year3Full)}
               onClick={(e) => handleClick(e)}
             >
               ADD SUBMISSIOM
