@@ -12,7 +12,6 @@ import GoogleButton from "react-google-button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 const Login = () => {
   // Navigator
   const navigate = useNavigate();
