@@ -78,21 +78,14 @@ export const getAllDetails = async (req, res, next) => {
   next();
 };
 
-export const getAllStaff = async (req, res, next) => {
-  const staffUsers = await StaffDB.aggregate([
-    {
-      $match: {
-        role: "supervisor",
-      },
-    },
-    {
-      $project: {
-        students: 1,
-      },
-    },
-  ]);
+export const AllStudentsToBeReviewed = async (req, res, next) => {
+  // console.log(req.user.id);
 
-  if (!staffUsers) {
+  const usersToBeReviewed = await StaffDB.findById(req.user.id);
+
+  // console.log(usersToBeReviewed);
+
+  if (!usersToBeReviewed) {
     return res.status(400).json({
       status: "error",
       message: "No User Found",
@@ -101,7 +94,7 @@ export const getAllStaff = async (req, res, next) => {
 
   return res.status(200).json({
     status: "success",
-    staffUsers,
+    usersToBeReviewed,
   });
 
   next();
