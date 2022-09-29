@@ -76,7 +76,7 @@ const Submission = () => {
   const [stateSubmission, setStateSubmission] = useState({
     threeMonths: {
       submissionStatus: "",
-      reviewStatus: "reviewed",
+      reviewStatus: "not-reviewed",
     },
 
     year1Half: {
@@ -117,7 +117,7 @@ const Submission = () => {
   };
   // function to set the button state enabled or disabled
   const buttonState = (inp) => {
-    return inp.submissionStatus === "submitted" &&
+    return inp.submissionStatus === "submitted" ||
       inp.reviewStatus === "reviewed"
       ? true
       : false;

@@ -282,7 +282,7 @@ const RegRegister = () => {
             Supervisors
           </label>
           <input
-            type="text"
+            type="email"
             className={
               regDetails.supervisors !== ""
                 ? "form-control is-valid"
@@ -290,9 +290,11 @@ const RegRegister = () => {
             }
             id="supervisors"
             name="supervisors"
-            placeholder="Supervsiors' Email"
+            placeholder="Supervsiors' email"
             onChange={(e) => handleChange(e)}
             required
+            multiple
+            pattern="^([\w+-.%]+@[\w-.]+\.[A-Za-z]{2,4},*[\W]*)+$"
           />
         </div>
 

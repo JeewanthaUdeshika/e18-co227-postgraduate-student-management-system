@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import React, { Component } from "react"; // Import React
 import DownloadForOfflineIcon from "@mui/icons-material/DownloadForOffline";
 
-function ReviewerDashBoard(params) {
+const ReviewerDashBoard = () => {
   // Function to return reviewer screen
 
   return (
@@ -49,6 +49,6 @@ function ReviewerDashBoard(params) {
       </CardContent>
     </Card>
   );
-}
+};
 
 export default ReviewerDashBoard;
