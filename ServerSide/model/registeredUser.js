@@ -7,6 +7,20 @@
 
 import mongoose from "mongoose";
 
+// Model for review of a submission
+const reviewState = mongoose.Schema({
+  state: {
+    type: Boolean,
+    default: false
+  },
+  comment: {
+    type: String
+  },
+  correctedFile: {
+    type: String
+  }
+});
+
 // Shape of the user document
 const userSchema = new mongoose.Schema({
   nameWithInitials: {
@@ -98,32 +112,41 @@ const userSchema = new mongoose.Schema({
   submission1: {
     type: String,
     default: "NA",
+    status: reviewState
   },
   submission2: {
     type: String,
     default: "NA",
+    status: reviewState
   },
   submission3: {
     type: String,
     default: "NA",
+    status: reviewState
   },
   submission4: {
     type: String,
     default: "NA",
+    status: reviewState
   },
   submission5: {
     type: String,
     default: "NA",
+    status: reviewState
   },
   submission6: {
     type: String,
     default: "NA",
+    status: reviewState
   },
   submission7: {
     type: String,
     default: "NA",
+    status: reviewState
   },
 });
+
+
 
 // Make the document model
 export const RegisteredDB = mongoose.model("registereduser", userSchema);

@@ -32,6 +32,10 @@ export const signUp = async (req, res) => {
       return res.status(409).json({ message: "User already exists" });
     }
 
+    // Get supervisors into a array
+    let supervisorString = req.body.supervisors;
+    const supervisors = supervisorString.split(' ');
+
     try {
       let user;
       // encript the password to send to the database
@@ -52,7 +56,7 @@ export const signUp = async (req, res) => {
             email: req.body.email,
             telNo: req.body.contactNumber,
             password: hashed,
-            supervisors: req.body.supervisors,
+            supervisors: supervisors,
             regNo: req.body.registrationNumber,
             DOR: req.body.dateOfRegistration,
             degree: req.body.degreeSelect,
@@ -71,7 +75,7 @@ export const signUp = async (req, res) => {
             email: req.body.email,
             telNo: req.body.contactNumber,
             password: hashed,
-            supervisors: req.body.supervisors,
+            supervisors: supervisors,
             researchArea: req.body.researchArea,
             reseachProgram: req.body.reseachProgram,
             // state: req.body.state,
