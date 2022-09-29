@@ -163,11 +163,14 @@ const Submission = () => {
                     fontFamily: "monospace",
                     backgroundColor: "lightgreen",
                     height: "50px",
+                    
                   }}
                 >
                   THREE MONTHS SUBMISSION
                 </h3>
               </Grid>
+
+              
 
               <Grid item xs={4}>
                 <Grid container spacing={0.5}>
@@ -196,6 +199,9 @@ const Submission = () => {
                       </Alert>
                     }
                   </Grid>
+
+
+
                 </Grid>
               </Grid>
             </Grid>
@@ -203,6 +209,30 @@ const Submission = () => {
             <p style={{ fontSize: "20px" }}>
               Upload Your 3 Months Submission Here.
             </p>
+
+            <Grid item xs={12}
+              style={{marginBottom: '25px'}}>
+                    <div className="card" style={{marginTop: "25px"}} >
+                      <div className="card-header">
+
+                        <div className="float-left">
+                          {" "}
+                          <strong style={{fontSize: '20px'}}>Submission Status</strong>
+                          {" "}
+                        </div>
+
+                      </div>
+
+                      <div className="card-content">
+
+                        <div style={{marginTop: '15px'}}>
+                            <p style={{marginLeft: '25px', fontWeight: 'lighter', fontSize: '20px'}}>Submission : </p>
+                            <p style={{marginLeft: '25px', fontWeight: 'lighter', fontSize: '20px'}}>Time: </p>
+                        </div>
+
+                      </div>
+                    </div>
+              </Grid>
 
             <Button
               variant="contained"
@@ -271,6 +301,30 @@ const Submission = () => {
               Upload your half yearly Submission of year 1 Here.
             </p>
 
+            <Grid item xs={8}
+              style={{marginBottom: '25px'}}>
+                    <div className="card" style={{marginTop: "25px"}}>
+                      <div className="card-header">
+
+                        <div className="float-left">
+                          {" "}
+                          <strong>Submission Status</strong>
+                          {" "}
+                        </div>
+
+                      </div>
+
+                      <div className="card-content">
+
+                        <div style={{marginTop: '15px'}}>
+                            <p style={{marginLeft: '25px', fontWeight: 'lighter', fontSize: '20px'}}>Submission : </p>
+                            <p style={{marginLeft: '25px', fontWeight: 'lighter', fontSize: '20px'}}>Time: </p>
+                        </div>
+
+                      </div>
+                    </div>
+              </Grid>
+
             <Button
               variant="contained"
               color="info"
@@ -337,6 +391,32 @@ const Submission = () => {
             <p style={{ fontSize: "20px" }}>
               Upload Your Yearly Submission of year 1 Here.
             </p>
+
+
+            <Grid item xs={8}
+              style={{marginBottom: '25px'}}>
+                    <div className="card" style={{marginTop: "25px"}}>
+                      <div className="card-header">
+
+                        <div className="float-left">
+                          {" "}
+                          <strong>Submission Status</strong>
+                          {" "}
+                        </div>
+
+                      </div>
+
+                      <div className="card-content">
+
+                        <div style={{marginTop: '15px'}}>
+                            <p style={{marginLeft: '25px', fontWeight: 'lighter', fontSize: '20px'}}>Submission : </p>
+                            <p style={{marginLeft: '25px', fontWeight: 'lighter', fontSize: '20px'}}>Time: </p>
+                        </div>
+
+                      </div>
+                    </div>
+              </Grid>
+
 
             <Button
               variant="contained"
@@ -405,6 +485,33 @@ const Submission = () => {
               Upload Your half yearly Submission of year 2 Here.
             </p>
 
+
+            <Grid item xs={8}
+              style={{marginBottom: '25px'}}>
+                    <div className="card" style={{marginTop: "25px"}}>
+                      <div className="card-header">
+
+                        <div className="float-left">
+                          {" "}
+                          <strong>Submission Status</strong>
+                          {" "}
+                        </div>
+
+                      </div>
+
+                      <div className="card-content">
+
+                        <div style={{marginTop: '15px'}}>
+                            <p style={{marginLeft: '25px', fontWeight: 'lighter', fontSize: '20px'}}>Submission : </p>
+                            <p style={{marginLeft: '25px', fontWeight: 'lighter', fontSize: '20px'}}>Time: </p>
+                        </div>
+
+                      </div>
+                    </div>
+              </Grid>
+
+
+
             <Button
               variant="contained"
               color="info"
@@ -471,6 +578,32 @@ const Submission = () => {
             <p style={{ fontSize: "20px" }}>
               Upload Your Yearly Submission of year 2 Here.
             </p>
+
+
+            <Grid item xs={8}
+              style={{marginBottom: '25px'}}>
+                    <div className="card" style={{marginTop: "25px"}}>
+                      <div className="card-header">
+
+                        <div className="float-left">
+                          {" "}
+                          <strong>Submission Status</strong>
+                          {" "}
+                        </div>
+
+                      </div>
+
+                      <div className="card-content">
+
+                        <div style={{marginTop: '15px'}}>
+                            <p style={{marginLeft: '25px', fontWeight: 'lighter', fontSize: '20px'}}>Submission : </p>
+                            <p style={{marginLeft: '25px', fontWeight: 'lighter', fontSize: '20px'}}>Time: </p>
+                        </div>
+
+                      </div>
+                    </div>
+              </Grid>
+
 
             <Button
               variant="contained"
@@ -539,6 +672,32 @@ const Submission = () => {
               Upload Your half yearly Submission of year 3 Here.
             </p>
 
+
+            <Grid item xs={8}
+              style={{marginBottom: '25px'}}>
+                    <div className="card" style={{marginTop: "25px"}}>
+                      <div className="card-header">
+
+                        <div className="float-left">
+                          {" "}
+                          <strong>Submission Status</strong>
+                          {" "}
+                        </div>
+
+                      </div>
+
+                      <div className="card-content">
+
+                        <div style={{marginTop: '15px'}}>
+                            <p style={{marginLeft: '25px', fontWeight: 'lighter', fontSize: '20px'}}>Submission : </p>
+                            <p style={{marginLeft: '25px', fontWeight: 'lighter', fontSize: '20px'}}>Time: </p>
+                        </div>
+
+                      </div>
+                    </div>
+              </Grid>
+
+
             <Button
               variant="contained"
               color="info"
@@ -605,6 +764,32 @@ const Submission = () => {
             <p style={{ fontSize: "20px" }}>
               Upload Your yearly Submission of year 3 Here.
             </p>
+
+
+            <Grid item xs={8}
+              style={{marginBottom: '25px'}}>
+                    <div className="card" style={{marginTop: "25px"}}>
+                      <div className="card-header">
+
+                        <div className="float-left">
+                          {" "}
+                          <strong>Submission Status</strong>
+                          {" "}
+                        </div>
+
+                      </div>
+
+                      <div className="card-content">
+
+                        <div style={{marginTop: '15px'}}>
+                            <p style={{marginLeft: '25px', fontWeight: 'lighter', fontSize: '20px'}}>Submission : </p>
+                            <p style={{marginLeft: '25px', fontWeight: 'lighter', fontSize: '20px'}}>Time: </p>
+                        </div>
+
+                      </div>
+                    </div>
+              </Grid>
+
 
             <Button
               variant="contained"

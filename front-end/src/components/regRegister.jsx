@@ -290,7 +290,7 @@ const RegRegister = () => {
             }
             id="supervisors"
             name="supervisors"
-            placeholder="Supervsiors' Name"
+            placeholder="Supervsiors' Email"
             onChange={(e) => handleChange(e)}
             required
           />

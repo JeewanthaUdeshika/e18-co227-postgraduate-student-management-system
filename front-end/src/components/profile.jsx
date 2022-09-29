@@ -34,6 +34,9 @@ const Profile = () => {
     readOnly: true,
     editConfirm: true, // State related to the visibility of edits confirmation
     approveConfirm: false, // State related to the visibility of approve confirmation
+    // approveVisibility: false,   // Visibility of approve button
+    // declineVisibility: false,   // Visibility of decline button 
+    // editVisibility: false,      // Visibility of edit profile
     borderStyle: "none",
   });
 
@@ -69,6 +72,7 @@ const Profile = () => {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Functions related to the Edit Profile
+
 
   // Change readonly state
 
@@ -426,10 +430,21 @@ const Profile = () => {
 
         <div className="row">
           <div className="col-sm">
+
+          <button
+              onClick={editProfile}
+              className="btn btn-primary"
+              hidden={info.approveConfirm}
+            >
+              EDIT PROFILE
+            </button>
+
+
             <button
               type="button"
               className="btn btn-success"
               hidden={info.approveConfirm}
+              style={{ marginLeft: "25px" }}
             >
               APPROVE
             </button>
@@ -443,14 +458,7 @@ const Profile = () => {
               DECLINE
             </button>
 
-            <button
-              onClick={editProfile}
-              className="btn btn-primary"
-              hidden={info.approveConfirm}
-              style={{ marginLeft: "25px" }}
-            >
-              EDIT PROFILE
-            </button>
+            
           </div>
 
           {/* Buttons To confirm edits or cancel edits */}

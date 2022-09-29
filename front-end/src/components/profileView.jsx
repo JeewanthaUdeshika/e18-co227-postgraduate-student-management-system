@@ -11,6 +11,7 @@ const Profile = () => {
   const [info, setInfo] = useState({
     profile: profilePicture, // Profile Picture
     name: "...", // Name of User
+    role: "", // Role of the user
     registrationNumber: "...", // Registration Number
     address: "...", // Postal Address of the user
     email: "...", // E-Mail address of the user
@@ -31,6 +32,7 @@ const Profile = () => {
     readOnly: true,
     editConfirm: true, // State related to the visibility of edits confirmation
     approveConfirm: false, // State related to the visibility of approve confirmation
+    pgDataVisibility: false,  // Visibility of postgraduate details 
     borderStyle: "none",
   });
 
@@ -50,6 +52,7 @@ const Profile = () => {
       setInfo({
         ...info,
         name: data.data.fullName,
+        role: data.data.role,
         email: data.data.email,
         contactNumber: data.data.telNo,
         researchArea: data.data.researchArea,
@@ -59,10 +62,24 @@ const Profile = () => {
       // console.log(state.name);
     }
     getData();
+
+    PGDataVisibility();   // change the visibilty of postgraduatre details
   }, []);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Functions related to the Edit Profile
+
+  // Visibility of postgraduate details for deferrent type of roles
+
+  const PGDataVisibility = () => {
+
+    if((info.role === "admin")||(info.role === "supervisor")||(info.role === "examiner")){
+      setInfo({
+        ...info,
+        pgDataVisibility: true
+      })
+    }
+  }
 
   // Change readonly state
 
@@ -134,6 +151,8 @@ const Profile = () => {
             }}
           />
         </div>
+        
+        <div hidden ={info.pgDataVisibility}>
 
         <p className="card-text-right" style={{ fontSize: "17px" }}>
           <span style={{ fontWeight: "bold" }}>Registration Number : </span>
@@ -152,6 +171,8 @@ const Profile = () => {
             }}
           ></input>
         </p>
+        
+        </div>
 
         <p className="card-text-right" style={{ fontSize: "17px" }}>
           <span style={{ fontWeight: "bold" }}>Address : </span>
@@ -207,7 +228,11 @@ const Profile = () => {
           ></input>
         </p>
 
+
+
         {/* Post Graduate Information */}
+        <div hidden = {info.pgDataVisibility}
+          >
 
         <div
           style={{
@@ -303,6 +328,8 @@ const Profile = () => {
           ></input>
         </p>
 
+        </div>
+
         {/* Social Media Information */}
 
         <div
@@ -383,7 +410,7 @@ const Profile = () => {
 
         {/* Files And Others */}
 
-        <div
+        {/* <div
           style={{
             display: "flex",
             flexDirection: "row",
@@ -401,24 +428,23 @@ const Profile = () => {
               marginLeft: "15px",
             }}
           />
-        </div>
+        </div> */}
 
-        <p className="card-text-right" style={{ fontSize: "17px" }}>
+        {/* <p className="card-text-right" style={{ fontSize: "17px" }}>
           <span style={{ fontWeight: "bold" }}>
             Download User Files by clicking DOWNLOAD Button{" "}
           </span>
 
           <button className="btn btn-default">
-            {/* <img src={Download} width="60px" height="60px" /> */}
             <span>
               <i className="fa fa-download" aria-hidden="true"></i>
             </span>
           </button>
-        </p>
+        </p> */}
 
         {/* Buttons to take actions */}
 
-        <div className="row">
+        {/* <div className="row">
           <div className="col-sm">
             <button
               type="button"
@@ -445,11 +471,11 @@ const Profile = () => {
             >
               EDIT PROFILE
             </button>
-          </div>
+          </div> */}
 
           {/* Buttons To confirm edits or cancel edits */}
 
-          <div className="col-sm">
+          {/* <div className="col-sm">
             <div className="text-center">
               <button
                 className="btn btn-success"
@@ -467,9 +493,11 @@ const Profile = () => {
               >
                 CANCEL
               </button>
-            </div>
-          </div>
-        </div>
+            </div> */}
+
+
+          {/* </div> */}
+        {/* </div> */}
       </div>
     </div>
   );
