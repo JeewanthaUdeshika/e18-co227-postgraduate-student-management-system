@@ -154,6 +154,8 @@ const Profile = () => {
             }}
           />
         </div>
+        
+        <div hidden ={info.pgDataVisibility}>
 
         <div
           hidden={
@@ -236,6 +238,8 @@ const Profile = () => {
             }}
           ></input>
         </p>
+
+
 
         {/* Post Graduate Information */}
         {/* <div hidden = {info.pgDataVisibility} */}
@@ -509,7 +513,7 @@ const Profile = () => {
             </div> */}
 
         {/* </div> */}
-        {/* </div> */}
+        </div>
       </div>
     </div>
   );

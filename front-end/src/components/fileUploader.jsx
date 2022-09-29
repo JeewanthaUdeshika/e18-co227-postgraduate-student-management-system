@@ -66,6 +66,31 @@ function FileUploader() {
           <div className="row">
             <h1 style={{ fontWeight: "lighter" }}>Upload Your Submission</h1>
 
+
+            // Submission Status
+            <div className="col-lg-12">
+              <div className="card" style={{marginTop: "25px"}}>
+                <div className="card-header">
+                  <div className="float-left">
+                    {" "}
+                    <strong>Submission Status</strong>
+                    {" "}
+                  </div>
+                </div>
+
+                <div className="card-content">
+                  <div style={{marginTop: '15px'}}>
+                      <p style={{marginLeft: '25px', fontWeight: 'lighter', fontSize: '20px'}}>Submission : </p>
+                      <p style={{marginLeft: '25px', fontWeight: 'lighter', fontSize: '20px'}}>Time: </p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////
+            
             <div className="col-lg-12">
               <div className="card" style={{ marginTop: "25px" }}>
                 <div className="card-header">
