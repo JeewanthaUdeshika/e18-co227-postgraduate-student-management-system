@@ -1872,7 +1872,7 @@ function CCDashboard (){
 
         const data = [];
 
-        for( let index =0 ; index< 3; index++){
+        for( let index =0 ; index< 30; index++){
             data.push({
                 key: `${index}`,
                 number: `Hello ${index}`,
