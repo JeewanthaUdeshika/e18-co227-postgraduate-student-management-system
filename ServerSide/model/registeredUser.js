@@ -9,9 +9,8 @@ import mongoose from "mongoose";
 
 // Model for review of a submission
 const reviewState = mongoose.Schema({
-  state: {
-    type: Boolean,
-    default: false
+  name: {
+    type: String
   },
   comment: {
     type: String
@@ -117,32 +116,32 @@ const userSchema = new mongoose.Schema({
   submission2: {
     type: String,
     default: "NA",
-    status: reviewState
+    status: [reviewState]
   },
   submission3: {
     type: String,
     default: "NA",
-    status: reviewState
+    status: [reviewState]
   },
   submission4: {
     type: String,
     default: "NA",
-    status: reviewState
+    status: [reviewState]
   },
   submission5: {
     type: String,
     default: "NA",
-    status: reviewState
+    status: [reviewState]
   },
   submission6: {
     type: String,
     default: "NA",
-    status: reviewState
+    status: [reviewState]
   },
   submission7: {
     type: String,
     default: "NA",
-    status: reviewState
+    status: [reviewState]
   },
 });
 

@@ -30,6 +30,7 @@ import ReviewerDashboard from "./pages/reviewDashboard";
 import FileUploader from "./pages/fileUploadPage";
 import ViewPage from "./pages/view";
 import ViewLoggedPage from "./pages/viewLogged";
+import CCPage from "./pages/CCPage";
 
 function App() {
   return (
@@ -63,6 +64,7 @@ function App() {
         <Route path="reviewTable" element={<ReviewTable />} />
         <Route path="fileUpload" element={<FileUploader />} />
         <Route path="viewLogged" element={<ViewLoggedPage />} />
+        <Route path="ccPage" element={<CCPage />} />
       </Routes>
     </BrowserRouter>
   );

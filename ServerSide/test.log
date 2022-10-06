@@ -173,6 +173,7 @@
 {"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
 {"level":"info","message":"id from get user function62eb78869004334f30e77cfb"}
 {"level":"info","message":"Server is running on  http://localhost:3001"}
+<<<<<<< HEAD
 {"level":"info","message":"Server is running on  http://localhost:3001"}
 {"level":"info","message":"Server is running on  http://localhost:3001"}
 {"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
@@ -184,3 +185,84 @@
 {"level":"info","message":{"contactNumber":"+94783365885","email":"juaghost1st@gmail.com","nameDenotedByInitials":"Pahala Hitige Jeewantha Udeshikla Ariyawansha","nameWithInitials":"P.H.J.U. Ariyawansha","password":"admin123","postalAddress":"D/93, Nilmalgoda, Kegalle.","registrationStatus":"prospective","researchArea":"wefrg","researchProgram":"phd","supervisors":"e18028@eng.pdn.ac.lk jeewanthaudeshika8@gmail.com"}}
 {"level":"info","message":{"_id":"63358f7d2a4d8dd4afe9466b","email":"juaghost1st@gmail.com","fullName":"Pahala Hitige Jeewantha Udeshikla Ariyawansha","kind":"Prospective","nameWithInitials":"P.H.J.U. Ariyawansha","password":"$2b$10$BFNBbmqZfyYshdqtXvdj9OSiwDAEmf7SvQQONRn275bIA7NlZzD2G","postalAddress":"D/93, Nilmalgoda, Kegalle.","researchArea":"wefrg","state":"not approved","supervisors":["e18028@eng.pdn.ac.lk","jeewanthaudeshika8@gmail.com"],"telNo":"+94783365885"}}
 {"level":"info","message":"http://localhost:3001/admin/toapprove"}
+=======
+{"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"id from get user function62cff850da42a9840402032a"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"id from get user function62eb7a052da0da4ab70eaf46"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":{"contactNumber":"0767791396","dateOfRegistration":"2022-09-29","degreeSelect":"mphill","email":"mekojir731@duetube.com","modeOfStudy":"partTime","nameDenotedByInitials":"RR","nameWithInitials":"Ranjith","password":"kaimkdscc","postalAddress":"Fd gfgdfgdf dfg","progressDate":"2022-09-28","progressLevel":"annualOralPresentationSubmitted","registrationNumber":"E/18/173","registrationStatus":"registered","researchArea":"Software","supervisors":"boribi9623@edxplus.com , ergbi5673@edxplus.com","url":"https://i.imgur.com/3rxS7Ns.png","yearOfCompletion":"2022-10"}}
+{"level":"info","message":{"DOR":"2022-09-29T00:00:00.000Z","URLtoWebsite":"https://i.imgur.com/3rxS7Ns.png","_id":"6334028978df0344b7848251","completionYear":"2022-10","dateofLastSubmission":"2022-09-28T00:00:00.000Z","degree":"mphill","email":"mekojir731@duetube.com","fullName":"RR","kind":"Registered","nameWithInitials":"Ranjith","password":"$2b$10$ftoVOiW0xghEPSwL9l5O9.omLcpB1qkM2wRfDnPZGoTaHaoqN7Cw6","postalAddress":"Fd gfgdfgdf dfg","progressLevel":"annualOralPresentationSubmitted","regNo":"E/18/173","researchArea":"Software","state":"not approved","studyMode":"partTime","supervisors":["boribi9623@edxplus.com , ergbi5673@edxplus.com"],"telNo":"0767791396"}}
+{"level":"info","message":"http://localhost:3001/admin/toapprove"}
+{"level":"info","message":{"contactNumber":"0767791396","dateOfRegistration":"2022-10-05","degreeSelect":"phd","email":"mekojir731@duetube.com","modeOfStudy":"fullTime","nameDenotedByInitials":"edtrfdt","nameWithInitials":"I.M.Kasthuripitiya","password":"kaimkdscc","postalAddress":"ewrwerwe","progressDate":"2022-09-28","progressLevel":"annualOralPresentationSubmitted","registrationNumber":"E/18/173","registrationStatus":"registered","researchArea":"Machine Learning","supervisors":"boribi9623@edxplus.com,ergbi5673@edxplus.com","url":"https://i.imgur.com/3rxS7Ns.png","yearOfCompletion":"2022-09"}}
+{"level":"info","message":{"DOR":"2022-10-05T00:00:00.000Z","URLtoWebsite":"https://i.imgur.com/3rxS7Ns.png","_id":"6334035c78df0344b7848257","completionYear":"2022-09","dateofLastSubmission":"2022-09-28T00:00:00.000Z","degree":"phd","email":"mekojir731@duetube.com","fullName":"edtrfdt","kind":"Registered","nameWithInitials":"I.M.Kasthuripitiya","password":"$2b$10$CvUtbX1AKrXKko/MhgWZ6.Vb/Je2sielxuhYvoviSlCtZNS6F5gXC","postalAddress":"ewrwerwe","progressLevel":"annualOralPresentationSubmitted","regNo":"E/18/173","researchArea":"Machine Learning","state":"not approved","studyMode":"fullTime","supervisors":["boribi9623@edxplus.com,ergbi5673@edxplus.com"],"telNo":"0767791396"}}
+{"level":"info","message":"http://localhost:3001/admin/toapprove"}
+{"level":"info","message":{"contactNumber":"0767791396","dateOfRegistration":"2022-09-28","degreeSelect":"meng","email":"mekojir731@duetube.com","modeOfStudy":"partTime","nameDenotedByInitials":"edtrfdt","nameWithInitials":"I.M.Kasthuripitiya","password":"kaimkdscc","postalAddress":"ewrwerwe","progressDate":"2022-09-28","progressLevel":"thesisSubmittedForReview","registrationNumber":"E/18/173","registrationStatus":"registered","researchArea":"Software","supervisors":"boribi9623@edxplus.com,ergbi5673@edxplus.com","url":"https://i.imgur.com/3rxS7Ns.png","yearOfCompletion":"2022-09"}}
+{"level":"info","message":{"contactNumber":"0767791396","dateOfRegistration":"2022-09-28","degreeSelect":"meng","email":"mekojir731@duetube.com","modeOfStudy":"partTime","nameDenotedByInitials":"edtrfdt","nameWithInitials":"I.M.Kasthuripitiya","password":"kaimkdscc","postalAddress":"ewrwerwe","progressDate":"2022-09-28","progressLevel":"thesisSubmittedForReview","registrationNumber":"E/18/173","registrationStatus":"registered","researchArea":"Software","supervisors":"boribi9623@edxplus.com,ergbi5673@edxplus.com","url":"https://i.imgur.com/3rxS7Ns.png","yearOfCompletion":"2022-09"}}
+{"level":"info","message":{"DOR":"2022-09-28T00:00:00.000Z","URLtoWebsite":"https://i.imgur.com/3rxS7Ns.png","_id":"6334055978df0344b7848260","completionYear":"2022-09","dateofLastSubmission":"2022-09-28T00:00:00.000Z","degree":"meng","email":"mekojir731@duetube.com","fullName":"edtrfdt","kind":"Registered","nameWithInitials":"I.M.Kasthuripitiya","password":"$2b$10$4S7NC73nR0ve/a0l0hu7Ou.MOqY4xNaMjPeR9vYnndqHsj6dvWwyS","postalAddress":"ewrwerwe","progressLevel":"thesisSubmittedForReview","regNo":"E/18/173","researchArea":"Software","state":"not approved","studyMode":"partTime","supervisors":["boribi9623@edxplus.com,ergbi5673@edxplus.com"],"telNo":"0767791396"}}
+{"level":"info","message":"http://localhost:3001/admin/toapprove"}
+{"level":"info","message":"id from get user function62eb7a052da0da4ab70eaf46"}
+{"level":"info","message":"id from get user function62eb7a052da0da4ab70eaf46"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"id from get user function62cff850da42a9840402032a"}
+{"level":"info","message":"id from get user function62cff850da42a9840402032a"}
+{"level":"info","message":"id from get user function62cff850da42a9840402032a"}
+{"level":"info","message":"id from get user function62cff850da42a9840402032a"}
+{"level":"info","message":"id from get user function62cff850da42a9840402032a"}
+{"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
+{"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
+{"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
+{"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
+{"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
+{"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
+{"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
+{"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
+{"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
+{"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
+{"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
+{"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
+{"level":"info","message":"id from get user function62cff850da42a9840402032a"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
+{"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
+{"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
+{"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
+>>>>>>> d0df922550d74c6c16ceed1d05e5ccab2ddce685
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}

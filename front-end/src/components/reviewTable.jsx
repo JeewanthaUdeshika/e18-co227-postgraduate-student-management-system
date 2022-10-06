@@ -21,7 +21,7 @@ const ReviewTable = () => {
     async function getData() {
       const res = await axios({
         method: "GET",
-        url: "http://localhost:3001/data/staff",
+        url: "http://localhost:3001/data/tobereviewed",
         withCredentials: true,
         headers: {
           Accept: "application/json",
@@ -31,9 +31,9 @@ const ReviewTable = () => {
       });
 
       console.log(res.data);
-      setState({ ...state, result: res.data.staffUsers[0].students });
+      setState({ ...state, result: res.data.usersToBeReviewed.students });
 
-      //   console.log(state.result.students);
+      // console.log(res.data.usersToBeReviewed.students);
     }
     getData();
   }, []);
