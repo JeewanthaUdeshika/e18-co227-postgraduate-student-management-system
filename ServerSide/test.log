@@ -262,7 +262,19 @@
 {"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
 {"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
 {"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
+<<<<<<< HEAD
 >>>>>>> d0df922550d74c6c16ceed1d05e5ccab2ddce685
 {"level":"info","message":"Server is running on  http://localhost:3001"}
 {"level":"info","message":"Server is running on  http://localhost:3001"}
 {"level":"info","message":"Server is running on  http://localhost:3001"}
+=======
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"id from get user function62cff850da42a9840402032a"}
+{"level":"info","message":"id from get user function62cff850da42a9840402032a"}
+{"level":"info","message":"id from get user function62cff850da42a9840402032a"}
+{"level":"info","message":"id from get user function62e7a60dc59bb534a85e995c"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"Server is running on  http://localhost:3001"}
+{"level":"info","message":"id from get user function62cff850da42a9840402032a"}
+>>>>>>> d220f76e1e1b6a956a3cf8a7c112e2a9119161d4

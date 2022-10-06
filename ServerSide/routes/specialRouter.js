@@ -10,8 +10,9 @@ import {
   getUser,
   getAllDetails,
   AllStudentsToBeReviewed,
+  submitReview,
 } from "../controller/specialController.js";
-import { isAdmin, isSupervisor } from "../Middleware/auth.js";
+import { isAdmin, isLogged, isSupervisor } from "../Middleware/auth.js";
 
 const router = express.Router();
 
@@ -19,4 +20,5 @@ router.get("/", isAdmin, getAllStudents);
 router.get("/admin/dashboard", isAdmin, getAllDetails);
 router.get("/tobereviewed", isSupervisor, AllStudentsToBeReviewed);
 router.get("/profile/:id", isAdmin, getUser);
+router.post("/submitreview", isSupervisor, submitReview);
 export default router;

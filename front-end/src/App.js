@@ -31,6 +31,8 @@ import FileUploader from "./pages/fileUploadPage";
 import ViewPage from "./pages/view";
 import ViewLoggedPage from "./pages/viewLogged";
 import CCPage from "./pages/CCPage";
+import StudentDashBoardPage from "./pages/studentDashboard";
+import StudentDashboard from "./components/dashboard/studentMainDashboard";
 
 function App() {
   return (
@@ -65,6 +67,7 @@ function App() {
         <Route path="fileUpload" element={<FileUploader />} />
         <Route path="viewLogged" element={<ViewLoggedPage />} />
         <Route path="ccPage" element={<CCPage />} />
+        <Route path="studentDashboard" element={<StudentDashBoardPage />} />
       </Routes>
     </BrowserRouter>
   );
