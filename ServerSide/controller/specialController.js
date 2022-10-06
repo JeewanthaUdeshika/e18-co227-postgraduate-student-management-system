@@ -4,7 +4,7 @@
  * Date - 01 / 08 / 2022
  */
 
-import { UserDB } from "../model/user.js";
+import { registeredUser, UserDB } from "../model/user.js";
 import { RegisteredDB } from "../model/registeredUser.js";
 import { StaffDB } from "../model/staff.js";
 export const getAllStudents = async (req, res, next) => {
@@ -81,10 +81,12 @@ export const getAllDetails = async (req, res, next) => {
 export const AllStudentsToBeReviewed = async (req, res, next) => {
   // console.log(req.user.id);
 
+  const usersWithRelevantNames = [];
+
+  // This will get the all the details of the relevant supervisor
   const usersToBeReviewed = await StaffDB.findById(req.user.id);
 
-  // console.log(usersToBeReviewed);
-
+  // If no users found then returns an error
   if (!usersToBeReviewed) {
     return res.status(400).json({
       status: "error",
@@ -92,9 +94,47 @@ export const AllStudentsToBeReviewed = async (req, res, next) => {
     });
   }
 
+  // console.log(usersToBeReviewed.students);
+  for (let count = 0; count < usersToBeReviewed.students.length; count++) {
+    // This returns an array of objects
+
+    // Filter the fullName field Only , by default _id field is there
+    const nameOfTheUser = await RegisteredDB.findOne(
+      {
+        _id: usersToBeReviewed.students[count],
+      },
+      "fullName"
+    );
+
+    // Create a new Object and add the new Property supervisor id to it
+    const details = {
+      _id: nameOfTheUser._id,
+      fullName: nameOfTheUser.fullName,
+      supervisorId: req.user.id,
+    };
+
+    // console.log(details);
+
+    // push the fullName of the user to the Names Array
+    usersWithRelevantNames.push(details);
+  }
+
+  // console.log(usersWithRelevantNames);
+
   return res.status(200).json({
     status: "success",
-    usersToBeReviewed,
+    usersWithRelevantNames,
+  });
+
+  next();
+};
+
+export const submitReview = async (req, res, next) => {
+  console.log(req.body);
+
+  return res.status(200).json({
+    status: "success",
+    message: req.body,
   });
 
   next();
